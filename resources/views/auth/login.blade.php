@@ -32,14 +32,14 @@
         background-color: #4267B2;
     }
     .login-form .social-login .social-login-btn.facebook:hover {
-        background-color: #4285f4;
+        background-color: #3558a1;
         box-shadow: 0 0 0 0.15rem rgba(0,123,255,.25)!important;
     }
     .login-form .social-login .social-login-btn.google {
         background-color: #DB4437;
     }
     .login-form .social-login .social-login-btn.google:hover {
-        background-color: #ff594a;
+        background-color: #c63f33;
         box-shadow: 0 0 0 0.15rem rgba(0,123,255,.25)!important;
     }
     .login-form .social-login .social-login-btn.facebook:focus,
