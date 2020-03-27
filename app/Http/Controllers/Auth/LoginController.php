@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Socialite;
 use App\User;
 use Auth;
@@ -41,8 +42,37 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function authenticated(Request $request, User $user)
+    {
+        // $role = Auth::user()->isRole();
+        $role = $user->role;
+
+        return redirect()->route($role);
+    }
+
+    public function redirectByRoles()
+    {
+        $role = Auth::user()->role;
+
+        switch ($role) {
+            case 'admin':
+                echo 'admin';
+                return redirect(route('admin'));
+                echo 'after redorection';
+                break;
+            case 'manager':
+                echo 'manager';
+                return redirect()->route('manager');
+                break;
+            default:
+                echo 'default';
+                return redirect()->route('customer');
+        }
+        dd('Not redirected');
+    }
+
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Redirect the user to the Social authentication page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,7 +82,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Obtain the user information from oauth provider.
      *
      * @return \Illuminate\Http\Response
      */
@@ -62,9 +92,9 @@ class LoginController extends Controller
 
         $user = User::where(['email' => $socialUser->getEmail()])->first();
 
-        if($user){
+        if ($user) {
             Auth::login($user, true);
-        }else{
+        } else {
             $user = User::create([
                 'name'          => $socialUser->getName(),
                 'email'         => $socialUser->getEmail(),
@@ -74,7 +104,9 @@ class LoginController extends Controller
             ]);
             Auth::login($user, true);
         }
+        
+        $role = $user->role;
 
-        return redirect($this->redirectTo);
+        return redirect()->route($role);
     }
 }

@@ -47,4 +47,12 @@ class User extends Authenticatable
         $hash = md5(strtolower(trim($this->attributes['email'])));
         return "http://www.gravatar.com/avatar/$hash?s=260&d=mp";
     }
+
+    /**
+     * Return the role of current user
+     */
+    public function isRole()
+    {
+        return $this->role;
+    }
 }
