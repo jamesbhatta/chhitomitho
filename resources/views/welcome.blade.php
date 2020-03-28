@@ -33,7 +33,7 @@
         color: inherit;
         display: block;
     }
-
+    
 </style>
 @endpush
 @section('content')
@@ -71,6 +71,55 @@
             </div>
         </div>
         <div class="col-md-8">
+            @foreach($categories as $category)
+            <div class="items-container">
+                <div class="category-wrapper">
+                    @if ( count($category->products) )
+                    <div class="category-title p-2 mb-4">
+                        <h3 class="h3-responsive text-muted">{{ $category->name }}</h3>
+                    </div>
+                    @endif
+                    <div class="row">
+                        @foreach ($category->products as $product)
+                        <div class="col-md-4">
+                            <div class="product-wrapper">
+                                <div class="card rounded-0 mb-5">
+                                    <img class="card-img-top rounded-0 border-bottom" src="{{ asset('storage/' . $product->product_image) }}" alt="{{ $product->name }}">
+                                    <div class="card-body text-center">
+                                        <div class="card-title">
+                                            <h4 class="h4-responsive font-weight-bolder text-theme-color text-capitalize">
+                                                {{ $product->name }}
+                                            </h4>
+                                        </div>
+                                        <div>
+                                            <h3 class="h3-responsive text-secondary-color">Rs. {{ number_format($product->regular_price) }}</h3>
+                                        </div>
+                                        <div class="d-flex justify-content-center my-3">
+                                            <div class="mx-2">
+                                                <button class="btn btn-sm btn-danger rounded-0 px-3 z-depth-0 m-0">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <div class="mx-2 text-center">
+                                                <input type="number" class="counter-control" value="1" min="1" max="99" style="width: 50px; text-align: center;">
+                                            </div>
+                                            <div class="mx-2">
+                                                <button class="btn btn-sm btn-danger rounded-0 px-3 z-depth-0 m-0">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button class="btn bg-secondary-color text-white rounded-0 text-capitalize z-depth-0 mt-4 w-100">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            
             <div class="items-container">
                 <div class="category-wrapper">
                     <div class="category-title p-2 mb-4">
@@ -117,7 +166,7 @@
                         {{-- End of column --}}
                         @endfor
                     </div>
-
+                    
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 <?php
 Route::get('/', function () {
-    return view('welcome');
+    $categories = \App\Category::with('products')->latest()->get();
+    return view('welcome', compact('categories'));
 });
 
 Auth::routes();
@@ -10,18 +11,26 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/profile', 'UserController@profile')->name('user.profile');
-Route::put('/profile/update/{user}', 'UserController@updateProfile')->name('user.profile.update');
+
 
 Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', function () {
         return view('backend.dashboard');
     })->name('admin');
-
+    
     Route::get('category', 'CategoryController@index')->name('category.index');
     Route::post('category/store', 'CategoryController@store')->name('category.store');
     Route::put('category/{category}/update', 'CategoryController@update')->name('category.update');
     Route::delete('category/{category}/destroy', 'CategoryController@destroy')->name('category.destroy');
+    
+    Route::get('product', 'ProductController@index')->name('product.index');
+    Route::get('product/create', 'ProductController@create')->name('product.create');
+    Route::post('product/store', 'ProductController@store')->name('product.store');
+    Route::get('product/{product}/edit', 'ProductController@edit')->name('product.edit');
+    Route::put('product/{product}/update', 'ProductController@update')->name('product.update');
+    Route::delete('product/{product}/destroy', 'ProductController@destroy')->name('product.destroy');
+    
+    Route::get('users', 'UsersController@index')->name('users.index');
 });
 
 Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'manager']], function () {
@@ -43,7 +52,8 @@ Route::group(['prefix' => 'courier', 'middleware' => ['auth', 'courier']], funct
 });
 
 Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], function () {
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard');
-    })->name('customer');
+    Route::get('/', 'UserController@profile')->name('customer');
+
+    Route::get('/profile', 'UserController@profile')->name('user.profile');
+    Route::put('/profile/update/{user}', 'UserController@updateProfile')->name('user.profile.update');
 });
