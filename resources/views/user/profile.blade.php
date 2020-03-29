@@ -11,11 +11,7 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="profile-pic-container text-center" style="width: 100%; height: 300px;">
-					@if (Auth::user()->avatar)
-					<img id="croppieProfilePic" class="img-fluid" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}">
-					@else
 					<img class="img-fluid rounded-circle" src="{{ Auth::user()->gravatar }}" alt="{{ Auth::user()->name }}">
-					@endif
 				</div>
 			</div>
 			<div class="col-md-8 text-muted">
@@ -60,11 +56,11 @@
 									</label>
 								</div>
 							</div>
-
+							
 							<div class="col-md-12">
 								<button type="submit" class="btn btn-success btn-lg rounded-0">Update</button>
 							</div>
-
+							
 						</div>
 					</form>
 				</div>

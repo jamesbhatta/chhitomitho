@@ -44,6 +44,10 @@ class User extends Authenticatable
      */
     public function getGravatarAttribute()
     {
+        if( $this->avatar != null ) {
+            return $this->avatar;
+        }
+
         $hash = md5(strtolower(trim($this->attributes['email'])));
         return "http://www.gravatar.com/avatar/$hash?s=260&d=mp";
     }

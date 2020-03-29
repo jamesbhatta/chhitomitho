@@ -18,10 +18,6 @@
     <div class="d-flex">
         <div class="side">
             <div class="py-4">
-                {{-- <h2 class="text-uppercase text-center text-light">
-                    <a href="{{ url('/') }}" target="_blank">
-                    </a>
-                </h2> --}}
                 <div class="user-details">
                     <img class="rounded-circle mr-3" src="{{ Auth::user()->gravatar}}" alt="{{ __('Chhitomitho') }}" style="height: 80px; width: 80px; border-radius: 50%;">
                     <div class="name">{{ Auth::user()->name }}</div>
