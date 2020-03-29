@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    color: #677897;
+}
+
+.card-shadow {
+    box-shadow: 0 0px 15px 2px rgba(143, 143, 143, 0.09);
+}
+
+.bg-ink {
+    background-color: #667bf1;
+}
+
+.text-ink {
+    color: #667bf1;
+}
+
+.bg-green {
+    background-color: #24e873;
+}
+
+.text-green {
+    color: #24e873;
+}
+
+.bg-red {
+    background-color: #fc5d51;
+}
+
+.text-red {
+    color: #fc5d51;
+}
+
+.side {
+    flex: 15%;
+    background-color: #1d2e38;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+}
+
+@media only screen and (max-width: 800px) {
+    .side {
+        background-color: #fff;
+        display: none;
+        width: 100%;
+        flex: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .main {
+        flex: 100%;
+    }
+}
+
+.main {
+    flex: 85%;
+    background-color: #f2f7fb;
+}
+
+.side .user-details {
+    text-align: center;
+    color: #dedede;
+}
+.side .user-details .name {
+    margin-top: 10px;
+    font-size: 1.2em;
+    /* color: #e6a42c; */
+}
+.side .user-details .email {
+    font-size: small;
+}
+.side .user-details .role {
+    text-transform: capitalize;
+    color: #c28130;
+    font-size: smaller;
+}
+.sidebar-list {
+    font-weight: 400;
+}
+
+.sidebar-list-item {
+    /*margin-top: 10px;*/
+}
+
+.sidebar-list-item a {
+    padding: 20px 15px;
+    color: #6c8da3;
+}
+
+.sidebar-list-item a:hover {
+    color: #fff;
+    background-color: #13242c;
+}
+.sidebar-list-item a:hover i{
+    color: #228ce7!important;
+}
+
+.sidebar-list-item a > i{
+    margin-right: 10px;
+}
+
+.sidebar-list-item a span {
+    float: right;
+}
+
+/** 
+* Top Bar
+*/
+.topbar-nav {
+    color: #667bf1;
+}
+
+.topbar-nav i {
+    color: #667bf1;
+    color: #fff;
+}
+
+#dashboard {
+    color: #929394;
+}
+
+/** 
+* Page Title
+*/
+h5.page-title {
+    font-weight: 500;
+}
+
+/**
+* Pagination
+*/
+.pagination .page-item.active .page-link {
+    box-shadow: none;
+}
+
+/**
+* Custom Tables
+* designn for customizing bootstrap tables
+*/
+
+.custom-table {
+    color: inherit;
+}
+.custom-table thead {
+    background-color: #f7f8fa;
+    background-color: #fbfcff;
+}
+
+.custom-table thead th {
+    color: #677897;
+    text-transform: capitalize;
+    font-size: 0.8em;
+    font-weight: 600;
+    border-width: 1.5px;
+    /* border-color: red; */
+}
