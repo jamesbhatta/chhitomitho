@@ -31,6 +31,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['aut
     Route::delete('product/{product}/destroy', 'ProductController@destroy')->name('product.destroy');
     
     Route::get('users', 'UsersController@index')->name('users.index');
+    Route::get('users/create', 'UsersController@create')->name('users.create');
+    Route::post('users/store', 'UsersController@store')->name('users.store');
+    Route::get('users/{user}/edit', 'UsersController@edit')->name('users.edit');
+    Route::put('users/{user}/update', 'UsersController@update')->name('users.update');
+    Route::delete('users/{user}/destroy', 'UsersController@destroy')->name('users.destroy');
 });
 
 Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'manager']], function () {
@@ -44,7 +49,7 @@ Route::group(['prefix' => 'partner', 'middleware' => ['auth', 'partner']], funct
         return view('backend.dashboard');
     })->name('partner');
 });
-
+\
 Route::group(['prefix' => 'courier', 'middleware' => ['auth', 'courier']], function () {
     Route::get('/dashboard', function () {
         return view('backend.dashboard');

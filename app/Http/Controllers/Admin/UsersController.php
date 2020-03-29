@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the users.
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +29,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -36,9 +38,19 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = User::create([
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'password'      => Hash::make($request->password),
+            'mobile'        => $request->mobile,
+            'address'       => $request->address,
+            'gender'        => $request->gender,
+            'role'          => $request->role,
+        ]);
+
+        return redirect()->route('users.edit', $user)->with(['success', 'User has been added']);
     }
 
     /**
@@ -58,9 +70,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('user.edit', compact(['user']));
     }
 
     /**
@@ -70,9 +82,24 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->fill([
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'mobile'        => $request->mobile,
+            'address'       => $request->address,
+            'gender'        => $request->gender,
+            'role'          => $request->role,
+        ]);
+
+        if($request->filled('password')) {
+            $user->fill(['password' => Hash::make($request->password)]);
+        }
+        
+        $user->update();
+
+        return redirect()->back()->with(['success', 'User has been updated']);
     }
 
     /**
@@ -81,8 +108,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        
+        return redirect()->route('users.index')->with(['success' => 'User has been deleted.']);
     }
 }

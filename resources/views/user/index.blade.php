@@ -5,8 +5,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="mb-4">
-                    <h5 class="page-title">Users</h5>
+                <div class="d-flex mb-4">
+                    <h5 class="page-title align-self-center">Users</h5>
+                    <div class="ml-auto">
+                        <a href="{{ route('users.create') }}" class="btn btn-outline-primary btn-sm z-depth-0">Add New</a>
+                    </div>
                 </div>
                 @include('partials.alerts')
             </div>
@@ -34,12 +37,12 @@
                     <td class="text-capitalize">{{ $user->role }}</td>
                     <td>{{ $user->mobile }}</td>
                     <td>
-                        {{-- <a href="{{ route('product.edit', $product) }}" class="text-muted"><i class="far fa-edit"></i> Edit</a> | 
-                        <form action="{{ route('product.destroy', $product) }}" method="POST" class="form d-inline">
+                        <a href="{{ route('users.edit', $user) }}" class="text-muted"><i class="far fa-edit"></i> Edit</a> | 
+                        <form action="{{ route('users.destroy', $user) }}" method="POST" class="form d-inline">
                             @csrf
                             @method('delete')
                             <button type="submit" class="del-user-btn btn bg-transparent text-muted z-depth-0 p-0 my-0"><i class="far fa-trash-alt"></i> Delete</button>
-                        </form> --}}
+                        </form>
                     </td>
                 </tr>
                 @endforeach
