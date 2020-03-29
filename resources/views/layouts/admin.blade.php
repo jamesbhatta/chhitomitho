@@ -132,6 +132,11 @@
     <script type="text/javascript" src="{{ asset('assets/mdb/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/mdb/js/mdb.min.js') }}"></script>
     
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
     @stack('scripts')
     
 </body>

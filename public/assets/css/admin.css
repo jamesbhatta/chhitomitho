@@ -67,19 +67,23 @@ body {
     text-align: center;
     color: #dedede;
 }
+
 .side .user-details .name {
     margin-top: 10px;
     font-size: 1.2em;
     /* color: #e6a42c; */
 }
+
 .side .user-details .email {
     font-size: small;
 }
+
 .side .user-details .role {
     text-transform: capitalize;
     color: #c28130;
     font-size: smaller;
 }
+
 .sidebar-list {
     font-weight: 400;
 }
@@ -97,11 +101,12 @@ body {
     color: #fff;
     background-color: #13242c;
 }
-.sidebar-list-item a:hover i{
+
+.sidebar-list-item a:hover i {
     color: #228ce7!important;
 }
 
-.sidebar-list-item a > i{
+.sidebar-list-item a>i {
     margin-right: 10px;
 }
 
@@ -112,6 +117,7 @@ body {
 /** 
 * Top Bar
 */
+
 .topbar-nav {
     color: #667bf1;
 }
@@ -128,6 +134,7 @@ body {
 /** 
 * Page Title
 */
+
 h5.page-title {
     font-weight: 500;
 }
@@ -135,6 +142,7 @@ h5.page-title {
 /**
 * Pagination
 */
+
 .pagination .page-item.active .page-link {
     box-shadow: none;
 }
@@ -147,6 +155,7 @@ h5.page-title {
 .custom-table {
     color: inherit;
 }
+
 .custom-table thead {
     background-color: #f7f8fa;
     background-color: #fbfcff;
@@ -159,4 +168,20 @@ h5.page-title {
     font-weight: 600;
     border-width: 1.5px;
     /* border-color: red; */
+}
+
+.custom-table td {
+    font-size: inherit;
+}
+
+.custom-table td .edit-link {
+    color: #007bff;
+    margin-right: 5px;
+    margin-right: 10px;
+}
+
+.custom-table td .del-btn {
+    background-color: transparent;
+    border: none;
+    color: #fc5d51;
 }

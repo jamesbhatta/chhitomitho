@@ -37,11 +37,11 @@
                     <td class="text-capitalize">{{ $user->role }}</td>
                     <td>{{ $user->mobile }}</td>
                     <td>
-                        <a href="{{ route('users.edit', $user) }}" class="text-muted"><i class="far fa-edit"></i> Edit</a> | 
+                        <a href="{{ route('users.edit', $user) }}" class="edit-link" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a> | 
                         <form action="{{ route('users.destroy', $user) }}" method="POST" class="form d-inline">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="del-user-btn btn bg-transparent text-muted z-depth-0 p-0 my-0"><i class="far fa-trash-alt"></i> Delete</button>
+                            <button type="submit" class="del-user-btn del-btn" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>

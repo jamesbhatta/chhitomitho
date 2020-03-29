@@ -44,11 +44,11 @@
                     </td>
                     <td>{{ $product->category->name }}</td>
                     <td>
-                        <a href="{{ route('product.edit', $product) }}" class="text-muted"><i class="far fa-edit"></i> Edit</a> | 
+                        <a href="{{ route('product.edit', $product) }}" class="edit-link" data-toggle="tooltip" title="Edit" data-placement="top"><i class="far fa-edit"></i></a>
                         <form action="{{ route('product.destroy', $product) }}" method="POST" class="form d-inline">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="del-product-btn btn bg-transparent text-muted z-depth-0 p-0 my-0"><i class="far fa-trash-alt"></i> Delete</button>
+                            <button type="submit" class="del-product-btn del-btn" data-toggle="tooltip" title="Delete" data-placement="top"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>
