@@ -61,37 +61,18 @@
             <div class="card menu-card rounded-0 mx-auto">
                 <div class="title bg-theme-color bg-secondary-color"><i class="fa fa-utensils mr-2"></i>Delicious Menu</div>
                 <ul class="menu-list">
+                    @foreach($categories as $category)
                     <li>
-                        <a href="">Quick Bites</a>
+                        <a href="#{{ $category->slug }}">{{ $category->name }}</a>
                     </li>
-                    <li>
-                        <a href="">Coffee & Tea</a>
-                    </li>
-                    <li>
-                        <a href="">MoMoc</a>
-                    </li>
-                    <li>
-                        <a href="">Rice & Noodles</a>
-                    </li>
-                    <li>
-                        <a href="">Pizzas, Burgers & Pastas</a>
-                    </li>
-                    <li>
-                        <a href="">Noodle Soup</a>
-                    </li>
-                    <li>
-                        <a href="">Sweets</a>
-                    </li>
-                    <li>
-                        <a href="">Beverages</a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
         <div class="col-md-8">
             @foreach($categories as $category)
             <div class="items-container">
-                <div class="category-wrapper">
+                <div id="{{ $category->slug }}" class="category-wrapper">
                     @if ( count($category->products) )
                     <div class="category-title p-2 mb-4">
                         <h3 class="h3-responsive text-muted">{{ $category->name }}</h3>
