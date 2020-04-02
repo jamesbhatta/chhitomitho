@@ -62,3 +62,13 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], fun
     Route::get('/profile', 'UserController@profile')->name('user.profile');
     Route::put('/profile/update/{user}', 'UserController@updateProfile')->name('user.profile.update');
 });
+
+Route::get('/cart', 'CartController@index')->name('cart');
+Route::get('/cart/items', 'CartController@getItems')->name('cart.items');
+Route::get('/cart/summary', 'CartController@summary')->name('cart.items.summary');
+Route::post('/cart/add', 'CartController@add')->name('cart.add');
+Route::post('/cart/update', 'CartController@update')->name('cart.update');
+
+Route::get('cart/destroy', function(){
+    Cart::destroy();
+});

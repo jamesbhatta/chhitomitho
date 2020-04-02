@@ -7,14 +7,26 @@ use App\User;
 use Auth;
 
 class UserController extends Controller
-{
+{	
+	/**
+	 * profile
+	 *
+	 * @return void
+	 */
 	public function profile()
 	{
 		$user = Auth::user();
 
 		return view('user.profile', compact('user'));
 	}
-
+	
+	/**
+	 * updateProfile
+	 *
+	 * @param  mixed $user
+	 * @param  mixed $request
+	 * @return void
+	 */
 	public function updateProfile(User $user, Request $request)
 	{
 		if (Auth::user()->id != $user->id) {
