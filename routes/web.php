@@ -1,6 +1,6 @@
 <?php
 Route::get('/', function () {
-    $categories = \App\Category::with('products')->latest()->get();
+    $categories = \App\Category::with('products')->ordered()->get();
     return view('welcome', compact('categories'));
 });
 

@@ -31,6 +31,10 @@
                                 <input type="text" name="slug" class="form-control rounded-0" value="{{ old('slug') }}">
                             </div>
                             <div class="form-group">
+                                <label for="">Order</label>
+                                <input type="number" name="order" class="form-control rounded-0" value="{{ old('order') }}">
+                            </div>
+                            <div class="form-group">
                                 <button class="btn btn-primary rounded-0 card-shadow">Add New Category</button>
                             </div>
                         </form>
@@ -52,7 +56,7 @@
                             @if (count($categories))
                             @foreach ($categories as $category)
                             <tr id="cat-{{ $loop->iteration }}" class="category-list-row">
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $category->order }}</td>
                                 <td>
                                     {{ $category->name }}
                                     <div class="list-options mt-1 invisible" style="visibility: ;">
@@ -65,7 +69,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $category->slug }}</td>
-                                <td>10</td>
+                                <td>{{ $category->products_count }}</td>
                             </tr>
                             <tr id="edit-{{ $loop->iteration }}" class="d-none">
                                 <td colspan="4">
@@ -85,6 +89,14 @@
                                             </div>
                                             <div class="col-sm-10">
                                                 <input type="text" name="slug" class="form-control form-control-sm rounded-0 mr-3" value="{{ $category->slug }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-row">
+                                            <div class="col-md-1">
+                                                <label><i>Order</i></label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input type="number" name="order" class="form-control form-control-sm rounded-0 mr-3" value="{{ $category->order }}">
                                             </div>
                                         </div>
                                         <div class="form-group form-row">

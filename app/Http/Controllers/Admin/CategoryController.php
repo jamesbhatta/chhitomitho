@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withCount('products')->ordered()->get();
         return view('category.index', compact('categories'));
     }
 
@@ -19,6 +19,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'order' => 'nullable|numeric'
         ]);
 
         $category = new Category();
@@ -28,6 +29,7 @@ class CategoryController extends Controller
         } else {
             $category->slug = Str::slug($request->name, '-');
         }
+        $category->order = $request->order;
         $category->save();
 
         return redirect()->back()->with('success', 'Category has been added.');
@@ -37,6 +39,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'order' => 'nullable|numeric'
         ]);
 
         $category->name = $request->name;
@@ -45,6 +48,7 @@ class CategoryController extends Controller
         } else {
             $category->slug = Str::slug($request->name, '-');
         }
+        $category->order = $request->order;
         $category->save();
 
         return redirect()->back()->with('success', 'Category has been updated.');
