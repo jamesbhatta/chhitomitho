@@ -49,7 +49,7 @@ Route::group(['prefix' => 'partner', 'middleware' => ['auth', 'partner']], funct
         return view('backend.dashboard');
     })->name('partner');
 });
-\
+
 Route::group(['prefix' => 'courier', 'middleware' => ['auth', 'courier']], function () {
     Route::get('/dashboard', function () {
         return view('backend.dashboard');
@@ -61,6 +61,7 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], fun
 
     Route::get('/profile', 'UserController@profile')->name('user.profile');
     Route::put('/profile/update/{user}', 'UserController@updateProfile')->name('user.profile.update');
+
 });
 
 Route::get('/cart', 'CartController@index')->name('cart');
@@ -69,6 +70,11 @@ Route::get('/cart/summary', 'CartController@summary')->name('cart.items.summary'
 Route::post('/cart/add', 'CartController@add')->name('cart.add');
 Route::post('/cart/update', 'CartController@update')->name('cart.update');
 
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+});
+// temporary test routes
 Route::get('cart/destroy', function(){
     Cart::destroy();
 });

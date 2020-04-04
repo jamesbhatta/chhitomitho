@@ -216,8 +216,8 @@
                 </div>
                 
                 <div class="d-flex justify-content-between">
-                    <a href="#" class="btn bg-secondary-color text-white rounded-0">Need More</a>
-                    <a href="#" class="btn bg-theme-color text-white rounded-0">Checkout</a>
+                    <a href="{{ url('/') }}" class="btn bg-secondary-color text-white rounded-0">Need More</a>
+                    <a href="{{ route('checkout.index') }}" class="btn bg-theme-color text-white rounded-0">Checkout</a>
                 </div>
             </div>
         </div>
