@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Auth;
+use Closure;
 
-class AdminMiddleware
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -14,14 +14,16 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, ...$roles)
     {
         if (!Auth::check()) {
-            return redirect()->route('login');
+            return redirect()->intended('login');
         }
-        
-        if (Auth::user()->role == 'admin') {
-            return $next($request);
+
+        foreach ($roles as $role) {
+            if (Auth::user()->role === $role) {
+                return $next($request);
+            }
         }
 
         abort(403, 'Unauthorized action.');

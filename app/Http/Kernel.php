@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'partner' => \App\Http\Middleware\PartnerMiddleware::class,
         'courier' => \App\Http\Middleware\CourierMiddleware::class,
         'customer' => \App\Http\Middleware\CustomerMiddleware::class,
+        'checkrole' => \App\Http\Middleware\CheckRole::class,
 
     ];
 }

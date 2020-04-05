@@ -29,9 +29,12 @@
 @endpush
 @section('content')
 <div id="checkout-page" class="container">
-    <form action="" method="POST" class="form">
+    <form action="{{ route('order.store') }}" method="POST" class="form">
         @csrf
         <div class="row">
+            <div class="col-md-12">
+                @include('partials.alerts')
+            </div>
             <div class="col-md-8">
                 <div class="card rounded-0 border">
                     <div class="card-body grey lighten-4 text-theme-color py-2 px-4">
@@ -42,15 +45,15 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="">Name</label>
-                                    <input type="text" name="name" class="form-control rounded-0" value="{{ Auth::user()->name }}">
+                                    <input type="text" name="billing_name" class="form-control rounded-0" value="{{ Auth::user()->name }}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="">Mobile</label>
-                                    <input type="text" name="mobile" class="form-control rounded-0" value="{{ Auth::user()->mobile }}">
+                                    <input type="text" name="billing_phone" class="form-control rounded-0" value="{{ Auth::user()->mobile }}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="">Address</label>
-                                    <input type="text" name="address" class="form-control rounded-0" value="{{ Auth::user()->address }}">
+                                    <input type="text" name="billing_address" class="form-control rounded-0" value="{{ Auth::user()->address }}">
                                 </div>
                             </div>
                         </div>
@@ -62,8 +65,8 @@
                         <h5>Payment Option</h5>
                     </div>
                     <div class="card-body">
-                        <input type="radio" id="radio-cod" name="payment_method" value="cod" hidden>
-                        <input type="radio" id="radio-esewa" name="payment_method" value="esewa" hidden>
+                        <input type="radio" id="radio-cod" name="payment_option" value="cod" hidden>
+                        <input type="radio" id="radio-esewa" name="payment_option" value="esewa" hidden>
                         <div class="row">
                             <div class="col-md-6">
                                 <div id="cod" class="card payment-option-card border border-info">

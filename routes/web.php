@@ -62,6 +62,7 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], fun
     Route::get('/profile', 'UserController@profile')->name('user.profile');
     Route::put('/profile/update/{user}', 'UserController@updateProfile')->name('user.profile.update');
 
+    Route::get('/orders', 'OrderController@index')->name('customer.orders');
 });
 
 Route::get('/cart', 'CartController@index')->name('cart');
@@ -73,8 +74,16 @@ Route::post('/cart/update', 'CartController@update')->name('cart.update');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+    Route::post('/order', 'OrderController@store')->name('order.store');
 });
+
 // temporary test routes
 Route::get('cart/destroy', function(){
     Cart::destroy();
+});
+
+Route::group(['prefix' => 'test', 'middleware' => ['checkrole:admin,user']], function () {
+    Route::get('/role', function () {
+        return "passed";
+    });
 });
