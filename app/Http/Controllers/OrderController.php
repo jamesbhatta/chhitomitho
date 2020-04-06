@@ -19,9 +19,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('orderProducts')->latest()->mine()->get();
+        $this->authorize('viewAll');
+        $orders = Order::with('orderProducts')->latest()->get();
         // return $orders;
-        return view('orders', compact('orders'));
+        return view('order.list', compact('orders'));
     }
 
     /**
@@ -91,7 +92,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $this->authorize('update', $order);
+        return view('order.edit', compact('order'));
     }
 
     /**
@@ -103,6 +105,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
+        $this->authorize('update', $order);
         //
     }
 
@@ -115,5 +118,12 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function myOrders()
+    {
+        $orders = Order::with('orderProducts')->latest()->mine()->get();
+        // return $orders;
+        return view('orders', compact('orders'));
     }
 }

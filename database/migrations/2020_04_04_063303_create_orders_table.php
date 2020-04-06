@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('total_price');
             $table->string('status');
+            $table->ipAddress('customer_ip');
             $table->timestamps();
         });
     }
