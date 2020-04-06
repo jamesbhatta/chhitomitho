@@ -67,4 +67,29 @@ class User extends Authenticatable
     {
         return $this->role === $role;
     }
+
+    public function scopeAdmin($query)
+    {
+        return $query->where('role', 'admin');
+    }
+
+    public function scopeManagers($query)
+    {
+        return $query->where('role', 'manager');
+    }
+
+    public function scopeCPartners($query)
+    {
+        return $query->where('role', 'partner');
+    }
+
+    public function scopeCouriers($query)
+    {
+        return $query->where('role', 'courier');
+    }
+
+    public function scopeCustomers($query)
+    {
+        return $query->where('role', 'customer');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Order;
 use App\OrderProduct;
+use App\User;
 use Auth;
 use Cart;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAll');
+        $this->authorize('viewAny', Order::class);
         $orders = Order::with('orderProducts')->latest()->get();
         // return $orders;
         return view('order.list', compact('orders'));
@@ -51,7 +52,8 @@ class OrderController extends Controller
             $order->fill([
                 'user_id' => Auth::user()->id,
                 'total_price' => Cart::total(0, '', ''),
-                'status' => 'pending'
+                'status' => 'pending',
+                'customer_ip' => \Request::ip(),
             ])->save();
 
             foreach (Cart::content() as $item) {
@@ -93,7 +95,8 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $this->authorize('update', $order);
-        return view('order.edit', compact('order'));
+        $couriers = User::couriers()->get();
+        return view('order.edit', compact('order', 'couriers'));
     }
 
     /**

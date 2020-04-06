@@ -15,6 +15,7 @@ class OrderPolicy
         if ($user->role === 'manager') {
             return true;
         }
+        return false;
     }
 
     /**
@@ -25,7 +26,7 @@ class OrderPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role === 'manager' || $user->role === 'admin';
+        return $user->role === 'manager';
     }
 
     /**

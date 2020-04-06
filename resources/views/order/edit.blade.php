@@ -20,7 +20,7 @@
                         <div class="card border rounded-0">
                             <div class="card-body">
                                 <h4 class="h4-responsive">Order #{{ $order->id }} Details</h4>
-                                <div>Payment via {{ $order->payment_option }}. Paid on Feb 7 @ 09:30 AM. Customer IP: 103.28.121.10</div>
+                                <div>Payment via {{ $order->payment_option }}. Paid on Feb 7 @ 09:30 AM. Customer IP: {{ $order->customer_ip }}</div>
                                 <div class="my-3"></div>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -42,7 +42,7 @@
                     </div>
                     
                     <div class="col-md-12 pt-4">
-                        <table class="table cart-table white border">
+                        <table class="table custom-table white border">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -105,7 +105,9 @@
                         <div class="form-group">
                             <label>Status:</label>
                             <select name="" id="" class="form-control rounded-0">
-                                <option value="">Pending</option>
+                                @foreach(config('constants.STATUS') as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -117,7 +119,9 @@
                         <div class="form-group">
                             <label>Delivered By:</label>
                             <select name="" id="" class="form-control rounded-0">
-                                <option value="">Jane Doe</option>
+                                @foreach($couriers as $courier)
+                                    <option value="{{ $courier->id }}">{{ $courier->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

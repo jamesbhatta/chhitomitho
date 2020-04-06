@@ -22,10 +22,14 @@ class CreateOrdersTable extends Migration
             $table->string('payment_option');
             $table->dateTime('transaction_time')->nullable();
             $table->text('order_notes')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->ipAddress('customer_ip')->nullable();
             $table->integer('total_price');
-            $table->string('status');
-            $table->ipAddress('customer_ip');
+            $table->string('status')->nullable();
+            $table->unsignedBigInteger('partner_id')->nullable();
+            $table->unsignedBigInteger('courier_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('partner_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('courier_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

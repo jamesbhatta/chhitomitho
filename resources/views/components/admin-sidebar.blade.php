@@ -16,8 +16,6 @@
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders</a>
     </li>
-    @else
-    kfjask
     @endcan
     {{-- @endif --}}
     <li class="sidebar-list-item">

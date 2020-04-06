@@ -37,9 +37,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['aut
     Route::delete('users/{user}/destroy', 'UsersController@destroy')->name('users.destroy');
 });
 
-// manager
-// Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'manager']], function () {
-// });
+// Manager
+Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'manager']], function () {
+    Route::get('/dashboard', function () {
+        return view('backend.dashboard');
+    })->name('manager');
+});
 
 //partner
 Route::group(['prefix' => 'partner', 'middleware' => ['auth', 'partner']], function () {
