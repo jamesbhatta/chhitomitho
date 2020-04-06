@@ -69,8 +69,8 @@
                                         </form>
                                     </div>
                                 </td>
-                                <td>{{ $store->owner->email }}</td>
                                 <td>{{ $store->owner->name }}</td>
+                                <td>{{ $store->owner->email }}</td>
                                 <td>{{ $store->owner->mobile }}</td>
                             </tr>
                             <tr id="edit-{{ $loop->iteration }}" class="d-none">
