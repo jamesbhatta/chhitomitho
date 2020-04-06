@@ -13,58 +13,78 @@
                 </div>
                 @include('partials.alerts')
             </div>
-        </div>
-        <table class="table custom-table white card-shadow">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Mobile</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @if( count($users) )
-                @foreach ($users as $user)
-                <tr>
-                    <td>
-                        <img src="{{ $user->gravatar }}" alt="" style="height: 40px; width: 40px;">
-                    </td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td class="text-capitalize">{{ $user->role }}</td>
-                    <td>{{ $user->mobile }}</td>
-                    <td>
-                        <a href="{{ route('users.edit', $user) }}" class="edit-link" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a> | 
-                        <form action="{{ route('users.destroy', $user) }}" method="POST" class="form d-inline">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="del-user-btn del-btn" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-                @else
-                <tr>
-                    <td colspan="5">
-                        <div class="text-center font-italic">No Users found.</div>
-                    </td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
-        
-        @if($users->hasMorePages())
-        <div class="d-flex">
-            <div class="ml-auto">
-                {{ $users->links() }}
+            <div class="col-md-12">
+                <div class="d-flex">
+                    <div class="mr-auto">
+                        <div class="input-group mb-3">
+                            <button class="btn btn-outline-primary btn-md m-0 px-3 py-2 z-depth-0 rounded-0 dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter pr-2"></i> Admin</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('users.index') }}">All</a>
+                                <div role="separator" class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('users.index') }}?role=admin">Admin</a>
+                                <a class="dropdown-item" href="{{ route('users.index') }}?role=manager">Manager</a>
+                                <a class="dropdown-item" href="{{ route('users.index') }}?role=partner">Partner</a>
+                                <a class="dropdown-item" href="{{ route('users.index') }}?role=customer">Customer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        @endif
-        
     </div>
+    <div class="my-3"></div>
+    <table class="table custom-table white card-shadow">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Mobile</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if( count($users) )
+            @foreach ($users as $user)
+            <tr>
+                <td>
+                    <img src="{{ $user->gravatar }}" alt="" style="height: 40px; width: 40px;">
+                </td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td class="text-capitalize">{{ $user->role }}</td>
+                <td>{{ $user->mobile }}</td>
+                <td>
+                    <a href="{{ route('users.edit', $user) }}" class="edit-link" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a> | 
+                    <form action="{{ route('users.destroy', $user) }}" method="POST" class="form d-inline">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="del-user-btn del-btn" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+            @else
+            <tr>
+                <td colspan="5">
+                    <div class="text-center font-italic">No Users found.</div>
+                </td>
+            </tr>
+            @endif
+        </tbody>
+    </table>
+    
+    @if($users->hasMorePages())
+    <div class="d-flex">
+        <div class="ml-auto">
+            {{ $users->links() }}
+        </div>
+    </div>
+    @endif
+    
+</div>
 </div>
 @endsection
 

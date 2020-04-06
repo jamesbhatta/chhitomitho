@@ -107,6 +107,14 @@ class User extends Authenticatable
         return $query->where('role', 'customer');
     }
 
+    public function scopeFilterByRole($query, $role = null)
+    {
+        if(!is_null($role)){
+            return $query->where('role', $role);
+        }
+        return $query;
+    }
+
     // Relations
     public function store()
     {
