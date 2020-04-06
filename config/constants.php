@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'user' => [
+        'items_per_pages' => 15,
+    ],
+
     'product' => [
         'image_dir' => 'products',
         'items_per_page' => 10,
