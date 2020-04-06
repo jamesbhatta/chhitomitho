@@ -149,17 +149,22 @@
                 </div>
 
                 {{-- Supplier card --}}
+                @if(count($stores))
                 <div class="card border border rounded-0 mt-3">
                     <div class="card-body grey lighten-4 text-theme-color py-2 px-4">
                         <h5>Fulfilled By</h5>
                     </div>
                     <div class="card-body">
-                        <label for="">Slect Supplier Restaurant</label>
-                        <select name="partner_id" id="" class="form-control">
-                            <option value="">Restaurabnt One</option>
+                        <label for="">Select Supplier Restaurant (optional)</label>
+                        <select name="store_id" id="" class="form-control">
+                            <option value="">Any</option>
+                            @foreach($stores as $store)
+                            <option value="{{ $store->id }}">{{ $store->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
         {{-- End of row --}}

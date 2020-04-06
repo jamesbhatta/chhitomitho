@@ -113,8 +113,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Fulfilled By:</label>
-                                <select name="parner_id" id="" class="form-control rounded-0">
-                                    <option value="">Restaurant</option>
+                                <select name="store_id" id="" class="form-control rounded-0">
+                                    <option value="">Any</option>
+                                    @foreach($stores as $store)
+                                    <option value="{{ $store->id }}" @if($store->id == $order->store_id) selected @endif>{{ $store->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">

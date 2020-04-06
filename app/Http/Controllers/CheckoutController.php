@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Store;
 use Illuminate\Http\Request;
 use Cart;
 
@@ -13,6 +14,7 @@ class CheckoutController extends Controller
         {
             return redirect()->route('cart');
         }
-        return view('checkout');
+        $stores = Store::sortByName()->get();
+        return view('checkout', compact('stores'));
     }
 }

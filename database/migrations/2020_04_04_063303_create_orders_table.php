@@ -25,10 +25,10 @@ class CreateOrdersTable extends Migration
             $table->ipAddress('customer_ip')->nullable();
             $table->integer('total_price');
             $table->string('status')->nullable();
-            $table->unsignedBigInteger('partner_id')->nullable();
+            $table->unsignedBigInteger('store_id')->nullable();
             $table->unsignedBigInteger('courier_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('partner_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('courier_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

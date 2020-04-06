@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Order;
 use App\OrderProduct;
+use App\Store;
 use App\User;
 use Auth;
 use Cart;
@@ -23,7 +24,7 @@ class OrderController extends Controller
         $this->authorize('viewAny', Order::class);
         $orders = Order::with('orderProducts')->latest()->get();
         // return $orders;
-        return view('order.list', compact('orders'));
+        return view('order.list', compact(['orders']));
     }
 
     /**
@@ -96,7 +97,8 @@ class OrderController extends Controller
     {
         $this->authorize('update', $order);
         $couriers = User::couriers()->get();
-        return view('order.edit', compact('order', 'couriers'));
+        $stores = Store::sortByName()->get();
+        return view('order.edit', compact(['order', 'couriers', 'stores']));
     }
 
     /**
@@ -110,7 +112,7 @@ class OrderController extends Controller
     {
         $this->authorize('update', $order);
         $order->fill([
-            'partner_id'    => $request->partner_id,
+            'store_id'    => $request->store_id,
             'courier_id'    => $request->courier_id,
             'status'    => $request->status,
             'order_notes' => $request->order_notes,
@@ -131,7 +133,7 @@ class OrderController extends Controller
     }
 
     public function myOrders()
-    {   
+    {
         $orders = Order::with('orderProducts')->latest()->mine()->get();
         return view('orders', compact('orders'));
     }
