@@ -52,6 +52,10 @@ class Order extends Model
         return $this->belongsTo('\App\User');
     }
 
+    public function store()
+    {
+        return $this->belongsTo('App\Store');
+    }
 
     public function scopeMine($query)
     {
