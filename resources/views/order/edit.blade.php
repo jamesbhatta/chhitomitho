@@ -121,6 +121,14 @@
                                     <option value="{{ $store->id }}" @if($store->id == $order->store_id) selected @endif>{{ $store->name }}</option>
                                     @endforeach
                                 </select>
+                                <p class="card-text">
+                                    <div>
+                                        Store Owner: {{ $order->store->owner->name }}
+                                    </div>
+                                    <div>
+                                        Contact: {{ $order->store->owner->mobile }}
+                                    </div>
+                                </p>
                             </div>
                             @endif
                             <div class="form-group">
