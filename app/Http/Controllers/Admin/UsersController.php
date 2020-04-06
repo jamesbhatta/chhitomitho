@@ -50,7 +50,7 @@ class UsersController extends Controller
             'role'          => $request->role,
         ]);
 
-        return redirect()->route('users.edit', $user)->with(['success', 'User has been added']);
+        return redirect()->route('users.edit', $user)->with('success', 'User has been added.');
     }
 
     /**
