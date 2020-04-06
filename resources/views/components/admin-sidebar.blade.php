@@ -26,18 +26,26 @@
         <a class="nav-link" href="{{ route('category.index') }}"><i class="far fa-list-alt text-warning"></i>Categories<span><i class="fas fa-angle-right"></i></span></a>
     </li>
     @endcan
+    @can('manage-products')
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('product.create') }}"><i class="fa fa-plus text-info"></i>New Product<span><i class="fas fa-angle-right"></i></span></a>
     </li>
+    @endcan
+    @can('manage-products')
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-cube text-primary"></i>Products<span><i class="fas fa-angle-right"></i></span></a>
     </li>
+    @endcan
+    @can('manage-users')
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('users.index') }}"><i class="far fa-user text-secondary"></i>Users<span><i class="fas fa-angle-right"></i></span></a>
     </li>
+    @endcan
+    @can('manage-store')
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('stores.index') }}"><i class="fas fa-grip-horizontal"></i>Stores<span><i class="fas fa-angle-right"></i></span></a>
     </li>
+    @endcan
     <li class="sidebar-list-item">
         <a class="nav-link" href=""><i class="far fa-star"></i>Features<span><i class="fas fa-angle-right"></i></span></a>
     </li>
