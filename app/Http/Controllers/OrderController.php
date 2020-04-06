@@ -95,7 +95,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $this->authorize('update', $order);
+        $this->authorize('view', $order);
+        // $order->load('orderProducts');
         $couriers = User::couriers()->get();
         $stores = Store::sortByName()->get();
         return view('order.edit', compact(['order', 'couriers', 'stores']));

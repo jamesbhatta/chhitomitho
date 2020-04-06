@@ -28,7 +28,8 @@ class OrderPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role === 'manager';
+        // return $user->role === 'manager';
+        return $user->hasRoles(['manager', 'partner']);
     }
 
     /**
@@ -40,6 +41,9 @@ class OrderPolicy
      */
     public function view(User $user, Order $order)
     {
+        if($user->hasRoles(['partner', 'courier'])) {
+            return true;
+        }
         return $user->id === $order->user_id;
     }
 

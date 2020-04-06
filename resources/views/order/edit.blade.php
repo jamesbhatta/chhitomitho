@@ -111,6 +111,7 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @if(!Auth::user()->hasRole('partner'))
                             <div class="form-group">
                                 <label>Fulfilled By:</label>
                                 <select name="store_id" id="" class="form-control rounded-0">
@@ -120,6 +121,7 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @endif
                             <div class="form-group">
                                 <label>Delivered By:</label>
                                 <select name="courier_id" id="" class="form-control rounded-0">

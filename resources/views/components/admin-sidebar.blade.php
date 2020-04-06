@@ -11,16 +11,21 @@
     <li class="sidebar-list-item">
         <a class="nav-link" href=""><i class="fas fa-desktop text-ink"></i>Dashboard <span><i class="fas fa-angle-right"></i></span></a>
     </li>
-    {{-- @if(Auth::user()->hasRole('manager')) --}}
-    @can('viewAny', App\Order::class)
+    {{-- @can('viewAny', App\Order::class)
+    <li class="sidebar-list-item">
+        <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders</a>
+    </li>
+    @endcan --}}
+    @can('access-orders')
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders</a>
     </li>
     @endcan
-    {{-- @endif --}}
+    @can('manage-categories')
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('category.index') }}"><i class="far fa-list-alt text-warning"></i>Categories<span><i class="fas fa-angle-right"></i></span></a>
     </li>
+    @endcan
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('product.create') }}"><i class="fa fa-plus text-info"></i>New Product<span><i class="fas fa-angle-right"></i></span></a>
     </li>

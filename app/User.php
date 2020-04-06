@@ -68,6 +68,20 @@ class User extends Authenticatable
         return $this->role === $role;
     }
 
+    public function hasRoles($roles)
+    {
+        foreach( $roles as $role)
+        {
+            if ($this->role === $role)
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Local Scopes
+     *
+     */
     public function scopeAdmin($query)
     {
         return $query->where('role', 'admin');
