@@ -15,7 +15,9 @@ class OrderPolicy
         if ($user->role === 'manager') {
             return true;
         }
-        return false;
+        if ($user->role === 'admin') {
+            return true;
+        }
     }
 
     /**

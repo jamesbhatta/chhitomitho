@@ -109,7 +109,14 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $this->authorize('update', $order);
-        //
+        $order->fill([
+            'partner_id'    => $request->partner_id,
+            'courier_id'    => $request->courier_id,
+            'status'    => $request->status,
+            'order_notes' => $request->order_notes,
+        ])->save();
+
+        return redirect()->back()->with('success', 'Order updated.');
     }
 
     /**
@@ -124,9 +131,8 @@ class OrderController extends Controller
     }
 
     public function myOrders()
-    {
+    {   
         $orders = Order::with('orderProducts')->latest()->mine()->get();
-        // return $orders;
         return view('orders', compact('orders'));
     }
 }
