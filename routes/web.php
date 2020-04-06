@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['aut
     
     Route::get('product', 'ProductController@index')->name('product.index');
     Route::get('product/create', 'ProductController@create')->name('product.create');
-    Route::post('product/store', 'ProductController@store')->name('product.store');
+    Route::post('product', 'ProductController@store')->name('product.store'); // removed product/store
     Route::get('product/{product}/edit', 'ProductController@edit')->name('product.edit');
     Route::put('product/{product}/update', 'ProductController@update')->name('product.update');
     Route::delete('product/{product}/destroy', 'ProductController@destroy')->name('product.destroy');
@@ -35,6 +35,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'middleware' => ['aut
     Route::get('users/{user}/edit', 'UsersController@edit')->name('users.edit');
     Route::put('users/{user}/update', 'UsersController@update')->name('users.update');
     Route::delete('users/{user}/destroy', 'UsersController@destroy')->name('users.destroy');
+
+    Route::get('stores', 'StoreController@index')->name('stores.index');
+    Route::post('stores', 'StoreController@store')->name('stores.store');
+    Route::put('stores/{store}/update', 'StoreController@update')->name('stores.update');
+    Route::delete('stores/{store}/destroy', 'StoreController@destroy')->name('stores.destroy');
 });
 
 // Manager

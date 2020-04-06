@@ -78,7 +78,7 @@ class User extends Authenticatable
         return $query->where('role', 'manager');
     }
 
-    public function scopeCPartners($query)
+    public function scopePartners($query)
     {
         return $query->where('role', 'partner');
     }
@@ -91,5 +91,11 @@ class User extends Authenticatable
     public function scopeCustomers($query)
     {
         return $query->where('role', 'customer');
+    }
+
+    // Relations
+    public function store()
+    {
+        return $this->hasOne('App\Store');
     }
 }

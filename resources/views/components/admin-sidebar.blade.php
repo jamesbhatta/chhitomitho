@@ -31,7 +31,7 @@
         <a class="nav-link" href="{{ route('users.index') }}"><i class="far fa-user text-secondary"></i>Users<span><i class="fas fa-angle-right"></i></span></a>
     </li>
     <li class="sidebar-list-item">
-        <a class="nav-link" href=""><i class="fas fa-grip-horizontal"></i>Forum<span><i class="fas fa-angle-right"></i></span></a>
+        <a class="nav-link" href="{{ route('stores.index') }}"><i class="fas fa-grip-horizontal"></i>Stores<span><i class="fas fa-angle-right"></i></span></a>
     </li>
     <li class="sidebar-list-item">
         <a class="nav-link" href=""><i class="far fa-star"></i>Features<span><i class="fas fa-angle-right"></i></span></a>
