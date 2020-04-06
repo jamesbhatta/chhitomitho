@@ -110,6 +110,7 @@
                 </div>
             </div>
             <div class="col-md-4">
+                {{-- Order Summary card --}}
                 <div class="card border border rounded-0">
                     <div class="card-body grey lighten-4 text-theme-color py-2 px-4">
                         <h5>Order Summary</h5>
@@ -144,6 +145,19 @@
                                 <button type="submit" class="btn bg-theme-color text-white rounded-0 text-capitalize">Place Order</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {{-- Supplier card --}}
+                <div class="card border border rounded-0 mt-3">
+                    <div class="card-body grey lighten-4 text-theme-color py-2 px-4">
+                        <h5>Fulfilled By</h5>
+                    </div>
+                    <div class="card-body">
+                        <label for="">Slect Supplier Restaurant</label>
+                        <select name="partner_id" id="" class="form-control">
+                            <option value="">Restaurabnt One</option>
+                        </select>
                     </div>
                 </div>
             </div>
