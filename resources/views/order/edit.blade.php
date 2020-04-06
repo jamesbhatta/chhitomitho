@@ -38,6 +38,7 @@
                                             <div>Name: {{ $order->billing_name }}</div>
                                             <div>Phone: {{ $order->billing_phone }}</div>
                                             <div>Address: {{ $order->billing_address }}</div>
+                                            <div>Payment Mode: <span class="text-uppercase">{{ $order->payment_option }}</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +115,7 @@
                             @if(!Auth::user()->hasRole('partner'))
                             <div class="form-group">
                                 <label>Fulfilled By:</label>
-                                <select name="store_id" id="" class="form-control rounded-0">
+                                <select name="store_id" id="" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
                                     <option value="">Any</option>
                                     @foreach($stores as $store)
                                     <option value="{{ $store->id }}" @if($store->id == $order->store_id) selected @endif>{{ $store->name }}</option>
@@ -124,7 +125,7 @@
                             @endif
                             <div class="form-group">
                                 <label>Delivered By:</label>
-                                <select name="courier_id" id="" class="form-control rounded-0">
+                                <select name="courier_id" id="" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
                                     <option value="">Select Courier</option>
                                     @foreach($couriers as $courier)
                                     <option value="{{ $courier->id }}" @if($courier->id == $order->courier_id) selected @endif>{{ $courier->name }}</option>

@@ -29,7 +29,7 @@ class OrderPolicy
     public function viewAny(User $user)
     {
         // return $user->role === 'manager';
-        return $user->hasRoles(['manager', 'partner']);
+        return $user->hasRoles(['manager', 'partner', 'courier']);
     }
 
     /**

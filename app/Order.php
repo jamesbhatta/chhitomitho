@@ -52,8 +52,10 @@ class Order extends Model
         return $this->belongsTo('\App\User');
     }
 
+
     public function scopeMine($query)
     {
         return $query->where('user_id', Auth::user()->id);
     }
+
 }
