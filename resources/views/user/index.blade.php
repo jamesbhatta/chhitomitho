@@ -22,10 +22,9 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ route('users.index') }}">All</a>
                                 <div role="separator" class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('users.index') }}?role=admin">Admin</a>
-                                <a class="dropdown-item" href="{{ route('users.index') }}?role=manager">Manager</a>
-                                <a class="dropdown-item" href="{{ route('users.index') }}?role=partner">Partner</a>
-                                <a class="dropdown-item" href="{{ route('users.index') }}?role=customer">Customer</a>
+                                @foreach(config('constants.ROLES') as $key => $role)
+                                <a class="dropdown-item" href="{{ route('users.index') }}?role={{ $key}}">{{ $role }}</a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
