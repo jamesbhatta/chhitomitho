@@ -48,17 +48,17 @@
 								<br>
 								<div class="form-check-inline">
 									<label class="form-check-label">
-										<input type="radio" name="gender" class="form-check-input" value="male">Male
+										<input type="radio" name="gender" class="form-check-input" value="male" @if(Auth::user()->gender == 'male') checked @endif>Male
 									</label>
 								</div>
 								<div class="form-check-inline">
 									<label class="form-check-label">
-										<input type="radio" name="gender" class="form-check-input" value="female">Female
+										<input type="radio" name="gender" class="form-check-input" value="female" @if(Auth::user()->gender == 'female') checked @endif>Female
 									</label>
 								</div>
 								<div class="form-check-inline">
 									<label class="form-check-label">
-										<input type="radio" name="gender" class="form-check-input" value="other">Other
+										<input type="radio" name="gender" class="form-check-input" value="other" @if(Auth::user()->gender == 'other') checked @endif>Other
 									</label>
 								</div>
 							</div>
