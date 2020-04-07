@@ -28,6 +28,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::define('access-backend', function ($user) {
+            return $user->hasRoles(['admin', 'manager', 'partner', 'courier' ]);
+        });
+
         Gate::define('access-orders', function ($user) {
             return $user->hasRoles(['admin', 'manager', 'partner', 'courier' ]);
         });
