@@ -12,7 +12,7 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Admin
-Route::group(['prefix' => 'Admin', 'namespace' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', function () {
         return view('backend.dashboard');
     })->name('admin');
