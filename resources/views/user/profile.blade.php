@@ -8,18 +8,24 @@
 <div class="container">
 	<div class="card rounded-0 p-4 z-depth-1">
 		@include('partials.alerts')
-		<div class="row">
-			<div class="col-md-4">
-				<div class="profile-pic-container text-center" style="width: 100%; height: 300px;">
-					<img class="img-fluid rounded-circle" src="{{ Auth::user()->gravatar }}" alt="{{ Auth::user()->name }}">
+		<form action="{{ route('user.profile.update', Auth::user()) }}" method="POST" enctype="multipart/form-data" class="form">
+			@csrf
+			@method('put')
+			<div class="row">
+				<div class="col-md-4">
+					<div class="profile-pic-container text-center" style="width: 100%; height: 300px;">
+						<img id="profilePicPreview" class="img-fluid img-thumbnail" src="{{ Auth::user()->gravatar }}" alt="{{ Auth::user()->name }}" style="max-height: 300px;">
+					</div>
+					<div class="text-center">
+						<input type="file" id="profilePic" name="profile_pic" hidden>
+						<div class="p-3">
+							<label for="profilePic" class="btn btn-primary rounded-0 z-depth-0 text-white" for="">Select Image</label>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-8 text-muted">
-				<h2 class="h2-responsive font-weight-lighter">User Information</h2>
-				<div class="p-3">
-					<form action="{{ route('user.profile.update', Auth::user()) }}" method="POST" class="form">
-						@csrf
-						@method('put')
+				<div class="col-md-8 text-muted">
+					<h2 class="h2-responsive font-weight-lighter">User Information</h2>
+					<div class="p-3">
 						<div class="row">
 							<div class="col-md-6 form-group">
 								<label for="">Name</label>
@@ -62,10 +68,10 @@
 							</div>
 							
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>
 @endsection

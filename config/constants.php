@@ -2,6 +2,7 @@
 
 return [
     'user' => [
+        'image_dir' => 'users',
         'items_per_pages' => 15,
     ],
 

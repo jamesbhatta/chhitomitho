@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -94,6 +95,14 @@ class UsersController extends Controller
                 'role'          => $request->role,
                 ]);
                 
+                if ($request->hasFile('profile_pic')) {
+                    if (Storage::exists($user->profile_pic)) {
+                        Storage::delete($user->profile_pic);
+                    }
+                    $imagePath = Storage::putFile(config('constants.user.image_dir'), $request->file('profile_pic'));
+                    $user->fill(['profile_pic' => $imagePath]);
+                }
+
                 if($request->filled('password')) {
                     $user->fill(['password' => Hash::make($request->password)]);
                 }
@@ -111,6 +120,9 @@ class UsersController extends Controller
             */
             public function destroy(User $user)
             {
+                if (Storage::exists($user->profile_pic)) {
+                    Storage::delete($user->profile_pic);
+                }
                 $user->delete();
                 
                 return redirect()->route('users.index')->with(['success' => 'User has been deleted.']);

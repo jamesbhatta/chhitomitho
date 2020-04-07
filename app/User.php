@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id', 'avatar', 'mobile', 'address', 'gender', 'role'
+        'name', 'email', 'password', 'provider', 'provider_id', 'avatar', 'profile_pic', 'mobile', 'address', 'gender', 'role'
     ];
 
     /**
@@ -44,7 +44,11 @@ class User extends Authenticatable
      */
     public function getGravatarAttribute()
     {
-        if( $this->avatar != null ) {
+        if ($this->profile_pic != null) {
+            return asset('storage/'.$this->profile_pic);
+        }
+
+        if ($this->avatar != null) {
             return $this->avatar;
         }
 
@@ -70,14 +74,13 @@ class User extends Authenticatable
 
     public function hasRoles($roles)
     {
-        foreach( $roles as $role)
-        {
+        foreach ($roles as $role) {
             if ($this->role === $role)
-            return true;
+                return true;
         }
         return false;
     }
-    
+
     /**
      * Local Scopes
      *
@@ -109,7 +112,7 @@ class User extends Authenticatable
 
     public function scopeFilterByRole($query, $role = null)
     {
-        if(!is_null($role)){
+        if (!is_null($role)) {
             return $query->where('role', $role);
         }
         return $query;

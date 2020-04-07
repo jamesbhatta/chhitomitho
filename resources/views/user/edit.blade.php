@@ -15,17 +15,23 @@
         </div>
         <div class="card rounded-0 p-4 card-shadow">
             @include('partials.alerts')
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-pic-container text-center" style="width: 100%; height: 300px;">
-                        <img class="img-fluid" src="" alt="">
+            <form action="{{ route('users.update', $user) }}" method="POST" enctype="multipart/form-data" class="form">
+                @csrf
+                @method('put')
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-pic-container text-center" style="width: 100%; height: 300px;">
+                            <img id="profilePicPreview" class="img-fluid" src="{{ $user->gravatar }}" alt="{{ $user->name }}" style="max-height: 300px;">
+                        </div>
+                        <div class="text-center">
+                            <input type="file" id="profilePic" name="profile_pic" hidden>
+                            <div class="p-3">
+                                <label for="profilePic" class="btn btn-primary rounded-0 z-depth-0 text-white" for="">Select Image</label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-8 text-muted">
-                    <div class="p-3">
-                        <form action="{{ route('users.update', $user) }}" method="POST" class="form">
-                            @csrf
-                            @method('put')
+                    <div class="col-md-8 text-muted">
+                        <div class="p-3">
                             <input type="hidden" name="id" value="{{ $user->id }}" hidden>
                             <div class="row">
                                 <div class="col-md-6 form-group">
@@ -87,11 +93,31 @@
                                 </div>
                                 
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(function () {
+        function readProfilePicURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#profilePicPreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        $("#profilePic").change(function(){
+            readProfilePicURL(this);
+        });
+    });
+</script>
+@endpush
