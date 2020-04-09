@@ -135,7 +135,7 @@ class OrderController extends Controller
 
     public function myOrders()
     {
-        $orders = Order::with('orderProducts')->latest()->mine()->get();
+        $orders = Order::with('orderProducts', 'store', 'courier')->latest()->mine()->get();
         return view('orders', compact('orders'));
     }
 }
