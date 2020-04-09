@@ -16,6 +16,9 @@
         <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders</a>
     </li>
     @endcan --}}
+    <li class="sidebar-list-item">
+        <a class="nav-link" href="{{ url('/') }}" target="_blank"><i class="fas fa-globe text-warning"></i> Site <span><i class="fas fa-angle-right"></i></span></a>
+    </li>
     @can('access-orders')
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders</a>
