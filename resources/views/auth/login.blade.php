@@ -146,7 +146,7 @@
                             <div class="d-flex justify-content-between">
                                 <div class="align-self-center">
                                     @if (Route::has('password.request'))
-                                    <a class="text-muted" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}s</a>
+                                    <a class="text-muted" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
                                     @endif
                                 </div>
                                 <div>
