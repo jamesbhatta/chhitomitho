@@ -49,11 +49,11 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="">Mobile</label>
-                                    <input type="text" name="billing_phone" class="form-control rounded-0" value="{{ Auth::user()->mobile }}">
+                                    <input type="text" name="billing_phone" class="form-control rounded-0" value="{{ old('billing_phone', Auth::user()->mobile) }}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="">Address</label>
-                                    <input type="text" name="billing_address" class="form-control rounded-0" value="{{ Auth::user()->address }}">
+                                    <input type="text" name="billing_address" class="form-control rounded-0" value="{{ old('billing_address', Auth::user()->address) }}">
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                         <h5>Order Notes (optional)</h5>
                     </div>
                     <div class="card-body">
-                        <textarea name="order_notes" id="" class="form-control" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                        <textarea name="order_notes" id="" class="form-control" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery.">{{ old('order_notes')}}</textarea>
                     </div>
                 </div>
             </div>
@@ -159,7 +159,7 @@
                         <select name="store_id" id="" class="form-control">
                             <option value="">Any</option>
                             @foreach($stores as $store)
-                            <option value="{{ $store->id }}">{{ $store->name }}</option>
+                            <option value="{{ $store->id }}" @if (old('store_id') == $store->id) selected @endif>{{ $store->name }}</option>
                             @endforeach
                         </select>
                     </div>
