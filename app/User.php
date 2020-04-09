@@ -123,4 +123,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Store');
     }
+
+    public function packages()
+    {
+        return $this->hasMany('App\Order', 'courier_id');
+    }
 }

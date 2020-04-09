@@ -38,7 +38,6 @@ class Order extends Model
                     $builder->where('user_id', Auth::user()->id);
                     break;
             }
-           
         });
     }
 
@@ -57,9 +56,25 @@ class Order extends Model
         return $this->belongsTo('App\Store');
     }
 
+    public function courier()
+    {
+        return $this->belongsTo('App\User', 'courier_id');
+    }
+
+    // Local Scopes
     public function scopeMine($query)
     {
         return $query->where('user_id', Auth::user()->id);
     }
 
+    // Attributes
+    public function getHasStoreAttribute()
+    {
+        return !empty($this->store_id);
+    }
+
+    public function getHasCourierAttribute()
+    {
+        return !empty($this->courier_id);
+    }
 }
