@@ -63,7 +63,7 @@
             </tbody>
         </table>
         
-        @if($products->hasMorePages())
+        @if($products->hasPages())
         <div class="d-flex">
             <div class="ml-auto">
                 {{ $products->links() }}
