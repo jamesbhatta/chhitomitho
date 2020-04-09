@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Socialite;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -43,6 +44,18 @@ class LoginController extends Controller
     }
 
     /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        $role = $user->role;
+        return redirect()->intended(route($role));
+    }
+    /**
      * Redirect the user to the Social authentication page.
      *
      * @return \Illuminate\Http\Response
@@ -75,7 +88,7 @@ class LoginController extends Controller
             ]);
             Auth::login($user, true);
         }
-        
+
         $role = $user->role;
 
         return redirect()->intended(route($role));
