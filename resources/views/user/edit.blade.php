@@ -84,8 +84,13 @@
                                 </div>
                                 
                                 <div class="col-md-6 form-group">
-                                    <label for="">Password</label>
+                                    <label for="">New Password</label>
                                     <input type="text" name="password" class="form-control rounded-0">
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                        Password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
+                                        special characters,
+                                        or emoji. Leave it blank to unchange.
+                                    </small>
                                 </div>
                                 
                                 <div class="col-md-12">
