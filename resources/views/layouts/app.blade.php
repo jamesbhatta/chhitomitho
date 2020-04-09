@@ -27,6 +27,7 @@
 		body {
 			box-sizing: border-box;
 			font-family: 'Lora', serif;
+			background-color: #f2f7fb;
 		}
 		.bg-theme-color {
 			background-color: #982121;
@@ -58,7 +59,7 @@
 		Secondary Color: #ffb80e
 		--}}
 	</head>
-	<body class="grey lighten-5">
+	<body>
 		<div id="app">
 			<nav class="navbar navbar-expand-md navbar-dark custom-navbar shadow-sm">
 				<div class="container">
