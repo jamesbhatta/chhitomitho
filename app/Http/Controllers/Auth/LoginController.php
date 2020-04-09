@@ -42,35 +42,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function authenticated(Request $request, User $user)
-    {
-        // $role = Auth::user()->isRole();
-        $role = $user->role;
-
-        return redirect()->route($role);
-    }
-
-    public function redirectByRoles()
-    {
-        $role = Auth::user()->role;
-
-        switch ($role) {
-            case 'admin':
-                echo 'admin';
-                return redirect(route('admin'));
-                echo 'after redorection';
-                break;
-            case 'manager':
-                echo 'manager';
-                return redirect()->route('manager');
-                break;
-            default:
-                echo 'default';
-                return redirect()->route('customer');
-        }
-        dd('Not redirected');
-    }
-
     /**
      * Redirect the user to the Social authentication page.
      *
@@ -107,6 +78,6 @@ class LoginController extends Controller
         
         $role = $user->role;
 
-        return redirect()->route($role);
+        return redirect()->intended(route($role));
     }
 }

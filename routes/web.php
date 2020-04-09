@@ -1,15 +1,13 @@
 <?php
-Route::get('/', function () {
-    $categories = \App\Category::with('products')->ordered()->get();
-    return view('welcome', compact('categories'));
-});
+Route::get('/', 'FrontendController@index');
 
 Auth::routes();
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('login.social');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.social.callback');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Abandoned HomeController
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // Admin
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
@@ -35,7 +33,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('users/{user}/edit', 'UsersController@edit')->name('users.edit');
     Route::put('users/{user}/update', 'UsersController@update')->name('users.update');
     Route::delete('users/{user}/destroy', 'UsersController@destroy')->name('users.destroy');
-
+    
     Route::get('stores', 'StoreController@index')->name('stores.index');
     Route::post('stores', 'StoreController@store')->name('stores.store');
     Route::put('stores/{store}/update', 'StoreController@update')->name('stores.update');
@@ -73,11 +71,13 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], fun
     Route::get('/orders', 'OrderController@myOrders')->name('customer.orders');
 });
 
-// registered users with policy
-Route::get('/orders', 'OrderController@index')->name('orders.index');
-Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
-Route::put('/orders/{order}/update', 'OrderController@update')->name('orders.update');
-Route::delete('/orders/{order}', 'OrderController@destroy')->name('orders.destroy');
+Route::group(['middleware' => ['auth']], function () {
+    // registered users with policy
+    Route::get('/orders', 'OrderController@index')->name('orders.index');
+    Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
+    Route::put('/orders/{order}/update', 'OrderController@update')->name('orders.update');
+    Route::delete('/orders/{order}', 'OrderController@destroy')->name('orders.destroy');
+});
 
 // anyone
 Route::get('/cart', 'CartController@index')->name('cart');
