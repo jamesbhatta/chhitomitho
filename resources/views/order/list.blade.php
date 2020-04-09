@@ -44,6 +44,15 @@
                         </tbody>
                     </table>
                 </div>
+
+                @if($orders->hasPages())
+                <div class="d-flex">
+                    <div class="ml-auto">
+                        {{ $orders->links() }}
+                    </div>
+                </div>
+                @endif
+
             </div>
             @foreach ($orders as $order)
             <div class="card border rounded-0 mb-4 d-none">

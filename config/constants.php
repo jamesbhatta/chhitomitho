@@ -11,6 +11,11 @@ return [
         'items_per_page' => 15,
         ''
     ],
+    
+    'order' => [
+        'items_per_page' => 15,
+        ''
+    ],
 
     'ROLES' => [
         'admin' => 'Admin',
