@@ -46,7 +46,7 @@
     .login-form .social-login .social-login-btn.google:focus {
         box-shadow: 0 0 0 0.3rem rgba(0,123,255,.15)!important;
     }
-
+    
     .login-form .separator {
         text-align: center;
         position: relative;
@@ -70,7 +70,7 @@
         width: 95%;
         z-index: -1;
     }
-
+    
     .login-form .form{
         padding: 20px;
     }
@@ -116,7 +116,7 @@
                             @csrf
                             <div class="form-group">
                                 <input type="email" name="email" class="form-control rounded-0 @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email Address" autocomplete="email" autofocus>
-
+                                
                                 @error('email')
                                 <div class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
@@ -125,19 +125,19 @@
                             </div>
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control rounded-0 @error('password') is-invalid @enderror" autocomplete="current-password" placeholder="Type your password">
-
+                                
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-
+                                
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
+                                    
+                                    <label class="form-check-label text-muted" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
@@ -146,18 +146,22 @@
                             <div class="d-flex justify-content-between">
                                 <div class="align-self-center">
                                     @if (Route::has('password.request'))
-                                    <a class="text-muted" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                                    <a class="text-muted" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }} Reset Now</a>
                                     @endif
                                 </div>
                                 <div>
-                                    <button id="loginBtn" type="submit" class="btn btn-primary rounded-0 z-depth-0">Log In</button>
+                                    <button id="loginBtn" type="submit" class="btn btn-primary btn-lg rounded-0 z-depth-0">Log In</button>
                                 </div>
                             </div>
                         </form>
+                        <div class="text-center mt-4">
+                             <span class="text-muted">Don't have account?</span> <a href="{{ route('register',) }}">Register</a>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
-
+            
         </div>
     </div>
 </div>
