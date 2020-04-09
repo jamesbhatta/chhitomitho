@@ -81,5 +81,14 @@
         </div>
     </div>
     @endforeach
+
+    @if($orders->hasPages())
+    <div class="d-flex">
+        <div class="ml-auto">
+            {{ $orders->links() }}
+        </div>
+    </div>
+    @endif
+
 </div>
 @endsection

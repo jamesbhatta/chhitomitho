@@ -29,4 +29,8 @@ return [
         'cancelled'   => 'Cancelled',
     ],
 
+    'my_orders' => [
+        'items_per_page' => '5',
+    ],
+
 ];
