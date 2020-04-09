@@ -75,7 +75,7 @@
         </tbody>
     </table>
     
-    @if($users->hasMorePages())
+    @if($users->hasPages())
     <div class="d-flex">
         <div class="ml-auto">
             {{ $users->links() }}
