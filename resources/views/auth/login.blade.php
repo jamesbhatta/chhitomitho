@@ -124,7 +124,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input type="text" name="password" class="form-control rounded-0 @error('password') is-invalid @enderror" autocomplete="current-password" placeholder="**your secure password**">
+                                <input type="password" name="password" class="form-control rounded-0 @error('password') is-invalid @enderror" autocomplete="current-password" placeholder="Type your password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
