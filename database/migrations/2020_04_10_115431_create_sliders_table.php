@@ -19,7 +19,8 @@ class CreateSlidersTable extends Migration
             $table->string('image')->nullable();
             $table->string('alt_text')->nullable();
             $table->integer('order')->nullable();
-            $table->json('data')->nullable();
+            // $table->json('data')->nullable();
+            $table->text('data')->nullable();
             $table->timestamps();
         });
     }
