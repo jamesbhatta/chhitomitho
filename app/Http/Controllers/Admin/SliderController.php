@@ -19,7 +19,9 @@ class SliderController extends Controller
     {
         $sliders = Slider::all();
         $sliderSettings = Slider::withoutGlobalScopes()->sliderSettings()->get()->first();
-        $sliderSettings = json_decode($sliderSettings->data);
+        if (!empty($sliderSettings)) {
+            $sliderSettings = json_decode($sliderSettings->data);
+        }
         return view('slider.index', compact('sliders', 'sliderSettings'));
     }
 

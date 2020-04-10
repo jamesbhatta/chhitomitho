@@ -26,7 +26,10 @@ class HomePageSlider extends Component
     {
         $sliders = Slider::ordered()->get();
         $sliderSettings = Slider::withoutGlobalScopes()->sliderSettings()->get()->first();
-        $sliderSettings = json_decode($sliderSettings->data);
+        if (!empty($sliderSettings)) {
+            $sliderSettings = json_decode($sliderSettings->data);
+        } else{
+        }
 
         return view('components.home-page-slider', [
             'sliders' => $sliders,

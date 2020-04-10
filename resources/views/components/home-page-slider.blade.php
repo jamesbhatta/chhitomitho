@@ -1,7 +1,7 @@
 @if(!empty($sliders))
 <div id="carousel-slider" class="carousel slide carousel-fade mb-4" data-ride="carousel">
     {{-- Indicators --}}
-    @if($sliderSettings->show_indicators)
+    @if($sliderSettings->show_indicators ?? true)
     <ol class="carousel-indicators">
         @foreach($sliders as $slider)
         <li data-target="#carousel-slider" data-slide-to="{{ $loop->index }}" class="@if($loop->iteration == 1 ) active @endif""></li>
@@ -21,7 +21,7 @@
     {{-- End of slides --}}
     
     {{-- Controls --}}
-    @if($sliderSettings->show_controls)
+    @if($sliderSettings->show_controls ?? true)
     <a class="carousel-control-prev" href="#carousel-slider" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>

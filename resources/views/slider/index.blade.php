@@ -23,14 +23,14 @@
                 <div class="form-row align-items-center justify-content-between">
                     <div class="col-auto">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" name="show_indicators" class="custom-control-input" id="show-indicators-checkbox" @if($sliderSettings->show_indicators) checked @endif>
+                            <input type="checkbox" name="show_indicators" class="custom-control-input" id="show-indicators-checkbox" @if($sliderSettings->show_indicators ?? null) checked @endif>
                             <label class="custom-control-label" for="show-indicators-checkbox">Show Indicators</label>
                         </div>
                     </div>
                     
                     <div class="col-auto">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" name="show_controls" class="custom-control-input" id="show-controls-checkbox" @if($sliderSettings->show_controls) checked @endif>
+                            <input type="checkbox" name="show_controls" class="custom-control-input" id="show-controls-checkbox" @if($sliderSettings->show_controls ?? null) checked @endif>
                             <label class="custom-control-label" for="show-controls-checkbox">Show Controls</label>
                         </div>
                     </div>
