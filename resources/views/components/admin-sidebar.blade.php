@@ -49,9 +49,11 @@
         <a class="nav-link" href="{{ route('stores.index') }}"><i class="fas fa-grip-horizontal"></i>Stores<span><i class="fas fa-angle-right"></i></span></a>
     </li>
     @endcan
+    @can('manage-sliders')
     <li class="sidebar-list-item">
-        <a class="nav-link" href=""><i class="far fa-star"></i>Features<span><i class="fas fa-angle-right"></i></span></a>
+        <a class="nav-link" href="{{ route('sliders.index') }}"><i class="far fa-images"></i>Sliders<span><i class="fas fa-angle-right"></i></span></a>
     </li>
+    @endcan
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt mr-2"></i>{{ __('Logout') }}

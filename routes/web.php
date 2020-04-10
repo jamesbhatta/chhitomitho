@@ -38,6 +38,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('stores', 'StoreController@store')->name('stores.store');
     Route::put('stores/{store}/update', 'StoreController@update')->name('stores.update');
     Route::delete('stores/{store}/destroy', 'StoreController@destroy')->name('stores.destroy');
+    
+    Route::get('sliders', 'SliderController@index')->name('sliders.index');
+    Route::post('sliders', 'SliderController@store')->name('sliders.store');
+    Route::put('sliders/{slider}', 'SliderController@update')->name('sliders.update');
+    Route::delete('sliders/{slider}', 'SliderController@destroy')->name('sliders.destroy');
+    Route::put('save-sliders-settings', 'SliderController@saveSettings')->name('sliders.settings.update');
 });
 
 // Manager

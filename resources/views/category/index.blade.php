@@ -20,7 +20,7 @@
                     <div class="p-3">
                         <h5>Add a new category</h5>
                         <hr>
-                        <form action="{{ route('category.store') }}" method="POST" class="form">
+                        <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data" class="form">
                             @csrf
                             <div class="form-group">
                                 <label for="">Name</label>

@@ -55,9 +55,15 @@
 </style>
 @endpush
 @section('content')
-<div class="container-fluid">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <x-home-page-slider />
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-3">
+            {{-- Menu Card --}}
             <div class="card menu-card rounded-0 mx-auto">
                 <div class="title bg-theme-color bg-secondary-color"><i class="fa fa-utensils mr-2"></i>Delicious Menu</div>
                 <ul class="menu-list">
@@ -68,8 +74,9 @@
                     @endforeach
                 </ul>
             </div>
+            {{-- End of Menu Card --}}
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             @foreach($categories as $category)
             <div class="items-container">
                 <div id="{{ $category->slug }}" class="category-wrapper">
@@ -109,7 +116,7 @@
                                                 </button>
                                             </div>
                                             <div class="mx-2 text-center">
-                                            <input type="number" class="quantity counter-control" value="{{ $product->min_quantity ?? 1 }}" min="{{ $product->min_quantity ?? 1 }}" max="99" style="width: 50px; text-align: center;">
+                                                <input type="number" class="quantity counter-control" value="{{ $product->min_quantity ?? 1 }}" min="{{ $product->min_quantity ?? 1 }}" max="99" style="width: 50px; text-align: center;">
                                             </div>
                                             <div class="mx-2">
                                                 <button class="qty-plus-btn btn btn-sm btn-danger rounded-0 px-3 z-depth-0 m-0">

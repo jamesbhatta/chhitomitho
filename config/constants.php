@@ -38,4 +38,8 @@ return [
         'items_per_page' => '5',
     ],
 
+    'slider' => [
+        'image_dir' => 'sliders',
+    ],
+
 ];
