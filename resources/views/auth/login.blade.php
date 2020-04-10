@@ -23,6 +23,7 @@
         padding: 50px 15px;
     }
     .login-form .social-login .social-login-btn {
+        display: block;
         padding: 15px 15px;
         margin: 10px;
         color: #fff;
@@ -99,7 +100,7 @@
                         <div class="form-title">{{ __('Login') }}</div>
                     </div>
                     <div class="social-login">
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex flex-column flex-md-row justify-content-center">
                             <div class="flex-shrink-0">
                                 <a href="{{ route('login.social', 'facebook') }}" class="social-login-btn facebook rounded-0 z-depth-0"><i class="fab fa-facebook-f mr-3"></i>Log in with Facebook</a>
                             </div>
@@ -137,16 +138,16 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     
-                                    <label class="form-check-label text-muted" for="remember">
+                                    <label class="form-check-label text-muted small" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
                             </div>
                             <hr class="my-4">
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-column-reverse flex-md-row justify-content-between">
                                 <div class="align-self-center">
                                     @if (Route::has('password.request'))
-                                    <a class="text-muted" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }} Reset Now</a>
+                                    <a class="text-muted small" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }} <span class="text-primary">Reset Now</span></a>
                                     @endif
                                 </div>
                                 <div>
@@ -155,7 +156,7 @@
                             </div>
                         </form>
                         <div class="text-center mt-4">
-                             <span class="text-muted">Don't have account?</span> <a href="{{ route('register',) }}">Register</a>
+                            <span class="text-muted">Don't have account?</span> <a href="{{ route('register',) }}">Register</a>
                         </div>
                     </div>
                     
