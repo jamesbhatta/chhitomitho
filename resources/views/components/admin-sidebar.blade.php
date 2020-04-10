@@ -44,7 +44,7 @@
         <a class="nav-link" href="{{ route('users.index') }}"><i class="far fa-user text-secondary"></i>Users<span><i class="fas fa-angle-right"></i></span></a>
     </li>
     @endcan
-    @can('manage-store')
+    @can('manage-stores')
     <li class="sidebar-list-item">
         <a class="nav-link" href="{{ route('stores.index') }}"><i class="fas fa-grip-horizontal"></i>Stores<span><i class="fas fa-angle-right"></i></span></a>
     </li>
