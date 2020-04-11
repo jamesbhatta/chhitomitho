@@ -1,4 +1,9 @@
 <?php
+
+use App\Jobs\OrderPlacedJob;
+use App\Mail\OrderPlaced;
+use Illuminate\Bus\Dispatcher;
+
 Route::get('/', 'FrontendController@index');
 
 Auth::routes();

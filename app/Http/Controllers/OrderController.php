@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Jobs\OrderPlacedJob;
 use App\Order;
 use App\OrderProduct;
 use App\Store;
@@ -68,6 +69,7 @@ class OrderController extends Controller
             }
             DB::commit();
             Cart::destroy();
+            OrderPlacedJob::dispatchNow($order);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'An unknown error occured. Please try again.');
