@@ -49,6 +49,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::put('sliders/{slider}', 'SliderController@update')->name('sliders.update');
     Route::delete('sliders/{slider}', 'SliderController@destroy')->name('sliders.destroy');
     Route::put('save-sliders-settings', 'SliderController@saveSettings')->name('sliders.settings.update');
+
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs');
+
 });
 
 // Manager

@@ -51,7 +51,12 @@
     @endcan
     @can('manage-sliders')
     <li class="sidebar-list-item">
-        <a class="nav-link" href="{{ route('sliders.index') }}"><i class="far fa-images"></i>Sliders<span><i class="fas fa-angle-right"></i></span></a>
+        <a class="nav-link" href="{{ route('sliders.index') }}"><i class="far fa-images text-default"></i>Sliders<span><i class="fas fa-angle-right"></i></span></a>
+    </li>
+    @endcan
+    @can('manage-logs')
+    <li class="sidebar-list-item">
+        <a class="nav-link" href="{{ route('logs') }}" target="_blank"><i class="far fa-calendar-alt text-secondary"></i>Logs<span><i class="fas fa-angle-right"></i></span></a>
     </li>
     @endcan
     <li class="sidebar-list-item">
