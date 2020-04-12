@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
 
+    public static function boot()
+    {
+        parent::boot();
+        Category::deleting(function ($category) {
+            if ( $category->isUncategorized() ) return false;
+        });
+    }
+
     public function scopeActive($query, $state = true)
     {
         return $query->where('active', $state);
@@ -25,5 +33,11 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany('App\Product');
+    }
+
+    public function isUncategorized()
+    {
+        if ($this->slug == 'uncategorized') return true;
+        return false;
     }
 }

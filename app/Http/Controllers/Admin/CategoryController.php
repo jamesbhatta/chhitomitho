@@ -42,6 +42,10 @@ class CategoryController extends Controller
             'order' => 'nullable|numeric'
         ]);
 
+        if ( $category->slug == 'uncategorized' ) {
+            return redirect()->back()->with('error', 'Uncategorized is the default category and cannot be modified.');
+        }
+
         $category->name = $request->name;
         if ($request->slug) {
             $category->slug = $request->slug;
@@ -58,6 +62,11 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        if ( $category->slug == 'uncategorized' ) {
+            return redirect()->back()->with('error', 'Uncategorized is the default category and cannot be deleted.');
+        }
+        $uncategorizedId = Category::firstWhere('slug', 'uncategorized')->id;
+        $category->products()->update(['category_id' => $uncategorizedId]);
         $category->delete();
 
         return redirect()->back()->with('success', 'Category has been delted.');
