@@ -58,7 +58,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-        return redirect()->route('product.edit', $product)->with('success', 'Product has been added');
+        return redirect()->route('product.create')->with('success', 'Product has been added');
     }
 
     /**
