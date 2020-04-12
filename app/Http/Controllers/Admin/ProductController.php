@@ -120,4 +120,19 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success', 'Product has been deleted.');
     }
+
+    public function deleteMultiple(Request $request)
+    {
+        $ids = explode(',', $request->product_ids);
+        foreach ($ids as $id) {
+            if ($id != null) {
+                $product = Product::find($id);
+                if (Storage::exists($product->product_image)) {
+                    Storage::delete($product->product_image);
+                }
+                $product->delete();
+            }
+        }
+        return redirect()->back()->with('success', 'Selected products has been deleted.');
+    }
 }

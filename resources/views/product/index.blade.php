@@ -13,21 +13,37 @@
                 </div>
                 @include('partials.alerts')
             </div>
+            <div class="col-md-12 mb-4">
+                <div class="d-flex">
+                    <form action="{{ route('product.deletemultiple') }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <input type="hidden" id="product_ids" name="product_ids">
+                        <button type="submit" id="bulk-delete-btn" class="btn btn-outline-danger btn-sm rounded-0 card-shadow ml-0" >Delete Selected</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <table class="table custom-table white card-shadow">
             <thead>
                 <tr>
+                    <th>
+                        <input type="checkbox" id="select-all">
+                    </th>
                     <th>#</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Category</th>
-                    <th></th>
+                    
                 </tr>
             </thead>
             <tbody>
                 @if( count($products) )
                 @foreach ($products as $product)
                 <tr>
+                    <td>
+                        <input type="checkbox" name="id[]" class="select-checkbox" value="{{ $product->id }}">
+                    </td>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $product->name }}</td>
                     <td>
@@ -80,6 +96,32 @@
     $(function () {
         $('.del-product-btn').click(function () {
             var ch = confirm ('Are you absolutely sure you want to delete?');
+            if(ch == true) {
+                return true;
+            }
+            return false;
+        });
+        
+        $('.select-checkbox').change( function () {
+            var arr = $('.select-checkbox:checked').map(function() { return this.value; }).get().join();
+            $('#product_ids').val(arr);
+            if (arr.length  > 0) {
+                $('#bulk-delete-btn').removeAttr('disabled');
+            } else {
+                $('#bulk-delete-btn').prop('disabled', true);
+            }
+        });
+
+        $('#select-all').change( function () {
+            if($(this).prop('checked')) {
+                $('.select-checkbox').prop('checked', true).trigger('change');
+            } else {
+                $('.select-checkbox').prop('checked', false).trigger('change');
+            }
+        })
+
+        $('#bulk-delete-btn').click( function (e) {
+            var ch = confirm ('Are you absolutely sure you want to delete all the selected items?');
             if(ch == true) {
                 return true;
             }
