@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::withCount('products')->ordered()->get();
+        $categories = Category::withCount('products')->orderByFeatured()->ordered()->get();
         return view('category.index', compact('categories'));
     }
 
@@ -49,6 +49,8 @@ class CategoryController extends Controller
             $category->slug = Str::slug($request->name, '-');
         }
         $category->order = $request->order;
+        $category->active = $request->boolean('active');
+        $category->featured = $request->boolean('featured');
         $category->save();
 
         return redirect()->back()->with('success', 'Category has been updated.');

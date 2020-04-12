@@ -14,7 +14,7 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('products')->ordered()->get();
+        $categories = Category::active()->with('products')->orderByFeatured()->ordered()->get();
         return view('welcome', compact('categories'));
     }
 }

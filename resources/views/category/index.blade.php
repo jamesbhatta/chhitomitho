@@ -50,6 +50,7 @@
                                 <th>Name</th>
                                 <th>Slug</th>
                                 <th>Count</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,9 +71,21 @@
                                 </td>
                                 <td>{{ $category->slug }}</td>
                                 <td>{{ $category->products_count }}</td>
+                                <td>
+                                    <span class="text-warning mr-2">
+                                        @if($category->active)
+                                        <i class="far fa-check-circle"></i>
+                                        @else
+                                        <i class="far fa-times-circle text-danger"></i>
+                                        @endif
+                                    </span>
+                                    @if($category->featured)
+                                    <span class="text-warning"><i class="far fa-star"></i></span>
+                                    @endif
+                                </td>
                             </tr>
                             <tr id="edit-{{ $loop->iteration }}" class="d-none">
-                                <td colspan="4">
+                                <td colspan="5">
                                     <form action="{{ route('category.update', $category) }}" method="POST" class="form">
                                         @csrf
                                         @method('PUT')
@@ -95,8 +108,20 @@
                                             <div class="col-md-1">
                                                 <label><i>Order</i></label>
                                             </div>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-3">
                                                 <input type="number" name="order" class="form-control form-control-sm rounded-0 mr-3" value="{{ $category->order }}">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" name="active" class="custom-control-input" id="checkbox-active-{{ $loop->iteration }}" @if($category->active) checked @endif>
+                                                    <label class="custom-control-label" for="checkbox-active-{{ $loop->iteration }}">Active</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" name="featured" class="custom-control-input" id="checkbox-featured-{{ $loop->iteration }}" @if($category->featured) checked @endif>
+                                                    <label class="custom-control-label" for="checkbox-featured-{{ $loop->iteration }}">Featured</label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group form-row">
