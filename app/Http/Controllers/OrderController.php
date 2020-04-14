@@ -68,7 +68,7 @@ class OrderController extends Controller
                     'price' => $item->price
                 ]);
             }
-            OrderPlacedJob::dispatchNow($order);
+            OrderPlacedJob::dispatch($order);
             Log::info('OrderPlacedJob dispatched');
             DB::commit();
             Cart::destroy();
