@@ -25,7 +25,7 @@ class OrderController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Order::class);
-        $orders = Order::with('orderProducts')->latest()->paginate(config('constants.order.items_per_page', 15));
+        $orders = Order::with('orderProducts', 'user')->latest()->paginate(config('constants.order.items_per_page', 15));
         // return $orders;
         return view('order.list', compact(['orders']));
     }
