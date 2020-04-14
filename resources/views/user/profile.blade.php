@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @push('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css">
 @endpush
 
 @section('content')
@@ -77,12 +76,21 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
 <script>
-	$(function() {
-		$('#croppieProfilePic').croppie({
-			viewport: { width: 260, height: 260, type: 'square' },
-		});
-	});
+	 $(function () {
+        function readProfilePicURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#profilePicPreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        $("#profilePic").change(function(){
+            readProfilePicURL(this);
+        });
+    });
 </script>
 @endpush
