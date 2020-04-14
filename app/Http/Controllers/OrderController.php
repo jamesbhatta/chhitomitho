@@ -12,6 +12,7 @@ use Auth;
 use Cart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -68,6 +69,7 @@ class OrderController extends Controller
                 ]);
             }
             OrderPlacedJob::dispatchNow($order);
+            Log::info('OrderPlacedJob dispatched');
             DB::commit();
             Cart::destroy();
         } catch (\Exception $e) {
