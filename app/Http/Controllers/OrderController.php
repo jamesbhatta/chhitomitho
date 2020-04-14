@@ -67,9 +67,9 @@ class OrderController extends Controller
                     'price' => $item->price
                 ]);
             }
+            OrderPlacedJob::dispatchNow($order);
             DB::commit();
             Cart::destroy();
-            OrderPlacedJob::dispatchNow($order);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'An unknown error occured. Please try again.');

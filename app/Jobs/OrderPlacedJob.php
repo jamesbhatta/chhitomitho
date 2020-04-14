@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class OrderPlacedJob implements ShouldQueue
@@ -34,6 +35,7 @@ class OrderPlacedJob implements ShouldQueue
      */
     public function handle()
     {
+        Log::info('Order Placed Job running');
         Mail::to($this->order->user->email)->send(new OrderPlaced($this->order));
     }
 }
