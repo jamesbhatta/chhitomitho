@@ -73,6 +73,7 @@ class OrderController extends Controller
             DB::commit();
             Cart::destroy();
         } catch (\Exception $e) {
+            Log::error('Exception caught in OrderController@store: ' . $e->getMessage());
             DB::rollback();
             return redirect()->back()->with('error', 'An unknown error occured. Please try again.');
         }
