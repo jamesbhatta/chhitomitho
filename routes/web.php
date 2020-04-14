@@ -1,6 +1,7 @@
 <?php
 
 use App\Jobs\OrderPlacedJob;
+use App\Jobs\SendSmsJob;
 use App\Mail\OrderPlaced;
 use Illuminate\Bus\Dispatcher;
 

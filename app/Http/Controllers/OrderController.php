@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
 use App\Jobs\OrderPlacedJob;
+use App\Jobs\SendSmsJob;
 use App\Order;
 use App\OrderProduct;
 use App\Store;
@@ -49,7 +50,6 @@ class OrderController extends Controller
     {
         DB::beginTransaction();
         try {
-
             $order = new Order();
             $order->fill($request->all());
             $order->fill([
@@ -68,8 +68,11 @@ class OrderController extends Controller
                     'price' => $item->price
                 ]);
             }
+            
             OrderPlacedJob::dispatch($order);
-            Log::info('OrderPlacedJob dispatched');
+            $to = $order->billing_phone;
+            $message = $this->createOrderReveivedSMS($order);
+            SendSmsJob::dispatch($to, $message);
             DB::commit();
             Cart::destroy();
         } catch (\Exception $e) {
@@ -142,5 +145,10 @@ class OrderController extends Controller
     {
         $orders = Order::with('orderProducts', 'store', 'courier')->latest()->mine()->paginate(config('constants.my_orders.items_per_page'));
         return view('orders', compact('orders'));
+    }
+
+    public function createOrderReveivedSMS($order)
+    {
+        return "Dear " . Auth::user()->name . ",\r\nyour order #$order->id has been received and is now being processed.\r\n Details: " . route('customer.orders');
     }
 }

@@ -44,16 +44,17 @@
                         <div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="">Name</label>
-                                    <input type="text" name="billing_name" class="form-control rounded-0" value="{{ Auth::user()->name }}">
+                                    <label for="">Name*</label>
+                                    <input type="text" name="billing_name" class="form-control rounded-0" value="{{ Auth::user()->name }}" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="">Mobile</label>
-                                    <input type="text" name="billing_phone" class="form-control rounded-0" value="{{ old('billing_phone', Auth::user()->mobile) }}">
+                                    <label for="">Mobile*</label>
+                                    <input type="text" name="billing_phone" class="form-control rounded-0" maxlength="10" pattern="[7-9]{1}[0-9]{9}" value="{{ old('billing_phone', Auth::user()->mobile) }}" required>
+                                    <small>10 digit mobile number.</small>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="">Address</label>
-                                    <input type="text" name="billing_address" class="form-control rounded-0" value="{{ old('billing_address', Auth::user()->address) }}">
+                                    <label for="">Address*</label>
+                                    <input type="text" name="billing_address" class="form-control rounded-0" value="{{ old('billing_address', Auth::user()->address) }}" required>
                                 </div>
                             </div>
                         </div>
