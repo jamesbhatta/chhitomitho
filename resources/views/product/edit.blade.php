@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group text-center white card-shadow p-3">
-                        <button type="submit" class="btn btn-primary rounded-0 card-shadow">Save Product</button>
+                        <button type="submit" class="btn btn-primary rounded-0 card-shadow">Edit Product</button>
                     </div>
                     <div class="form-group white card-shadow text-center">
                         @php
