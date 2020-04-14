@@ -41,5 +41,7 @@ return [
     'slider' => [
         'image_dir' => 'sliders',
     ],
+    
+    'cron_test_mode' => env('CRON_TEST_MODE', true),
 
 ];

@@ -27,6 +27,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('queue:work --sleep=3 --tries=3')->everyMinute()->withoutOverlapping();
+        if (config('constants.cron_test_mode')) {
+            $schedule->call(function () {
+                Log::info('Cron Job running');
+            });
+        }
     }
 
     /**
