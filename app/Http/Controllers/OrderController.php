@@ -70,9 +70,9 @@ class OrderController extends Controller
             }
 
             OrderPlacedJob::dispatch($order);
-            $to = $order->billing_phone;
-            $message = $this->createOrderReveivedSMS($order);
-            SendSmsJob::dispatch($to, $message);
+            // $to = $order->billing_phone;
+            // $message = $this->createOrderReveivedSMS($order);
+            // SendSmsJob::dispatch($to, $message);
             DB::commit();
             Cart::destroy();
         } catch (\Exception $e) {
