@@ -77,4 +77,5 @@ class Order extends Model
     {
         return !empty($this->courier_id);
     }
+
 }

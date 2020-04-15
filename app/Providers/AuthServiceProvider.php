@@ -59,5 +59,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage-logs', function ($user) {
             return $user->hasRoles(['admin']);
         });
+
+       
     }
 }

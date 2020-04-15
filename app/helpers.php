@@ -25,3 +25,22 @@ if (!function_exists('sendSms')) {
         return $server_output;
     }
 }
+
+if ( !function_exists('createOrderConfirmedSMS') ) {
+    function createOrderConfirmedSMS($order){
+        return "Dear " . $order->user->name . ",\r\nyour order #$order->id has been confirmed and is now being processed.\r\nLatest status of your order can be fount at " . route('customer.orders');
+    }
+}
+
+
+if ( !function_exists('createOrderShippedSMS') ) {
+    function createOrderShippedSMS($order){
+        return "Dear " . $order->user->name . ",\r\nyour order #$order->id has been dispatched and is on the way.\r\nLatest status can be found at " . route('customer.orders');
+    }
+}
+
+if ( !function_exists('createOrderCompletedSMS') ) {
+    function createOrderCompletedSMS($order){
+        return "Dear " . $order->user->name . ",\r\nyour order #$order->id has been completed.\r\nThank you for choosing us.\r\nRegards,\r\nChhitomitho Team";
+    }
+}

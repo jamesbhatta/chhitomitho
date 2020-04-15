@@ -68,7 +68,7 @@ class OrderController extends Controller
                     'price' => $item->price
                 ]);
             }
-            
+
             OrderPlacedJob::dispatch($order);
             $to = $order->billing_phone;
             $message = $this->createOrderReveivedSMS($order);
@@ -120,12 +120,38 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $this->authorize('update', $order);
-        $order->fill([
-            'store_id'    => $request->store_id,
-            'courier_id'    => $request->courier_id,
-            'status'    => $request->status,
-            'order_notes' => $request->order_notes,
-        ])->save();
+        DB::beginTransaction();
+        try {
+            if ($order->status != $request->status) {
+                $message = null;
+                switch ($request->status) {
+                    case "confirmed":
+                        $message = createOrderConfirmedSMS($order);
+                        break;
+                    case "shipped":
+                        $message = createOrderShippedSMS($order);
+                        break;
+                    case "completed":
+                        $message = createOrderCompletedSMS($order);
+                        break;
+                }
+                if (!is_null($message)) {
+                    Log::info($message);
+                    SendSmsJob::dispatch($order->billing_phone, $message);
+                }
+            }
+            $order->fill([
+                'store_id'    => $request->store_id,
+                'courier_id'    => $request->courier_id,
+                'status'    => $request->status,
+                'order_notes' => $request->order_notes,
+            ])->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            Log::error('Exception caught in OrderController@update: ' . $e->getMessage());
+            DB::rollback();
+            return redirect()->back()->with('error', 'An unknown error occured. Please try again.');
+        }
 
         return redirect()->back()->with('success', 'Order updated.');
     }
@@ -147,8 +173,13 @@ class OrderController extends Controller
         return view('orders', compact('orders'));
     }
 
-    public function createOrderReveivedSMS($order)
-    {
-        return "Dear " . Auth::user()->name . ",\r\nyour order #$order->id has been received and is now being processed.\r\n Details: " . route('customer.orders');
-    }
+    // public function createOrderReveivedSMS($order)
+    // {
+    //     return "Dear " . Auth::user()->name . ",\r\nyour order #$order->id has been received and is now being processed.\r\nLatest status of your order can be fount at " . route('customer.orders');
+    // }
+
+    // public function createOrderConfirmedSMS($order)
+    // {
+    //     return "Dear " . $order->user->name . ",\r\nyour order #$order->id has been confirmed and is now being processed.\r\nLatest status can be found at " . route('customer.orders');
+    // }
 }

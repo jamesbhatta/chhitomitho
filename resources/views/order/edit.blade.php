@@ -3,6 +3,7 @@
 @section('content')
 <div class="p-3">
     <div class="container-fluid">
+        
         <form action="{{ route('orders.update', $order) }}" method="POST" class="form">
             @csrf
             @method('put')
@@ -100,6 +101,7 @@
                     <div class="card border rounded-0 mb-3">
                         <div class="card-body">
                             <button type="submit" class="btn btn-primary btn-lg rounded-0 w-100">Update</button>
+                            <button type="submit" class="btn btn-primary btn-lg rounded-0 w-100">Dispatch</button>
                         </div>
                     </div>
                     <div class="card border rounded-0">

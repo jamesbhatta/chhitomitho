@@ -28,6 +28,7 @@ return [
     'STATUS'  => [
         'pending_payment' => 'Pending Payment',
         'pending'   => 'Pending',
+        'confirmed' => 'Confirmed',
         'processing'    => 'Processing',
         'shipped'   => 'Shipped',
         'completed'   => 'Completed',

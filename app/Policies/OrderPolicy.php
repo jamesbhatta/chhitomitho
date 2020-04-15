@@ -105,4 +105,9 @@ class OrderPolicy
     {
         //
     }
+
+    public function dispatch(User $user, Order $order)
+    {
+
+    }
 }
