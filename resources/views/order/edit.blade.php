@@ -183,7 +183,7 @@
                             @if($order->status == "processing" || $order->status == "confirmed")
                             <input type="hidden" name="dispatched" value="true" hidden>
                             <button type="submit" class="btn btn-info btn-lg rounded-0 w-100 text-capitalize card-shadow">Mark Dispatched</button>
-                            @elseif($order->courier->hasRole('courier') && $order->status == "shipped")
+                            @elseif(Auth::user()->hasRole('courier') && $order->status == "shipped")
                             <input type="hidden" name="delivered" value="true" hidden>
                             <button type="submit" class="btn btn-success btn-lg rounded-0 w-100 text-capitalize card-shadow">Mark Delivered</button>
                             @else
