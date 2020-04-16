@@ -85,7 +85,7 @@
                     </table>
                     {{-- End of products list --}}
                     {{-- Order Notes --}}
-                    @if( Auth::user()->hasRoles(['admin', 'partner']) || !is_null($order->order_notes))
+                    @if( Auth::user()->hasRoles(['admin', 'manager']) || !is_null($order->order_notes))
                     <div class="card border rounded-0">
                         <div class="card-header">
                             Order Notes
@@ -165,7 +165,7 @@
                                 @if(Auth::user()->hasRole('courier') && $order->hasStore)
                                 <ul class="list-group list-group-flush">
                                     <div class="list-group-item d-flex justify-content-between border-0">
-                                        <dt>Store Owner:</dt>
+                                        <dt>Store:</dt>
                                         <div>{{ $order->store->owner->name }}</div>
                                     </div>
                                     <div class="list-group-item d-flex justify-content-between border-0">
@@ -180,6 +180,9 @@
                     </div>
                     <div class="card border rounded-0">
                         <div class="card-body">
+                            <div>
+                                Status: <span class="text-capitalize">{{ $order->status }}</span>
+                            </div>
                             @if($order->status == "processing" || $order->status == "confirmed")
                             <input type="hidden" name="dispatched" value="true" hidden>
                             <button type="submit" class="btn btn-info btn-lg rounded-0 w-100 text-capitalize card-shadow">Mark Dispatched</button>
