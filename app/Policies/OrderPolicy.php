@@ -106,8 +106,19 @@ class OrderPolicy
         //
     }
 
-    public function dispatch(User $user, Order $order)
+    public function markDispatched(User $user, Order $order)
     {
+        if($user->hasRoles(['partner', 'courier'])) {
+            return true;
+        }
+        return false;
+    }
 
+    public function markDelivered(User $user, Order $order)
+    {
+        if($user->hasRole('courier')) {
+            return true;
+        }
+        return false;
     }
 }

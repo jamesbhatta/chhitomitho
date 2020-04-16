@@ -31,7 +31,7 @@ return [
         'confirmed' => 'Confirmed',
         'processing'    => 'Processing',
         'shipped'   => 'Shipped',
-        'completed'   => 'Completed',
+        'delivered'   => 'Delivered',
         'cancelled'   => 'Cancelled',
     ],
 

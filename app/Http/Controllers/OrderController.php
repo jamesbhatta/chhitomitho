@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderStatusChangedEvent;
 use App\Http\Requests\OrderRequest;
 use App\Jobs\OrderPlacedJob;
 use App\Jobs\SendSmsJob;
@@ -25,7 +26,7 @@ class OrderController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Order::class);
-        $orders = Order::with('orderProducts', 'user')->latest()->paginate(config('constants.order.items_per_page', 15));
+        $orders = Order::with('orderProducts', 'user', 'store', 'store.owner', 'courier')->latest()->paginate(config('constants.order.items_per_page', 15));
         // return $orders;
         return view('order.list', compact(['orders']));
     }
@@ -69,6 +70,7 @@ class OrderController extends Controller
                 ]);
             }
 
+            // Instead fire an Order Placed Event
             OrderPlacedJob::dispatch($order);
             // $to = $order->billing_phone;
             // $message = $this->createOrderReveivedSMS($order);
@@ -119,41 +121,38 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $this->authorize('update', $order);
         DB::beginTransaction();
         try {
-            if ($order->status != $request->status) {
-                $message = null;
-                switch ($request->status) {
-                    case "confirmed":
-                        $message = createOrderConfirmedSMS($order);
-                        break;
-                    case "shipped":
-                        $message = createOrderShippedSMS($order);
-                        break;
-                    case "completed":
-                        $message = createOrderCompletedSMS($order);
-                        break;
-                }
-                if (!is_null($message)) {
-                    Log::info($message);
-                    SendSmsJob::dispatch($order->billing_phone, $message);
-                }
+            if ($request->has('dispatched')) {
+                $this->authorize('markDispatched', $order);
+                $order->fill(['status' => 'shipped'])->save();
+                $response = "The order #$order->id has been marked as Dispatched.";
+            } elseif ($request->has('delivered')) {
+                $this->authorize('markDelivered', $order);
+                $order->fill(['status' => 'delivered'])->save();
+                $response = "The order #$order->id has been marked as Delivered.";
+            } else {
+                $this->authorize('update', $order);
+                $order->fill([
+                    'store_id'    => $request->store_id,
+                    'courier_id'    => $request->courier_id,
+                    'status'    => $request->status,
+                    'order_notes' => $request->order_notes,
+                ])->save();
+                $response = "The order #$order->id has been Updated.";
             }
-            $order->fill([
-                'store_id'    => $request->store_id,
-                'courier_id'    => $request->courier_id,
-                'status'    => $request->status,
-                'order_notes' => $request->order_notes,
-            ])->save();
+
             DB::commit();
+            if ($order->wasChanged('status')) {
+                event(new OrderStatusChangedEvent($order, $request->status));
+            }
         } catch (\Exception $e) {
             Log::error('Exception caught in OrderController@update: ' . $e->getMessage());
             DB::rollback();
             return redirect()->back()->with('error', 'An unknown error occured. Please try again.');
         }
 
-        return redirect()->back()->with('success', 'Order updated.');
+        return redirect()->back()->with('success', $response);
     }
 
     /**
@@ -167,19 +166,23 @@ class OrderController extends Controller
         //
     }
 
+    public function dispatched(Order $order)
+    {
+        $order->status = 'shipped';
+        $order->save();
+        return redirect()->back()->with('success', 'Order has been marked as Dispatched.');
+    }
+
+    public function delivered(Order $order)
+    {
+        $order->status = 'delivered';
+        $order->save();
+        return redirect()->back()->with('success', 'Order has been marked as Delivered successfully.');
+    }
+
     public function myOrders()
     {
         $orders = Order::with('orderProducts', 'store', 'courier')->latest()->mine()->paginate(config('constants.my_orders.items_per_page'));
         return view('orders', compact('orders'));
     }
-
-    // public function createOrderReveivedSMS($order)
-    // {
-    //     return "Dear " . Auth::user()->name . ",\r\nyour order #$order->id has been received and is now being processed.\r\nLatest status of your order can be fount at " . route('customer.orders');
-    // }
-
-    // public function createOrderConfirmedSMS($order)
-    // {
-    //     return "Dear " . $order->user->name . ",\r\nyour order #$order->id has been confirmed and is now being processed.\r\nLatest status can be found at " . route('customer.orders');
-    // }
 }

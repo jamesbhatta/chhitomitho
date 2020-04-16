@@ -78,4 +78,16 @@ class Order extends Model
         return !empty($this->courier_id);
     }
 
+    public function getOrderNumberAttribute()
+    {
+        return "#".$this->id;
+    }
+
+
+    // Methods
+    // public function isPaymentComplete()
+    // {
+    //     return $this->payment_mode == 'esewa' && !isset($this->transaction_time);
+    // }
+
 }
