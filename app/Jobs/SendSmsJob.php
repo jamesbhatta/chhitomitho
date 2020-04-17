@@ -40,7 +40,7 @@ class SendSmsJob implements ShouldQueue
             $response = json_decode($response_json);
             $status = $response->response_code;
             if ($status == 200) {
-                Log::info('SMS sent to: ' . $this->to . " -> " . $response_json );
+                Log::info('SMS sent to: ' . $this->to . " -> " . $response_json. ' Message Body: ' . $this->message );
                 return true;
             } else {
                 throw new Exception('Invalid response from server: ' . $response_json);

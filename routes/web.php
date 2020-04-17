@@ -1,10 +1,5 @@
 <?php
 
-use App\Jobs\OrderPlacedJob;
-use App\Jobs\SendSmsJob;
-use App\Mail\OrderPlaced;
-use Illuminate\Bus\Dispatcher;
-
 Route::get('/', 'FrontendController@index');
 
 Auth::routes();
@@ -93,8 +88,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
     Route::put('/orders/{order}/update', 'OrderController@update')->name('orders.update');
     Route::delete('/orders/{order}', 'OrderController@destroy')->name('orders.destroy');
-    Route::put('/orders/{order}/dispatch', 'OrderController@dispatch')->name('orders.dispatch');
-    Route::put('/orders/{order}/delivered', 'OrderController@delivered')->name('orders.delivered');
 });
 
 // anyone

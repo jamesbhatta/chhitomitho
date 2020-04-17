@@ -38,6 +38,17 @@ class User extends Authenticatable
     ];
 
     /**
+     * Route notifications for the Slack channel.
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForSlack($notification)
+    {
+        return config('notification.slack.url');
+    }
+
+    /**
      * Returns the gravatar URL for current user
      *
      * @usage user()->gravatar()

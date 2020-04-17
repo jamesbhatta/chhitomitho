@@ -6,6 +6,7 @@ use App\Events\OrderStatusChangedEvent;
 use App\Http\Requests\OrderRequest;
 use App\Jobs\OrderPlacedJob;
 use App\Jobs\SendSmsJob;
+use App\Notifications\NewOrder;
 use App\Order;
 use App\OrderProduct;
 use App\Store;
@@ -163,21 +164,10 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
-    }
+        $this->authorize('delete', $order);
+        $order->delete();
 
-    public function dispatched(Order $order)
-    {
-        $order->status = 'shipped';
-        $order->save();
-        return redirect()->back()->with('success', 'Order has been marked as Dispatched.');
-    }
-
-    public function delivered(Order $order)
-    {
-        $order->status = 'delivered';
-        $order->save();
-        return redirect()->back()->with('success', 'Order has been marked as Delivered successfully.');
+        return redirect()->back()->with('success', 'Order has been deleted permanently');
     }
 
     public function myOrders()

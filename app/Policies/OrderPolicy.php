@@ -79,7 +79,7 @@ class OrderPolicy
      */
     public function delete(User $user, Order $order)
     {
-        //
+        return $user->role === 'manager';
     }
 
     /**

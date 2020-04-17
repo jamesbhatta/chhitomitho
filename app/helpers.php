@@ -3,9 +3,9 @@
 if (!function_exists('sendSms')) {
     function sendSMS($to, $message)
     {
-        $token = config('sms.token');
-        $sender = config('sms.sender');
-        $url = config('sms.url');
+        $token = config('notification.sms.token');
+        $sender = config('notification.sms.sender');
+        $url = config('notification.sms.url');
 
         $content = [
             'token' => rawurlencode($token),
@@ -29,7 +29,21 @@ if (!function_exists('sendSms')) {
 if (!function_exists('createOrderConfirmedSMS')) {
     function createOrderConfirmedSMS($order)
     {
-        return "Dear " . $order->user->name . ",\r\nyour order #$order->id has been confirmed and is now being processed.\r\nLatest status of your order can be fount at " . route('customer.orders');
+        return "Dear " . $order->user->name . ",\r\nyour order #$order->id has been confirmed and is now being processed.\r\nLatest status of your order can be found at " . route('customer.orders');
+    }
+}
+
+if (!function_exists('createConfirmedOrderSMSForPartner')) {
+    function createConfirmedOrderSMSForPartner($order)
+    {
+        return "A new order #($order->id) has arrived.\r\nPlease process the order as quickly as possible.\r\nFor Details, " . route('customer.orders');
+    }
+}
+
+if (!function_exists('createConfirmedOrderSMSForCourier')) {
+    function createConfirmedOrderSMSForCourier($order, $storeName)
+    {
+        return "Pick order #($order->id) from $storeName.\r\nDetails, " . route('customer.orders');
     }
 }
 

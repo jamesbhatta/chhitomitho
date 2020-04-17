@@ -2,19 +2,13 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 class OrderStatusChangedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
 
     public $order;
     public $oldStatus;
@@ -24,10 +18,18 @@ class OrderStatusChangedEvent
      *
      * @return void
      */
-    public function __construct($order, $oldStatus)
+    public function __construct(\App\Order $order, $oldStatus)
     {
         $this->order = $order;
         $this->oldStatus = $oldStatus;
+
+        // \DB::connection()->enableQueryLog();
+        // $order->load('store', 'store.owner', 'courier');
+        // dump($order->store->owner);
+        // $order->store->owner->id;
+        // $order->courier_id;
+        // $queries = \DB::getQueryLog();
+        // return dd($queries);
     }
     
 }
