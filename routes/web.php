@@ -104,6 +104,9 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 // temporary test routes
+Route::get('privacy-policy', function () {
+    return view('policy');
+});
 Route::get('cart/destroy', function(){
     Cart::destroy();
 });
