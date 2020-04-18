@@ -157,10 +157,10 @@
                     </div>
                     <div class="card-body">
                         <label for="">Select Supplier Restaurant (optional)</label>
-                        <select name="store_id" id="" class="form-control">
+                        <select name="preferred_store" id="" class="form-control">
                             <option value="">Any</option>
                             @foreach($stores as $store)
-                            <option value="{{ $store->id }}" @if (old('store_id') == $store->id) selected @endif>{{ $store->name }}</option>
+                            <option value="{{ $store->name }}" @if (old('preferred_store') == $store->name) selected @endif>{{ $store->name }}</option>
                             @endforeach
                         </select>
                     </div>

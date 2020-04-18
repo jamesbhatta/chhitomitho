@@ -124,6 +124,9 @@
                                     <option value="{{ $store->id }}" @if($store->id == $order->store_id) selected @endif>{{ $store->name }}</option>
                                     @endforeach
                                 </select>
+                                @if (!empty($order->preferred_store))
+                                <div class="form-text"><small>Preferred Store:</small> {{ $order->preferred_store }}</div>
+                                @endif
                             </div>
                             @endif
                             <div class="form-group">
