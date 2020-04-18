@@ -42,6 +42,9 @@
                                     <div>Address: {{ $order->billing_address }}</div>
                                     <div>Payment Mode: <span class="text-uppercase">{{ $order->payment_option }}</span></div>
                                 </div>
+                                <div class="col-md-12">
+                                    <x-status-tracker :status="$order->status"></x-status-tracker>
+                                </div>
                             </div>
                             @endif
                         </div>
@@ -186,14 +189,14 @@
                             <div>
                                 Status: <span class="text-capitalize">{{ $order->status }}</span>
                             </div>
-
+                            
                             @if($order->status == "processing" || $order->status == "confirmed")
                             
                             <input type="hidden" name="dispatched" value="true" hidden>
                             <button type="submit" class="btn btn-info btn-lg rounded-0 w-100 text-capitalize card-shadow">Mark Dispatched</button>
                             
                             @elseif(Auth::user()->hasRole('courier') && $order->status == "shipped")
-
+                            
                             <input type="hidden" name="delivered" value="true" hidden>
                             <button type="submit" class="btn btn-success btn-lg rounded-0 w-100 text-capitalize card-shadow">Mark Delivered</button>
                             
