@@ -14,32 +14,6 @@
                 @include('partials.alerts')
             </div>
             
-            <div class="col-md-12 d-none">
-                <div class="card card-shadow mb-3">
-                    <div class="card-body d-flex">
-                        <div class="align-self-center">
-                            <a class="{{ $filter == 'all' ? 'text-muted' : '' }}" href="{{ route('orders.index') }}">All</a> | 
-                            <a class="{{ $filter == 'pending' ? 'text-muted' : '' }}" href="{{ route('orders.index') }}?filter=pending">Pending</a> | 
-                            <a class="{{ $filter == 'processing' ? 'text-muted' : '' }}" href="{{ route('orders.index') }}?filter=processing">Processing</a> | 
-                            <a class="{{ $filter == 'shipped' ? 'text-muted' : '' }}" href="{{ route('orders.index') }}?filter=shipped">Shipped</a> | 
-                            <a class="{{ $filter == 'delivered' ? 'text-muted' : '' }}" href="{{ route('orders.index') }}?filter=delivered">Delivered</a>
-                        </div>
-                        <form action="{{ route('orders.index') }}" class="form-inline ml-auto">
-                            @csrf
-                            <div class="form-group mb-2">
-                                <label for="search-order-number" class="sr-only">Email</label>
-                                <input type="text" class="form-control" name="order_number" id="search-order-number" value="{{ $order_number }}" placeholder="# Order Number">
-                            </div>
-                            <div class="form-group mx-sm-3 mb-2">
-                                <label for="search-name" class="sr-only">Password</label>
-                                <input type="text" class="form-control" name="name" id="search-name" value="{{ $name }}" placeholder="Name">
-                            </div>
-                            <button type="submit" class="btn btn-primary card-shadow p-2 my-0 mb-2 ml-0"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
             <div class="col-md-12">
                 <div class="card card-shadow">
                     <div class="card-header grey lighten-5">
