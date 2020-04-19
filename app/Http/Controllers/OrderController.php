@@ -27,6 +27,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $this->authorize('viewAny', Order::class);
+        DB::table('notifications')->where('type', 'App\Notifications\NewOrder')->where('notifiable_id', Auth::user()->id)->delete();
 
         $orderNumber = $request->has('order_number') ? $request->order_number : null;
         $name = $request->has('name') ? $request->name : null;

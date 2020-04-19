@@ -85,7 +85,7 @@
         var adminSidebar = new Vue({
             el: '#adminSidebar',
             data: {
-                newOrders: 101,
+                newOrders: 0,
             },
             created() {
                 this.getNewOrders();
