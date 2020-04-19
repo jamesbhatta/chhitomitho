@@ -52,12 +52,12 @@ class OrderStatusChangedListener  implements ShouldQueue
                 SendSmsJob::dispatch($to, $message);
 
                 // Send SMS to Partner (Store owner)
-                $to = $event->order->billing_phone;
+                $to = $event->order->store->owner->mobile;
                 $message = createConfirmedOrderSMSForPartner($event->order);
                 SendSmsJob::dispatch($to, $message);
                 
                 // Send SMS to courier
-                $to = $event->order->billing_phone;
+                $to = $event->order->courier->mobile;
                 $message = createConfirmedOrderSMSForCourier($event->order, $event->order->store->name);
                 SendSmsJob::dispatch($to, $message);
                 
