@@ -24,12 +24,31 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('viewAny', Order::class);
-        $orders = Order::with('orderProducts', 'user', 'store', 'store.owner', 'courier')->latest()->paginate(config('constants.order.items_per_page', 15));
-        // return $orders;
-        return view('order.list', compact(['orders']));
+
+        $orderNumber = $request->has('order_number') ? $request->order_number : null;
+        $name = $request->has('name') ? $request->name : null;
+        $orders = Order::with('orderProducts', 'user', 'store', 'store.owner', 'courier');
+
+        if ($orderNumber) {
+            $orders = $orders->where('id', $orderNumber);
+        }
+        if ($name) {
+            $orders = $orders->where('billing_name', 'like', "%$name%");
+        }
+        if ($request->has('filter')) {
+            $orders = $orders->where('status', $request->filter);
+        }
+        $orders = $orders->latest()->paginate(config('constants.order.items_per_page', 15));
+
+        return view('order.list')->with([
+            'orders' => $orders,
+            'filter' => $request->filter ?? "all",
+            'order_number' => $request->order_number ?? null,
+            'name' => $request->name ?? null,
+        ]);
     }
 
     /**
