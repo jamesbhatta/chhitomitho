@@ -99,8 +99,8 @@ Route::post('/cart/update', 'CartController@update')->name('cart.update');
 
 
 // all registered users
-Route::group(['middleware' => ['auth']], function() {
-    
+Route::group(['prefix' => 'ajax', 'middleware' => ['auth']], function() {
+    Route::get('order/new/count', 'AjaxController@newOrdersCount')->name('ajax.order.new.count');
 });
 
 // temporary test routes
