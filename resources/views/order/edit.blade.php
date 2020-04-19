@@ -141,6 +141,47 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div>
+                                Next steps:
+                                @if($order->status == 'pending_payment')
+                                <ul>
+                                    <li>Await for Payment</li>
+                                </ul>
+                                @endif
+                                @if($order->status == 'pending')
+                                <ol>
+                                    @if($order->payment_option == 'cod')
+                                    <li>Call customer</li>
+                                    @endif
+                                    <li>Select Store</li>
+                                    <li>Select Courier</li>
+                                    @if($order->payment_option == 'cod')
+                                    <li>Change status to Confirmed or Cancelled</li>
+                                    @endif
+                                </ol>
+                                @endif
+                                @if($order->status == 'confirmed')
+                                <ul>
+                                    <li>Change status to Processing</li>
+                                </ul>
+                                @endif
+                                @if($order->status == 'processing')
+                                <ul>
+                                    <li>Change status to Shipped</li>
+                                </ul>
+                                @endif
+                                @if($order->status == 'shipped')
+                                <ul>
+                                    <li>Change status to Delivered</li>
+                                </ul>
+                                @endif
+                                @if($order->status == 'delivered')
+                                <span class="text-success">No more actions Reqired</span>
+                                @endif
+                                @if($order->status == 'cancelled')
+                                <span class="text-danger">This order has been cancelled</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     
