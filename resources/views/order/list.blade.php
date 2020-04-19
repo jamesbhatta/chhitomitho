@@ -134,25 +134,24 @@
                                 @empty
                                 <tr>
                                     <td class="text-center font-italic" colspan="10">
-                                       !! No orders found !!
+                                        !! No orders found !!
                                     </td>
                                 </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-                    @if($orders->hasPages())
                     <div class="card-footer d-flex">
                         <div class="align-self-center text-dark">
                             Showing {{ $orders->firstItem() }} to {{ $orders->lastItem() }} of {{ $orders->total() }} entries
                         </div>
+                        @if($orders->hasPages())
                         <div class="align-self-center ml-auto">
                             {{ $orders->links() }}
                         </div>
+                        @endif
                     </div>
-                    @endif
                 </div>
-                
             </div>
         </div>
     </div>
