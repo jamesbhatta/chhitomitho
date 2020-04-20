@@ -41,6 +41,9 @@
 		.text-secondary-color {
 			color: #28a745;
 		}
+		.card-shadow {
+			box-shadow: 0 0px 15px 2px rgba(143, 143, 143, 0.09);
+		}
 		.custom-navbar {
 			background-color: #982121!important;
 			color: #f1f1f1!important;

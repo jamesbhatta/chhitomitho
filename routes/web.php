@@ -77,6 +77,8 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], fun
     Route::get('/my-profile', 'UserController@profile')->name('customer');
     Route::get('/profile', 'UserController@profile')->name('user.profile');
     Route::put('/profile/update/{user}', 'UserController@updateProfile')->name('user.profile.update');
+    Route::put('/profile/password/{user}', 'UserController@changePassword')->name('user.password.update');
+    Route::post('/profile/picture/{user}', 'UserController@changeProfilePic')->name('ajax.user.profile.pic.update');
     Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
     Route::post('/order', 'OrderController@store')->name('order.store');
     Route::get('/orders', 'OrderController@myOrders')->name('customer.orders');
