@@ -30,13 +30,15 @@
 			background-color: #f2f7fb;
 		}
 		.bg-theme-color {
-			background-color: #982121;
+			/* background-color: #982121; */
+			background-color: #dd3e52;
 		}
 		.text-theme-color {
 			color: #982121;
 		}
 		.bg-secondary-color {
-			background-color: #28a745;
+			/* background-color: #28a745; */
+			background-color: #FC7A1E;
 		}
 		.text-secondary-color {
 			color: #28a745;
@@ -45,8 +47,10 @@
 			box-shadow: 0 0px 15px 2px rgba(143, 143, 143, 0.09);
 		}
 		.custom-navbar {
-			background-color: #982121!important;
+			/* background-color: #982121!important; */
+			background-color: #dd3e52!important;
 			color: #f1f1f1!important;
+			font-family: 'Sen', sans-serif;
 		}
 		.custom-navbar .navbar-brand {
 			color: #f1f1f1!important;

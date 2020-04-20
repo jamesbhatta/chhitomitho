@@ -143,7 +143,7 @@
                         </table>
                         <div class="d-flex">
                             <div class="ml-auto">
-                                <button type="submit" class="btn bg-theme-color text-white rounded-0 text-capitalize">Place Order</button>
+                                <button type="submit" class="btn bg-theme-color text-white rounded-0 text-capitalize card-shadow">Place Order</button>
                             </div>
                         </div>
                     </div>
