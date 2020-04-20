@@ -24,15 +24,15 @@
     @include('partials.alerts')
     
     @forelse ($orders as $order)
-    <div class="card card-shadow mb-4">
+    <div class="card card-shadow mb-5 rounded-0">
         <div class="card-header grey lighten-5 mdb-color-text">
             <div class="d-flex">
                 <div>
-                    <h6 class="h6-responsive text-info">Order #{{ $order->id }}</h6>
+                    <h6 class="h6-responsive text-primary">Order #{{ $order->id }}</h6>
                     <div class="small text-muted">Placed on {{ \Carbon\Carbon::parse($order->created_at)->format('jS \\of F Y h:i:s A') }}</div>
                 </div>
                 <div class="ml-auto">
-                    <h6 class="h6-responsive text-capitalize text-info">{{ $order->status }}</h6>
+                    <h6 class="h6-responsive text-capitalize text-primary">{{ $order->status }}</h6>
                     <div class="small text-muted text-uppercase"><i class="fas fa-dollar-sign mr-2"></i> {{ $order->payment_option }}</div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         </tbody>
                         <tfoot class=" rgba-blue-slight">
                             <tr class="font-weight-bolder">
-                                <td colspan="2" class="text-right">Total</td>
+                                <td colspan="2" class="text-right">Total Price</td>
                                 <td><span class="text-muted">Rs.</span> {{ number_format($order->total_price) }}</td>
                             </tr>
                         </tfoot>
@@ -76,7 +76,7 @@
                     @if($order->hasCourier)
                     <div class="card z-depth-0">
                         <div class="card-body text-center purple-text">
-                            <img class="img-fluid img-thumbnail" src="{{ $order->courier->gravatar }}" alt="{{ $order->courier->name }}" style="max-height: 300px;">
+                            <img class="img-fluid img-thumbnail rounded" src="{{ $order->courier->gravatar }}" alt="{{ $order->courier->name }}" style="height: 200px; width: 200px;">
                             <p class="my-2"><span class="text-muted">Delivery Boy:</span> <span class="font-weight-bolder">{{ $order->courier->name }}</span></p>
                             <p><span class="text-muted">Mobile:</span> {{ $order->courier->mobile }}</p>
                         </div>
