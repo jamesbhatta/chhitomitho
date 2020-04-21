@@ -46,7 +46,7 @@
                 <div class="profile-picture-section">
                     <form id="image-update-form" action="" enctype="multipart/form-data" method="post">
                         @csrf
-                        <div class="mb-2">Profile picture</div>
+                        {{-- <div class="mb-2">Profile picture</div> --}}
                         <div class="profile-pic-container">
                             <img id="profilePicPreview" class="img-fluid img- rounded" src="{{ Auth::user()->gravatar }}" alt="{{ Auth::user()->name }}">
                             <label for="profilePic" class="change-label" for=""><i class="fa fa-camera mr-2"></i> Change</label>

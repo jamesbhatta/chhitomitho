@@ -39,6 +39,11 @@
         display: block;
     }
     
+    .category-title {
+        /* font-family: 'Permanent Marker', cursive; */
+        font-family: 'Sen', sans-serif;
+    }
+    
     /* Chrome, Safari, Edge, Opera */
     .counter-control::-webkit-outer-spin-button,
     .counter-control::-webkit-inner-spin-button {
@@ -64,7 +69,7 @@
     <div class="row">
         <div class="col-md-3">
             {{-- Menu Card --}}
-            <div class="card menu-card rounded-0 mx-auto">
+            <div class="card menu-card card-shadow rounded-0 mx-auto">
                 <div class="title bg-theme-color bg-secondary-color"><i class="fa fa-utensils mr-2"></i>Delicious Menu</div>
                 <ul class="menu-list">
                     @foreach($categories as $category)
@@ -81,7 +86,7 @@
             <div class="items-container">
                 <div id="{{ $category->slug }}" class="category-wrapper">
                     @if ( count($category->products) )
-                    <div class="category-title p-2 mb-4">
+                    <div class="category-title mb-4">
                         <h3 class="h3-responsive text-muted">{{ $category->name }}</h3>
                     </div>
                     @endif
@@ -89,7 +94,7 @@
                         @foreach ($category->products as $product)
                         <div class="col-md-4">
                             <div class="product-wrapper">
-                                <div class="card rounded-0 mb-5">
+                                <div class="card card-shadow rounded-0 mb-5">
                                     <img class="card-img-top rounded-0 border-bottom" src="{{ asset('storage/' . $product->product_image) }}" alt="{{ $product->name }}">
                                     <div class="card-body text-center">
                                         <div class="card-title">

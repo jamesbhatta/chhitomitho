@@ -49,15 +49,15 @@
 		.custom-navbar {
 			/* background-color: #982121!important; */
 			background-color: #dd3e52!important;
-			color: #f1f1f1!important;
+			/* color: #f1f1f1!important; */
 			font-family: 'Sen', sans-serif;
 		}
 		.custom-navbar .navbar-brand {
-			color: #f1f1f1!important;
+			/* color: #f1f1f1!important; */
 			font-family: 'Permanent Marker', cursive;
 		}
 		.custom-navbar .nav-item .nav-link {
-			color: #f1f1f1!important;
+			/* color: #f1f1f1!important; */
 		}
 		.custom-navbar .dropdown-menu {
 			margin-top: 10px!important;
