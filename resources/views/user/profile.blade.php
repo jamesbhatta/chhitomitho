@@ -37,7 +37,7 @@
 @endpush
 
 @section('content')
-<div id="profile-page" class="container">
+<div id="profile-page" class="container py-4">
     <div class="card rounded-0 p-4 card-shadow">
         @include('partials.alerts')
         

@@ -18,7 +18,7 @@
 </style>
 @endpush
 @section('content')
-<div id="orders-page" class="container">
+<div id="orders-page" class="container py-3">
     <h2 class="h2-responsive text-muted mb-3">My Orders</h2>
     
     @include('partials.alerts')

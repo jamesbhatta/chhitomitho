@@ -1,75 +1,155 @@
 @extends('layouts.app')
-
+@push('styles')
+<style>
+    .container-register {
+        background: url("{{ asset('assets/img/bg.webp') }}");
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: 'Sen', sans-serif;
+    }
+    #register-card {
+        padding: 50px 100px;
+        width: 500px;
+    }
+    #register-card .form-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #555;
+        text-align: center;
+    }
+    .btn-social {
+        font-size: 16px;
+        line-height: 1.2;
+        padding: 15px;
+        width: calc((100% - 20px)/2);
+        border-radius: 8px;
+        box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
+        -webkit-transition: all .4s;
+        transition: all .4s;
+        margin-bottom: 10px;
+        color: #fff;
+        text-align: center;
+    }
+    .btn-social > i {
+        margin-right: 15px;
+    }
+    .btn-facebook {
+        background-color: #4267B2;
+        margin-right: 10px;
+    }
+    .btn-google {
+        background-color: #DB4437;
+    }
+    .btn-social:hover {
+        background: linear-gradient(45deg,#00dbde,#fc00ff);
+        color: #fff;
+    }
+    
+    #register-card i.prefix {
+        color: #b33ff6;
+        top: auto;
+        bottom: 0.25rem!important;
+    }
+    #registerBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+        width: 100%;
+        height: 60px;
+        background-color: #333;
+        border-radius: 10px;
+        font-size: 16px;
+        color: #fff;
+        line-height: 1.2;
+        -webkit-transition: all .4s;
+        -o-transition: all .4s;
+        -moz-transition: all .4s;
+        transition: all .4s;
+        position: relative;
+        z-index: 1;
+        outline: none;
+        border: none;
+    }
+    
+    #registerBtn:hover {
+        background: linear-gradient(45deg,#00dbde,#fc00ff);
+    }
+    a.login-link {
+        color: inherit;
+        border-bottom: 1px solid #ccc;
+    }
+    a.login-link:hover {
+        color: #ba3bf6;
+    }
+    
+    @media (max-width: 576px) {
+        #register-card {
+            padding: 50px 25px;;
+            width: 100%;
+        }
+        .btn-social {
+            width: 100%;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        #register-card {
+            padding: 25px;;
+            width: 500px;
+        }
+    }
+</style>
+@endpush
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+<div class="container-register">
+    <div>
+        @include('partials.alerts')
+        <div id="register-card" class="card z-depth-0">
+            <div class="form-title">Create An Account</div>
+            <div class="d-flex flex-sm-row flex-column justify-content-between my-3">
+                <a class="btn-social btn-facebook" href="{{ route('login.social', 'facebook') }}">
+                    <i class="fab fa-facebook-square"></i>Facebook
+                </a>
+                <a class="btn-social btn-google" href="{{ route('login.social', 'google') }}"><i class="fab fa-google"></i>Google</a>
+            </div>
+            <form action="{{ route('register') }}" method="POST">
+                @csrf
+                <div class="md-form">
+                    <i class="far fa-user prefix"></i>
+                    <input type="text" id="name" name="name" class="form-control form-control-sm validate @error('name') is-invalid @enderror">
+                    <label for="name" data-error="wrong" data-success="right">Name</label>
+                    
                 </div>
+                <div class="md-form">
+                    <i class="far fa-envelope prefix"></i>
+                    <input type="email" id="email" name="email" class="form-control form-control-sm validate @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+                    <label for="email" data-error="wrong" data-success="right">Email</label>
+                </div>
+                <div class="md-form">
+                    <i class="fas fa-unlock-alt prefix"></i>
+                    <input type="password" id="password" name="password" class="form-control form-control-sm validate @error('password') is-invalid @enderror" minlength="8"   name="password" autocomplete="new-password">
+                    <label for="password" data-error="wrong" data-success="right">Password</label>
+                </div>
+                <div class="md-form">
+                    <i class="fas fa-unlock-alt prefix"></i>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-sm validate" minlength="8" autocomplete="new-password">
+                    <label for="confirm_password" data-error="wrong" data-success="right">Confirm Password</label>
+                </div>
+                <div class="form-group">
+                    <button id="registerBtn" type="submit">Register</button>
+                </div>
+            </form>
+            <div class="text-center text-muted">
+                <span>Already a member?</span><span> <a href="{{ route('login') }}" class="login-link"> Login</a></span>
             </div>
         </div>
     </div>

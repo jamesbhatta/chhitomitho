@@ -4,6 +4,20 @@
 <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
 
 <style>
+    #login-page {
+        background: url("{{ asset('assets/img/bg.webp') }}");
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: 'Sen', sans-serif;
+    }
     .login-form {
         font-family: 'Sen', sans-serif;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16),0 1px 6px 0 rgba(0,0,0,0.12) !important;
@@ -11,7 +25,8 @@
     }
     .login-form .head {
         padding: 15px 10px;
-        background: linear-gradient(110deg, #30c5d7, #4edca7) !important;
+        /* background: linear-gradient(110deg, #30c5d7, #4edca7) !important; */
+        background: linear-gradient(45deg,#00dbde,#fc00ff);
         text-align:center;
     }
     .login-form .head .form-title {
@@ -91,7 +106,7 @@
 @endpush
 
 @section('content')
-<div class="vh-100">
+<div id="login-page">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 mb-5 p-4">
