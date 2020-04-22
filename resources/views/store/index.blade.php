@@ -34,6 +34,24 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="">Commission Percentage</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" name="commission_percentage" class="form-control rounded-0" value="{{ old('commission_percentage') }}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text rounded-0">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Credit Limit</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text rounded-0">NRs.</span>
+                                    </div>
+                                    <input type="text" name="credit_limit" class="form-control rounded-0" value="{{ old('credit_limit') }}">
+                                </div>
+                            </div>
                             <div class="form-group text-center">
                                 <button class="btn btn-primary rounded-0 card-shadow">Add New Store</button>
                             </div>
@@ -51,6 +69,7 @@
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
+                                <th>Commission & credit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,9 +91,10 @@
                                 <td>{{ $store->owner->name }}</td>
                                 <td>{{ $store->owner->email }}</td>
                                 <td>{{ $store->owner->mobile }}</td>
+                                <td>{{ $store->commission_percentage }} %, NRs. {{ number_format($store->credit_limit) }}</td>
                             </tr>
                             <tr id="edit-{{ $loop->iteration }}" class="d-none">
-                                <td colspan="4">
+                                <td colspan="6">
                                     <form action="{{ route('stores.update', $store) }}" method="POST" class="form">
                                         @csrf
                                         @method('PUT')
@@ -95,6 +115,30 @@
                                                     <option value="{{ $partner->id }}" @if($partner->id == $store->user_id) selected @endif>{{ $partner->name }}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <div class="col-md-2 align-self-center">
+                                                <label><i>Commission</i></label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group input-group-sm">
+                                                    <input type="text" name="commission_percentage" class="form-control form-control-sm rounded-0" value="{{ $store->commission_percentage }}">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text rounded-0">%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 text-center align-self-center">
+                                                <label><i>Credit Limit</i></label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group input-group-sm">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text rounded-0">NRs.</span>
+                                                    </div>
+                                                    <input type="text" name="credit_limit" class="form-control form-control-sm rounded-0" value="{{ $store->credit_limit }}">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group form-row">

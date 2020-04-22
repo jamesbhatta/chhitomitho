@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    protected $fillable = ['name', 'user_id'];
+    protected $fillable = ['name', 'user_id', 'commission_percentage', 'credit_limit'];
     
     public function owner()
     {
