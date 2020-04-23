@@ -77,6 +77,9 @@
 			color: #535b61;
 			padding: .25rem 1.5rem;
 		}
+		[v-cloak] {
+			display: none;
+		}
 	</style>
 	
 	{{--
@@ -150,50 +153,50 @@
 			</nav>
 			
 			{{-- <main class="py-4"> --}}
-			<main>
-				@yield('content')
-			</main>
-		</div>
-		
-		{{-- Scripts --}}
-		<script type="text/javascript" src="{{ asset('assets/mdb/js/jquery.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('assets/mdb/js/popper.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('assets/mdb/js/bootstrap.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('assets/mdb/js/mdb.min.js') }}"></script>
-		<script>
-			$(document).ready(function() {
-				$.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
-				
-				App = {
-					loadCartSummary: function() {
-						$.ajax({
-							url: '{{ route('cart.items.summary') }}',
-							method: 'GET',
-							success: function (data) {
-								var totalQty = 0;
-								var totalPrice = 0;
-								if (data.status == 200) {
-									totalQty = data.totalQuantity;
-									totalPrice = data.totalPrice;
+				<main>
+					@yield('content')
+				</main>
+			</div>
+			
+			{{-- Scripts --}}
+			<script type="text/javascript" src="{{ asset('assets/mdb/js/jquery.min.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('assets/mdb/js/popper.min.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('assets/mdb/js/bootstrap.min.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('assets/mdb/js/mdb.min.js') }}"></script>
+			<script>
+				$(document).ready(function() {
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+					
+					App = {
+						loadCartSummary: function() {
+							$.ajax({
+								url: '{{ route('cart.items.summary') }}',
+								method: 'GET',
+								success: function (data) {
+									var totalQty = 0;
+									var totalPrice = 0;
+									if (data.status == 200) {
+										totalQty = data.totalQuantity;
+										totalPrice = data.totalPrice;
+									}
+									$('#cart-total-quantity').html(totalQty)
+									$('#cart-total-price').html(totalPrice)
+								},
+								error: function (data) {
 								}
-								$('#cart-total-quantity').html(totalQty)
-								$('#cart-total-price').html(totalPrice)
-							},
-							error: function (data) {
-							}
-						});
+							});
+						}
 					}
-				}
-				App.loadCartSummary();
-			});
-		</script>
+					App.loadCartSummary();
+				});
+			</script>
+			
+			@stack('scripts')
+			
+		</body>
+		</html>
 		
-		@stack('scripts')
-		
-	</body>
-	</html>
-	

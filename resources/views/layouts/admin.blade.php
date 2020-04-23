@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
     <link href="{{ asset('assets/mdb/css/addons/datatables.min.css') }}" rel="stylesheet">
     @stack('styles')
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
     
 </head>
 <body>

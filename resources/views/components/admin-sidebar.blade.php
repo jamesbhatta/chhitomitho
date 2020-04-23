@@ -6,6 +6,7 @@
         background-color: #ffba33;
         color: #fff;
     }
+    
 </style>
 <div id="adminSidebar">
     <div class="py-4">
@@ -32,7 +33,7 @@
         
         @can('access-orders')
         <li class="sidebar-list-item">
-            <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders<span class="new-orders-count">@{{ newOrders }}</span></a>
+            <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders<span class="new-orders-count" v-cloak>@{{ newOrders }}</span></a>
         </li>
         @endcan
         

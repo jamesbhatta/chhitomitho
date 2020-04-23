@@ -9,7 +9,7 @@
                     <h5 class="align-self-center page-title">Ledger Book: {{ $store->name }}</h5>
                     
                     @can('viewAny', App\LedgerEntry::class)
-                    <div class="ml-auto">
+                    <div class="ml-auto" v-cloak>
                         <div class="input-group mb-3">
                             <button class="btn btn-outline-info btn-md m-0 px-3 py-2 z-depth-0 rounded-0 dropdown-toggle" type="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter pr-2"></i> {{ $store->name ?? 'Select Store' }} </button>
