@@ -52,7 +52,7 @@ class LedgerEntryController extends Controller
             'details' => 'required',
         ]);
 
-        // LedgerEntry::debit($store->id, $request->amount, $request->details);
+        LedgerEntry::debit($store->id, $request->amount, $request->details);
 
         return redirect()->back()->with('success', 'Amount has been deposited successfully.');
     }
