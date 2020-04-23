@@ -6,6 +6,7 @@ use App\Events\OrderStatusChangedEvent;
 use App\Http\Requests\OrderRequest;
 use App\Jobs\OrderPlacedJob;
 use App\Jobs\SendSmsJob;
+use App\LedgerEntry;
 use App\Notifications\NewOrder;
 use App\Order;
 use App\OrderProduct;
@@ -161,6 +162,10 @@ class OrderController extends Controller
                     'order_notes' => $request->order_notes,
                 ])->save();
                 $response = "The order #$order->id has been Updated.";
+            }
+
+            if ($order->wasChanged('status') && $order->status == 'shipped') {
+                LedgerEntry::credit($order->store_id, $order->total_price, 'Order ' . $order->orderNumber);
             }
 
             DB::commit();

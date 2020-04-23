@@ -90,6 +90,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
     Route::put('/orders/{order}/update', 'OrderController@update')->name('orders.update');
     Route::delete('/orders/{order}', 'OrderController@destroy')->name('orders.destroy');
+    
+    // Ledger Book
+    Route::get('/ledgers', 'LedgerEntryController@index')->name('ledgers.index');
+    Route::get('/ledgers/{store}', 'LedgerEntryController@show')->name('ledgers.show');
+    Route::post('/store/{store}/ledgers', 'LedgerEntryController@store')->name('ledgers.store');
+    Route::get('ajax/ledgers/stores', 'LedgerEntryController@storesList')->name('ajax.ledgers.stores_list');
 });
 
 // anyone
@@ -118,3 +124,9 @@ Route::group(['prefix' => 'test', 'middleware' => ['checkrole:admin,user']], fun
         return "passed";
     });
 });
+
+// Route::get('/ledger/{store_id}', function ($store_id) {
+//     // dd(LedgerEntry::credit($store_id, 100, 'Order #121'));
+//     dd(LedgerEntry::debit($store_id, 100, 'Order #121'));
+//     return 'done';
+// });

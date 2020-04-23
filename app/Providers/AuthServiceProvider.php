@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\LedgerEntry;
 use App\Order;
+use App\Policies\LedgerPolicy;
 use App\Policies\OrderPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Order::class => OrderPolicy::class,
+        LedgerEntry::class => LedgerPolicy::class,
     ];
 
     /**
@@ -58,6 +61,11 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('manage-logs', function ($user) {
             return $user->hasRoles(['admin']);
+        });
+
+
+        Gate::define('viewTransactions', function ($user, \App\Store $store) {
+            return true;
         });
 
        

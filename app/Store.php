@@ -12,11 +12,17 @@ class Store extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
-
+    
     public function orders()
     {
         return $this->hasMany('App\Order');
     }
+    
+    public function transactions()
+    {
+        return $this->hasMany('App\LedgerEntry', 'store_id');
+    }
+ 
     
     // Local Scopes
     public function scopeSortByName($query, $order = 'asc')

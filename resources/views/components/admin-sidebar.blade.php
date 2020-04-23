@@ -29,46 +29,67 @@
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ url('/') }}" target="_blank"><i class="fas fa-globe text-warning"></i> Site <span><i class="fas fa-angle-right"></i></span></a>
         </li>
+        
         @can('access-orders')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders<span class="new-orders-count">@{{ newOrders }}</span></a>
         </li>
         @endcan
+        
+        @can('viewAny', App\LedgerEntry::class)
+        <li class="sidebar-list-item">
+            <a class="nav-link" href="{{ route('ledgers.index') }}"><i class="far fa-money-bill-alt text-default"></i>Ledgers<span><i class="fas fa-angle-right"></i></span></a>
+        </li>
+        @endcan
+
+        @if(Auth::user()->hasRole('partner'))
+        <li class="sidebar-list-item">
+            <a class="nav-link" href="{{ route('ledgers.show', Auth::user()->store->id) }}"><i class="far fa-money-bill-alt text-default"></i>Ledger Book<span><i class="fas fa-angle-right"></i></span></a>
+        </li>
+        @endif
+
         @can('manage-categories')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('category.index') }}"><i class="far fa-list-alt text-warning"></i>Categories<span><i class="fas fa-angle-right"></i></span></a>
         </li>
         @endcan
+        
         @can('manage-products')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('product.create') }}"><i class="fa fa-plus text-info"></i>New Product<span><i class="fas fa-angle-right"></i></span></a>
         </li>
         @endcan
+        
         @can('manage-products')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-cube text-primary"></i>Products<span><i class="fas fa-angle-right"></i></span></a>
         </li>
         @endcan
+        
         @can('manage-users')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('users.index') }}"><i class="far fa-user text-secondary"></i>Users<span><i class="fas fa-angle-right"></i></span></a>
         </li>
         @endcan
+        
         @can('manage-stores')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('stores.index') }}"><i class="fas fa-grip-horizontal"></i>Stores<span><i class="fas fa-angle-right"></i></span></a>
         </li>
         @endcan
+        
         @can('manage-sliders')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('sliders.index') }}"><i class="far fa-images text-default"></i>Sliders<span><i class="fas fa-angle-right"></i></span></a>
         </li>
         @endcan
+        
         @can('manage-logs')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('logs') }}" target="_blank"><i class="far fa-calendar-alt text-secondary"></i>Logs<span><i class="fas fa-angle-right"></i></span></a>
         </li>
         @endcan
+        
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt mr-2"></i>{{ __('Logout') }}
