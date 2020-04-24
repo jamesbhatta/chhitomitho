@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @push('styles')
-<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-
 <style>
     #login-page {
         background: url("{{ asset('assets/img/bg.webp') }}");
@@ -25,17 +23,16 @@
     }
     .login-form .head {
         padding: 15px 10px;
-        /* background: linear-gradient(110deg, #30c5d7, #4edca7) !important; */
-        background: linear-gradient(45deg,#00dbde,#fc00ff);
         text-align:center;
     }
     .login-form .head .form-title {
-        color: #fff;
         font-size: 32px;
-        font-weight: 500;
+        font-weight: 600;
+        color: #555;
+        text-align: center;
     }
     .login-form .social-login{
-        padding: 50px 15px;
+        padding: 25px 15px;
     }
     .login-form .social-login .social-login-btn {
         display: block;
@@ -160,18 +157,18 @@
                             </div>
                             <hr class="my-4">
                             <div class="d-flex flex-column-reverse flex-md-row justify-content-between">
-                                <div class="align-self-center">
+                                <div class="align-self-center mt-3 mt-md-0">
                                     @if (Route::has('password.request'))
-                                    <a class="text-muted small" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }} <span class="text-primary">Reset Now</span></a>
+                                    <a class="text-muted pr-sm-0 pr-md-3" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }} <span class="text-primary">Reset Now</span></a>
                                     @endif
                                 </div>
-                                <div>
-                                    <button id="loginBtn" type="submit" class="btn btn-primary btn-lg rounded-0 z-depth-0">Log In</button>
+                                <div class="flex-fill flex-grow-1">
+                                    <button id="loginBtn" type="submit" class="btn btn-primary btn-lg btn-block rounded-0 z-depth-0">Log In</button>
                                 </div>
                             </div>
                         </form>
                         <div class="text-center mt-4">
-                            <span class="text-muted">Don't have account?</span> <a href="{{ route('register',) }}">Register</a>
+                            <span class="text-muted">Don't have an account?</span> <a href="{{ route('register',) }}"><span class="border-bottom">Register</span></a>
                         </div>
                     </div>
                     

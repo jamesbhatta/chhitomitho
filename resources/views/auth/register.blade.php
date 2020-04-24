@@ -1,25 +1,17 @@
 @extends('layouts.app')
 @push('styles')
 <style>
-    .container-register {
+    #auth-register {
         background: url("{{ asset('assets/img/bg.webp') }}");
         width: 100%;
         min-height: 100vh;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
         padding: 15px;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         font-family: 'Sen', sans-serif;
     }
-    #register-card {
-        padding: 50px 100px;
-        width: 500px;
-    }
-    #register-card .form-title {
+    #auth-register .form-title {
         font-size: 28px;
         font-weight: 600;
         color: #555;
@@ -90,66 +82,67 @@
     a.login-link:hover {
         color: #ba3bf6;
     }
-    
     @media (max-width: 576px) {
-        #register-card {
-            padding: 50px 25px;;
-            width: 100%;
-        }
         .btn-social {
             width: 100%;
         }
     }
     
-    @media (max-width: 768px) {
+    @media (min-width: 576px) {
         #register-card {
-            padding: 25px;;
-            width: 500px;
+            max-width: 500px;
+        }
+        .btn-social {
+            width: 100%;
         }
     }
 </style>
 @endpush
 @section('content')
-<div class="container-register">
-    <div>
-        @include('partials.alerts')
-        <div id="register-card" class="card z-depth-0">
-            <div class="form-title">Create An Account</div>
-            <div class="d-flex flex-sm-row flex-column justify-content-between my-3">
-                <a class="btn-social btn-facebook" href="{{ route('login.social', 'facebook') }}">
-                    <i class="fab fa-facebook-square"></i>Facebook
-                </a>
-                <a class="btn-social btn-google" href="{{ route('login.social', 'google') }}"><i class="fab fa-google"></i>Google</a>
-            </div>
-            <form action="{{ route('register') }}" method="POST">
-                @csrf
-                <div class="md-form">
-                    <i class="far fa-user prefix"></i>
-                    <input type="text" id="name" name="name" class="form-control form-control-sm validate @error('name') is-invalid @enderror">
-                    <label for="name" data-error="wrong" data-success="right">Name</label>
-                    
+<div id="auth-register">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div id="register-card" class="card z-depth-0  mx-auto mt-sm-3 mt-md-4">
+                <div class="card-body py-4 px-sm-4 px-md-5">
+                    <div class="form-title mb-4">Create An Account</div>
+                    @include('partials.alerts')
+                    <div class="d-flex flex-sm-row flex-column justify-content-between my-3">
+                        <a class="btn-social btn-facebook" href="{{ route('login.social', 'facebook') }}">
+                            <i class="fab fa-facebook-square"></i>Facebook
+                        </a>
+                        <a class="btn-social btn-google" href="{{ route('login.social', 'google') }}"><i class="fab fa-google"></i>Google</a>
+                    </div>
+                    <form action="{{ route('register') }}" method="POST">
+                        @csrf
+                        <div class="md-form">
+                            <i class="far fa-user prefix"></i>
+                            <input type="text" id="name" name="name" class="form-control form-control-sm validate @error('name') is-invalid @enderror">
+                            <label for="name" data-error="wrong" data-success="right">Name</label>
+                            
+                        </div>
+                        <div class="md-form">
+                            <i class="far fa-envelope prefix"></i>
+                            <input type="email" id="email" name="email" class="form-control form-control-sm validate @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+                            <label for="email" data-error="wrong" data-success="right">Email</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fas fa-unlock-alt prefix"></i>
+                            <input type="password" id="password" name="password" class="form-control form-control-sm validate @error('password') is-invalid @enderror" minlength="8"   name="password" autocomplete="new-password">
+                            <label for="password" data-error="wrong" data-success="right">Password</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fas fa-unlock-alt prefix"></i>
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-sm validate" minlength="8" autocomplete="new-password">
+                            <label for="confirm_password" data-error="wrong" data-success="right">Confirm Password</label>
+                        </div>
+                        <div class="form-group">
+                            <button id="registerBtn" type="submit">Register</button>
+                        </div>
+                    </form>
+                    <div class="text-center text-muted">
+                        <span>Already a member?</span><span> <a href="{{ route('login') }}" class="login-link"> Login</a></span>
+                    </div>
                 </div>
-                <div class="md-form">
-                    <i class="far fa-envelope prefix"></i>
-                    <input type="email" id="email" name="email" class="form-control form-control-sm validate @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
-                    <label for="email" data-error="wrong" data-success="right">Email</label>
-                </div>
-                <div class="md-form">
-                    <i class="fas fa-unlock-alt prefix"></i>
-                    <input type="password" id="password" name="password" class="form-control form-control-sm validate @error('password') is-invalid @enderror" minlength="8"   name="password" autocomplete="new-password">
-                    <label for="password" data-error="wrong" data-success="right">Password</label>
-                </div>
-                <div class="md-form">
-                    <i class="fas fa-unlock-alt prefix"></i>
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-sm validate" minlength="8" autocomplete="new-password">
-                    <label for="confirm_password" data-error="wrong" data-success="right">Confirm Password</label>
-                </div>
-                <div class="form-group">
-                    <button id="registerBtn" type="submit">Register</button>
-                </div>
-            </form>
-            <div class="text-center text-muted">
-                <span>Already a member?</span><span> <a href="{{ route('login') }}" class="login-link"> Login</a></span>
             </div>
         </div>
     </div>
