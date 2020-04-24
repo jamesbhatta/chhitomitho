@@ -13,4 +13,15 @@ class AjaxController extends Controller
         $count = DB::table('notifications')->where('type', 'App\Notifications\NewOrder')->where('notifiable_id', Auth::user()->id)->count();
         return response()->json(['count' => $count]);
     }
+
+    public function pushSalesProducts()
+    {
+        // \DB::enableQueryLog();
+        $products = \App\Product::inRandomOrder()->limit(4)->get();
+        // dd(\DB::getQueryLog());
+        $products->map(function($product) {
+            return $product['product_image_url'] = asset('/storage/' . $product->product_image);
+        });
+        return $products;
+    }
 }

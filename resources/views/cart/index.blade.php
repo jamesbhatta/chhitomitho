@@ -6,7 +6,7 @@
         font-family: 'Sen', sans-serif;
         color: #434954;
     }
-
+    
     .empty-cart-container {
         width: 300px;
         margin: 20px auto;
@@ -90,11 +90,12 @@
         top: 40%;
     }
     
-    #order-summary-section {}
-    
-    .order-summary-section-heading {
+    #order-summary-section {
         position: sticky;
         top: 10px;
+    }
+    
+    .order-summary-section-heading {
         font-size: 28px;
     }
     
@@ -113,7 +114,7 @@
 </style>
 @endpush
 @section('content')
-<div id="cart-page" class="container">
+<div id="cart-page" class="container my-4">
     @if(!Cart::count())
     <div class="card border rounded-0">
         <div class="card-body text-center">
@@ -223,10 +224,22 @@
         </div>
         <div class="col-lg-2"></div>
     </div>
+    <div id="push-sales" class="row my-5" v-cloak>
+        <div v-if="products" class="col-md-12">
+            <h5 class="mb-3">@{{ title }}</h5>
+            <div class="row">
+                <div v-for="product in products" class="col-md-3">
+                    <x-product-verticle-vue></x-product-verticle-vue>
+                </div>
+            </div>
+        </div>
+    </div>
     @endif
 </div>
 @endsection
 @push('scripts')
+<script src="{{ asset('assets/js/shopping.js') }}"></script>    
+
 <script>
     $(document).ready(function() {
         function updateCart(rowId, quantity) {
@@ -262,7 +275,58 @@
             var rowId = $(this).data('row-id');
             updateCart(rowId, 0);
         });
+        
+        var pushSales = new Vue({
+            el: '#push-sales',
+            data: {
+                title: 'Recommended',
+                products: null
+            },
+            mounted() {
+                this.fetchPushSalesProducts();
+            },
+            methods: {
+                formatMoney: function (number) {
+                    return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(number)
+                },
+                fetchPushSalesProducts: function() {
+                    axios.get('{{ route('ajax.push_sales_products') }}')
+                    .then(response => {
+                        if(response.status == 200) {
+                            this.products = response.data;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                    .then(function () {
+                    });
+                },
+                
+                addToCart: function (id, quantity, e) {
+                    var btn = 'product'+id;
+                    console.log(this.$refs[btn]);
+                    this.$refs[btn][0].innerText = 'Adding to Cart';
+                    this.$refs[btn][0].disabled = true;
+                    
+                    $('#cart-processing-overlay').show();
+                    axios.post('{{ route('cart.add') }}', {
+                        id: id,
+                        quantity: quantity
+                    })
+                    .then(response => {
+                        if(response.status == 200){
+                            location.reload();
+                            this.$refs[btn][0].innerText = 'Add To Cart';
+                            this.$refs[btn][0].disabled = false;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                }
+            }
+        })
     });
-    
 </script>
 @endpush

@@ -130,3 +130,5 @@ Route::group(['prefix' => 'test', 'middleware' => ['checkrole:admin,user']], fun
 //     dd(LedgerEntry::debit($store_id, 100, 'Order #121'));
 //     return 'done';
 // });
+
+Route::get('ajax/push-sales-products', 'AjaxController@pushSalesProducts')->name('ajax.push_sales_products');

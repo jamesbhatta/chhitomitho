@@ -80,6 +80,10 @@
 		[v-cloak] {
 			display: none;
 		}
+
+		.text-strike {
+			text-decoration: line-through;
+		}
 	</style>
 	
 	{{--
@@ -163,6 +167,9 @@
 			<script type="text/javascript" src="{{ asset('assets/mdb/js/popper.min.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('assets/mdb/js/bootstrap.min.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('assets/mdb/js/mdb.min.js') }}"></script>
+			<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 			<script>
 				$(document).ready(function() {
 					$.ajaxSetup({
