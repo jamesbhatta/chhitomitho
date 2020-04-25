@@ -116,7 +116,7 @@
                         @csrf
                         <div class="md-form">
                             <i class="far fa-user prefix"></i>
-                            <input type="text" id="name" name="name" class="form-control form-control-sm validate @error('name') is-invalid @enderror">
+                            <input type="text" id="name" name="name" class="form-control form-control-sm validate @error('name') is-invalid @enderror" value="{{ old('name') }}">
                             <label for="name" data-error="wrong" data-success="right">Name</label>
                             
                         </div>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="md-form">
                             <i class="fas fa-unlock-alt prefix"></i>
-                            <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-sm validate" minlength="8" autocomplete="new-password">
+                            <input type="password" id="confirm_password" name="password_confirmation" class="form-control form-control-sm validate" minlength="8" autocomplete="new-password">
                             <label for="confirm_password" data-error="wrong" data-success="right">Confirm Password</label>
                         </div>
                         <div class="form-group">
