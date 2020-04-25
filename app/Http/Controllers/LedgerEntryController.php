@@ -53,6 +53,9 @@ class LedgerEntryController extends Controller
         ]);
 
         LedgerEntry::debit($store->id, $request->amount, $request->details);
+        
+        $store->payment_requested_at = null;
+        $store->update();
 
         return redirect()->back()->with('success', 'Amount has been deposited successfully.');
     }
@@ -70,6 +73,7 @@ class LedgerEntryController extends Controller
         $entries = $store->transactions()->latest()->paginate(100);
 
         $data = LedgerEntry::whereStoreId($store->id)->select(\DB::raw('sum(credit) as earnings, sum(debit) as withdrawals'))->first();
+        $data['balance'] = LedgerEntry::whereStoreId($store->id)->select('balance')->latest()->first()->balance;
 
         return view('ledger.show', compact('entries', 'store', 'data'));
     }

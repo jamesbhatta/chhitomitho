@@ -96,6 +96,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/ledgers/{store}', 'LedgerEntryController@show')->name('ledgers.show');
     Route::post('/store/{store}/ledgers', 'LedgerEntryController@store')->name('ledgers.store');
     Route::get('ajax/ledgers/stores', 'LedgerEntryController@storesList')->name('ajax.ledgers.stores_list');
+
+    // Payment Request
+    Route::post('/store/{store}/payment', 'StorePaymentController@store')->name('store.payment.request');
 });
 
 // anyone
@@ -110,6 +113,9 @@ Route::post('/cart/update', 'CartController@update')->name('cart.update');
 Route::group(['prefix' => 'ajax', 'middleware' => ['auth']], function() {
     Route::get('order/new/count', 'AjaxController@newOrdersCount')->name('ajax.order.new.count');
 });
+
+Route::get('ajax/push-sales-products', 'AjaxController@pushSalesProducts')->name('ajax.push_sales_products');
+
 
 // temporary test routes
 Route::get('privacy-policy', function () {
@@ -131,4 +137,3 @@ Route::group(['prefix' => 'test', 'middleware' => ['checkrole:admin,user']], fun
 //     return 'done';
 // });
 
-Route::get('ajax/push-sales-products', 'AjaxController@pushSalesProducts')->name('ajax.push_sales_products');

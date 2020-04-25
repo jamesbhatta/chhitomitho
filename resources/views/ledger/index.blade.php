@@ -22,6 +22,7 @@
                                     <th>Balance</th>
                                     <th>Credit Limit</th>
                                     <th>Commission</th>
+                                    <th></th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -39,6 +40,21 @@
                                     </td>
                                     <td>NRs. {{ number_format($store->credit_limit) }}</td>
                                     <td>{{ $store->commission_percentage }} %</td>
+                                    <td class="text-center">
+                                        @if( $store->hasRequestedPayment)
+                                        <span class="text-green" data-toggle="tooltip" title="Payment Requested" data-placement="left">
+                                            <i class="fas fa-circle"></i>
+                                        </span>
+                                        @elseif($store->transactions->first()->balance >= $store->credit_limit)
+                                        <span class="text-ink" data-toggle="tooltip" title="Credit Reached" data-placement="left">
+                                            <i class="fas fa-circle"></i>
+                                        </span>
+                                        @else
+                                        <span class="text-red" data-toggle="tooltip" title="No Enough Credit" data-placement="left">
+                                            <i class="fas fa-circle"></i>
+                                        </span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a class="text-primary" href="{{ route('ledgers.show', $store->id) }}">View Transactions</a>
                                     </td>

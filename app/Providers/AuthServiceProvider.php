@@ -63,9 +63,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRoles(['admin']);
         });
 
-
         Gate::define('viewTransactions', function ($user, \App\Store $store) {
             return true;
+        });
+
+        Gate::define('request-payment', function ($user, \App\Store $store) {
+            return $user->id == $store->user_id;
         });
 
        

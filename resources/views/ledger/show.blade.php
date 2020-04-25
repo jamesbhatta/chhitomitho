@@ -20,6 +20,22 @@
                     </div>
                     @endcan
                     
+                    @can('request-payment', $store)
+                    <div class="ml-auto align-self-center">
+                        <div class="text-center">
+                            @if( ! $store->hasRequestedPayment && $data->balance >= $store->credit_limit)
+                            <form action="{{ route('store.payment.request', $store) }}" method="POST" class="form form-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-success card-shadow text-capitalize"><i class="far fa-paper-plane mr-2"></i> Request Payment</button>
+                            </form>
+                            @endif
+                            @if($store->hasRequestedPayment)
+                            <div class="text-success"><i class="fa fa-check mr-2"></i> Payment Requested</div>
+                            @endif
+                        </div>
+                    </div>
+                    @endcan
+                    
                 </div>
                 @include('partials.alerts')
             </div>
@@ -65,9 +81,9 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <div>
-                                        <div class="mb-3">Balance  </div>
+                                        <div class="mb-3">Balance</div>
                                         <div>
-                                            <h4><strong class="text-ink"><small>NRs.</small> {{ number_format($data->earnings - $data->withdrawals) }} </strong></h4>
+                                            <h4><strong class="text-ink"><small>NRs.</small> {{ number_format($data->balance) }} </strong></h4>
                                         </div>
                                     </div>
                                     <div class="grey lighten-4 rounded p-2">
@@ -82,9 +98,9 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <div>
-                                        <div class="mb-3">Min. Withdrawal. <span class="text-dark">Nrs. {{ number_format($store->credit_limit) }}</span></div>
+                                        <div class="mb-3">Min. Withdrawal </div>
                                         <div>
-                                            <h5><strong class="text-ink"><small>NRs.</small> {{ number_format($store->credit_limit - ($store->commission_percentage / 100) * $store->credit_limit, 2) }}  </strong> <small>(NET)</small></h5>
+                                            <h4><strong class="text-ink"><small>NRs.</small> {{ number_format($store->credit_limit) }}  </strong></h4>
                                         </div>
                                     </div>
                                     <div class="grey lighten-4 rounded p-2">
@@ -111,6 +127,7 @@
                                 </div>
                             </div>
                             @endcan
+                            
                         </div>
                     </div>
                     <div class="card-body white card-shadow p-3">
@@ -119,6 +136,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Details</th>
+                                    <th>S.P.</th>
                                     <th>Debit</th>
                                     <th>Credit</th>
                                     <th>Balance</th>
@@ -129,6 +147,7 @@
                                 <tr>
                                     <td>{{ \carbon\carbon::parse($entry->created_at)->format('j M , Y @ h:i A') }}</td>
                                     <td>{{ $entry->details }}</td>
+                                    <td>{{ $entry->sellingPriceAmount }}</td>
                                     <td class="text-danger">{{ $entry->debitAmount }}</td>
                                     <td class="text-success">{{ $entry->creditAmount }}</td>
                                     <td>{{ $entry->balanceAmount }}</td>

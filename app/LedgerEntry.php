@@ -13,6 +13,11 @@ class LedgerEntry extends Model
         dump('I am test method in LedgerEntry');
     }
 
+    public function getSellingPriceAmountAttribute()
+    {
+        return is_null($this->selling_price) ? null : 'NRs. ' . number_format($this->selling_price);
+    }
+
     public function getDebitAmountAttribute()
     {
         return is_null($this->debit) ? null : 'NRs. ' . number_format($this->debit);
@@ -25,7 +30,7 @@ class LedgerEntry extends Model
 
     public function getBalanceAmountAttribute()
     {
-        return 'NRs. ' . number_format($this->balance);
+        return 'NRs. ' . number_format($this->balance, 2);
     }
 
     public function store()
@@ -33,7 +38,7 @@ class LedgerEntry extends Model
         return $this->belongsTo('App\Store');
     }
 
-    public static function credit($store_id, $amount, $details)
+    public static function credit($store_id, $amount, $details, $sellingPrice = null)
     {
         $currentBalance = LedgerEntry::where('store_id', $store_id)->latest()->first()->balance ?? 0;
         $newBalance = $currentBalance + $amount;
@@ -42,7 +47,8 @@ class LedgerEntry extends Model
             'store_id'  =>  $store_id,
             'details'   =>  $details,
             'credit'    =>  $amount,
-            'balance'   =>  $newBalance
+            'balance'   =>  $newBalance,
+            'selling_price' => $sellingPrice
         ]);
         return $newBalance;
     }

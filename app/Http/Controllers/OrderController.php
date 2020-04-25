@@ -165,7 +165,9 @@ class OrderController extends Controller
             }
 
             if ($order->wasChanged('status') && $order->status == 'shipped') {
-                LedgerEntry::credit($order->store_id, $order->total_price, 'Order ' . $order->orderNumber);
+                $sellingPrice = $order->total_price;
+                $amountAfterCommission = ((100 - $order->store->commission_percentage) / 100) * $sellingPrice;
+                LedgerEntry::credit($order->store_id, $amountAfterCommission, 'Order ' . $order->orderNumber, $sellingPrice);
             }
 
             DB::commit();

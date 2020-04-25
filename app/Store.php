@@ -29,4 +29,9 @@ class Store extends Model
     {
         return $query->orderBy('name', $order);
     }
+
+    public function getHasRequestedPaymentAttribute()
+    {
+        return $this->payment_requested_at;
+    }
 }
