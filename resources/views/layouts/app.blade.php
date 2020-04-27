@@ -29,6 +29,9 @@
 			font-family: 'Lora', serif;
 			background-color: #f2f7fb;
 		}
+		*:focus {
+			outline: none;
+		}
 		.bg-theme-color {
 			/* background-color: #982121; */
 			background-color: #dd3e52;
@@ -80,7 +83,7 @@
 		[v-cloak] {
 			display: none;
 		}
-
+		
 		.text-strike {
 			text-decoration: line-through;
 		}
@@ -156,54 +159,56 @@
 				</div>
 			</nav>
 			
-			{{-- <main class="py-4"> --}}
-				<main>
-					@yield('content')
-				</main>
-			</div>
-			
-			{{-- Scripts --}}
-			<script type="text/javascript" src="{{ asset('assets/mdb/js/jquery.min.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('assets/mdb/js/popper.min.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('assets/mdb/js/bootstrap.min.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('assets/mdb/js/mdb.min.js') }}"></script>
-			<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+			<main>
+				@yield('content')
+			</main>
 
-			<script>
-				$(document).ready(function() {
-					$.ajaxSetup({
-						headers: {
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-					});
-					
-					App = {
-						loadCartSummary: function() {
-							$.ajax({
-								url: '{{ route('cart.items.summary') }}',
-								method: 'GET',
-								success: function (data) {
-									var totalQty = 0;
-									var totalPrice = 0;
-									if (data.status == 200) {
-										totalQty = data.totalQuantity;
-										totalPrice = data.totalPrice;
-									}
-									$('#cart-total-quantity').html(totalQty)
-									$('#cart-total-price').html(totalPrice)
-								},
-								error: function (data) {
-								}
-							});
-						}
-					}
-					App.loadCartSummary();
-				});
-			</script>
+			<x-footer></x-footer>
 			
-			@stack('scripts')
-			
-		</body>
-		</html>
+		</div>
 		
+		{{-- Scripts --}}
+		<script type="text/javascript" src="{{ asset('assets/mdb/js/jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('assets/mdb/js/popper.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('assets/mdb/js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('assets/mdb/js/mdb.min.js') }}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+				
+				App = {
+					loadCartSummary: function() {
+						$.ajax({
+							url: '{{ route('cart.items.summary') }}',
+							method: 'GET',
+							success: function (data) {
+								var totalQty = 0;
+								var totalPrice = 0;
+								if (data.status == 200) {
+									totalQty = data.totalQuantity;
+									totalPrice = data.totalPrice;
+								}
+								$('#cart-total-quantity').html(totalQty)
+								$('#cart-total-price').html(totalPrice)
+							},
+							error: function (data) {
+							}
+						});
+					}
+				}
+				App.loadCartSummary();
+			});
+		</script>
+		
+		@stack('scripts')
+		
+	</body>
+	</html>
+	

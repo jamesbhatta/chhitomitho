@@ -108,6 +108,9 @@ Route::get('/cart/summary', 'CartController@summary')->name('cart.items.summary'
 Route::post('/cart/add', 'CartController@add')->name('cart.add');
 Route::post('/cart/update', 'CartController@update')->name('cart.update');
 
+// Pages
+Route::get('/privacy-policy', 'PageController@privacyPolicy')->name('page.privacy_policy');
+
 
 // all registered users
 Route::group(['prefix' => 'ajax', 'middleware' => ['auth']], function() {
@@ -118,9 +121,6 @@ Route::get('ajax/push-sales-products', 'AjaxController@pushSalesProducts')->name
 
 
 // temporary test routes
-Route::get('privacy-policy', function () {
-    return view('policy');
-});
 Route::get('cart/destroy', function(){
     Cart::destroy();
 });

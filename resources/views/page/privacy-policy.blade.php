@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container white p-4">
+<div class="container white my-5 p-4">
     <h1>Privacy Policy</h1>
     
     <p>Last updated: April 17, 2020</p>

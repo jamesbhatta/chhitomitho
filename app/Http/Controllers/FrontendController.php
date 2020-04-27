@@ -15,6 +15,7 @@ class FrontendController extends Controller
     public function index()
     {
         $categories = Category::active()->where('slug', '!=', 'uncategorized')->with('products')->orderByFeatured()->ordered()->get();
-        return view('welcome', compact('categories'));
+        $featuredProducts = \App\Product::limit(10)->get();
+        return view('welcome', compact('categories', 'featuredProducts'));
     }
 }
