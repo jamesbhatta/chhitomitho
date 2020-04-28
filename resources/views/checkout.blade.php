@@ -28,7 +28,7 @@
 </style>
 @endpush
 @section('content')
-<div id="checkout-page" class="container">
+<div id="checkout-page" class="container my-4">
     <form action="{{ route('order.store') }}" method="POST" class="form">
         @csrf
         <div class="row">

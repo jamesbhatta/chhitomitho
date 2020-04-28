@@ -130,10 +130,3 @@ Route::group(['prefix' => 'test', 'middleware' => ['checkrole:admin,user']], fun
         return "passed";
     });
 });
-
-// Route::get('/ledger/{store_id}', function ($store_id) {
-//     // dd(LedgerEntry::credit($store_id, 100, 'Order #121'));
-//     dd(LedgerEntry::debit($store_id, 100, 'Order #121'));
-//     return 'done';
-// });
-

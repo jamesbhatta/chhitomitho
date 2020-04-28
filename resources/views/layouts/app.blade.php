@@ -162,8 +162,68 @@
 			<main>
 				@yield('content')
 			</main>
-
+			
 			<x-footer></x-footer>
+			<style>
+				#floating-cart {
+					position: fixed;
+					bottom: 20px;
+					right: 20px;
+					z-index: 100;
+					width: auto;
+					padding: 15px 20px;
+					background-color: #7ac400;
+					background-color: #FC7A1E;
+					display: none;
+				}
+				#floating-cart svg{
+					font-size: 1.5rem;
+					fill: #fff;
+				}
+				#floating-cart .cart-quantity {
+					position: absolute;
+					top: -10px;
+					right: -15px;
+					background-color: #ff3547;
+					color: #fff; padding: 5px 8px;
+					min-height:15px;
+					min-width: 15px;
+					border-radius: 50%;
+					font-size: 0.6rem;
+				}
+				#floating-cart .cart-price {
+					margin-left: 15px;
+					color: #fff;
+					font-size: 0.8rem;
+				}
+			</style>
+			<div id="floating-cart-wrapper" class="dropup">
+				<div id="floating-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<div style="position: relative; display: inline;">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: #fff;" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
+						<span class="cart-quantity">0</span>
+					</div>
+					<span class="cart-price"></span>
+				</div>
+				<div class="dropdown-menu dropdown-menu-right rounded-0 mb-3" aria-labelledby="floating-cart">
+					<div class="p-3">
+						{{-- <h4 class="h4-responsive text-right">Cart</h4> --}}
+						{{-- <table class="table table-borderless table-sm">
+							<tr>
+								<td>Coffee</td>
+								<td class="text-right">1 x Rs. 240</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="text-right">Total Rs. 240</td>
+							</tr>
+						</table> --}}
+						{{-- <div class="dropdown-divider"></div> --}}
+						<a class="btn bg-secondary-color text-white btn-sm text-capitalize card-shadow rounded-0" href="{{ route('cart') }}">View Cart</a>
+						<a class="btn bg-secondary-color text-white btn-sm text-capitalize card-shadow rounded-0" href="{{ route('checkout.index') }}">Checkout</a>
+					</div>
+				</div>
+			</div>
+			
 			
 		</div>
 		
@@ -195,8 +255,12 @@
 									totalQty = data.totalQuantity;
 									totalPrice = data.totalPrice;
 								}
-								$('#cart-total-quantity').html(totalQty)
-								$('#cart-total-price').html(totalPrice)
+								$('#cart-total-quantity').html(totalQty);
+								$('#cart-total-price').html('Rs. ' + totalPrice);
+								
+								$('#floating-cart').show();
+								$('#floating-cart .cart-quantity').html(totalQty);
+								$('#floating-cart .cart-price').html('Rs. ' + totalPrice);
 							},
 							error: function (data) {
 							}
