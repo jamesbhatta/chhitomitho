@@ -235,15 +235,6 @@
 @endpush
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <x-home-page-slider />
-        </div>
-    </div>
-    
-</div>
-
 {{-- Featured Products section --}}
 <div class="container-fluid" style="background-color: #e2eaef;">
     <div class="container py-4">
@@ -320,6 +311,14 @@
 </div>
 {{-- End of Featured Products section --}}
 
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-12">
+            <x-home-page-slider />
+        </div>
+    </div>
+    
+</div>
 
 <div class="container my-4">
     
