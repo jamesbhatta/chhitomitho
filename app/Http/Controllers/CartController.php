@@ -26,9 +26,10 @@ class CartController extends Controller
      */
     public function getItems()
     {
-        $cart = Cart::content();
+        $data['items'] = Cart::content();
+        $data['priceTotal'] = Cart::priceTotal(); 
 
-        return response()->json($cart);
+        return response()->json($data);
     }
 
     /**

@@ -87,6 +87,56 @@
 		.text-strike {
 			text-decoration: line-through;
 		}
+
+		/*=================
+		** Floating Cart
+		**================*/
+		
+		#floating-cart {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			z-index: 100;
+			width: auto;
+			padding: 15px 20px;
+			background-color: #FC7A1E;
+			display: none;
+			font-family: 'Sen', sans-serif;
+		}
+		#floating-cart-wrapper .dropdown-menu {
+			border: 0.8px solid #FC7A1E;
+			font-family: 'Sen', sans-serif;
+		}
+		#floating-cart-wrapper .dropdown-menu:before {
+			content: "";
+			border-top: 10px solid #FC7A1E;
+			border-right: 10px solid transparent;
+			border-left: 10px solid transparent;
+			position: absolute;
+			bottom: -10px;
+			right: 16px;
+			z-index: 10;
+		}
+		#floating-cart svg{
+			font-size: 1.5rem;
+			fill: #fff;
+		}
+		#floating-cart .cart-quantity {
+			position: absolute;
+			top: -10px;
+			right: -15px;
+			background-color: #ff3547;
+			color: #fff; padding: 5px 8px;
+			min-height:15px;
+			min-width: 15px;
+			border-radius: 50%;
+			font-size: 0.6rem;
+		}
+		#floating-cart .cart-price {
+			margin-left: 20px;
+			color: #fff;
+			font-size: 0.8rem;
+		}
 	</style>
 	
 	{{--
@@ -164,40 +214,8 @@
 			</main>
 			
 			<x-footer></x-footer>
-			<style>
-				#floating-cart {
-					position: fixed;
-					bottom: 20px;
-					right: 20px;
-					z-index: 100;
-					width: auto;
-					padding: 15px 20px;
-					background-color: #7ac400;
-					background-color: #FC7A1E;
-					display: none;
-				}
-				#floating-cart svg{
-					font-size: 1.5rem;
-					fill: #fff;
-				}
-				#floating-cart .cart-quantity {
-					position: absolute;
-					top: -10px;
-					right: -15px;
-					background-color: #ff3547;
-					color: #fff; padding: 5px 8px;
-					min-height:15px;
-					min-width: 15px;
-					border-radius: 50%;
-					font-size: 0.6rem;
-				}
-				#floating-cart .cart-price {
-					margin-left: 15px;
-					color: #fff;
-					font-size: 0.8rem;
-				}
-			</style>
-			<div id="floating-cart-wrapper" class="dropup">
+			
+			<div id="floating-cart-wrapper" class="dropup" v-cloak>
 				<div id="floating-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<div style="position: relative; display: inline;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: #fff;" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
@@ -207,17 +225,19 @@
 				</div>
 				<div class="dropdown-menu dropdown-menu-right rounded-0 mb-3" aria-labelledby="floating-cart">
 					<div class="p-3">
-						{{-- <h4 class="h4-responsive text-right">Cart</h4> --}}
-						{{-- <table class="table table-borderless table-sm">
-							<tr>
-								<td>Coffee</td>
-								<td class="text-right">1 x Rs. 240</td>
+						<h4 class="h4-responsive text-right">@{{ cartTitle }}</h4>
+						<table class="table table-borderless table-sm">
+							<tr v-for="item in items">
+								<td>
+									<i v-on:click="removeCartItem(item.rowId, 0)" class="fa fa-times fa-sm text-danger mr-2"></i>@{{ item.name }}
+								</td>
+								<td class="text-right">@{{ item.qty }} x Rs. @{{ item.price }}</td>
 							</tr>
 							<tr>
-								<td colspan="2" class="text-right">Total Rs. 240</td>
+								<td colspan="2" class="text-right">Total Rs. @{{ priceTotal }}</td>
 							</tr>
-						</table> --}}
-						{{-- <div class="dropdown-divider"></div> --}}
+						</table> 
+						<div class="dropdown-divider"></div>
 						<a class="btn bg-secondary-color text-white btn-sm text-capitalize card-shadow rounded-0" href="{{ route('cart') }}">View Cart</a>
 						<a class="btn bg-secondary-color text-white btn-sm text-capitalize card-shadow rounded-0" href="{{ route('checkout.index') }}">Checkout</a>
 					</div>
@@ -263,11 +283,65 @@
 								$('#floating-cart .cart-price').html('Rs. ' + totalPrice);
 							},
 							error: function (data) {
+							},
+							complete: function () {
+								floatingCart.fetchCartItems();
 							}
 						});
 					}
 				}
-				App.loadCartSummary();
+								
+				var floatingCart = new Vue({
+					el: '#floating-cart-wrapper',
+					data: {
+						cartTitle: 'Cart',
+						items: null,
+						priceTotal: 0,
+					},
+					mounted() {
+						// this.fetchCartItems();
+					},
+					methods: {
+						formatMoney: function (number) {
+							return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(number)
+						},
+						fetchCartItems: function() {
+							axios.get('{{ route('cart.items') }}')
+							.then(response => {
+								console.log(response.data.items);
+								if(response.status == 200) {
+									this.items = response.data.items;
+									this.priceTotal = response.data.priceTotal;
+								}
+							})
+							.catch(function (error) {
+								console.log(error);
+							})
+							.then(function () {
+							});
+						},
+						
+						removeCartItem: function(rowId, quantity) {
+							axios.post("{{ route('cart.update') }}", {
+								rowId: rowId,
+								quantity: quantity
+							})
+							.then(function (response) {
+								console.log(response);
+							})
+							.catch(function (error) {
+								console.log(error);
+							}).then(function () {
+								App.loadCartSummary();
+							});  
+						}
+						
+					}
+				});
+
+				// initialize cart
+				App.loadCartSummary();	
+				
 			});
 		</script>
 		

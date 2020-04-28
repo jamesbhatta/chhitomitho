@@ -264,6 +264,7 @@
                 updateCart(rowId, quantity - 1);
             }
         });
+        
         $('.quantity-plus').click(function() {
             var rowId = $(this).parent().find('.quantity').data('row-id');
             var quantity = parseInt($(this).parent().find('.quantity').text());
