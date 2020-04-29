@@ -80,6 +80,17 @@
 			color: #535b61;
 			padding: .25rem 1.5rem;
 		}
+		
+		.custom-navbar .dropdown:hover>.dropdown-menu {
+			display: block;
+			top: 100%;
+		}
+		
+		.custom-navbar .dropdown>.dropdown-toggle:active {
+			/*Without this, clicking will make it sticky*/
+			pointer-events: none;
+		}
+		
 		[v-cloak] {
 			display: none;
 		}
@@ -87,7 +98,7 @@
 		.text-strike {
 			text-decoration: line-through;
 		}
-
+		
 		/*=================
 		** Floating Cart
 		**================*/
@@ -290,7 +301,7 @@
 						});
 					}
 				}
-								
+				
 				var floatingCart = new Vue({
 					el: '#floating-cart-wrapper',
 					data: {
@@ -338,7 +349,7 @@
 						
 					}
 				});
-
+				
 				// initialize cart
 				App.loadCartSummary();	
 				
