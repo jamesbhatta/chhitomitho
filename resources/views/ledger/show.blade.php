@@ -123,7 +123,7 @@
                             @can('create', App\LedgerEntry::class)
                             <div class="ml-auto">
                                 <div class="text-center">
-                                    <a href="" class="btn btn-outline-primary btn-sm card-shadow" data-toggle="modal" data-target="#modalDepositForm">Deposit Form</a>
+                                    <a href="" class="btn btn-outline-primary btn-sm card-shadow" data-toggle="modal" data-target="#modalDepositForm">Deposit Voucher</a>
                                 </div>
                             </div>
                             @endcan
@@ -185,7 +185,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Deposit Form</h4>
+                <h4 class="modal-title w-100 font-weight-bold">Deposit Voucher</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -204,10 +204,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Details</label>
+                        <label for="">Transaction Details</label>
                         <input type="text" name="details" class="form-control" required>
-                    </div>
-                    <div class="form-group">
+                        <small>Type in transaction date, E-sewa or bank transaction number.</small>
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
