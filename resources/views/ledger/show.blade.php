@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+@endpush
 @section('content')
 <div id="ledger-page" class="p-3">
     <div class="container-fluid">
@@ -121,17 +124,20 @@
                                 Showing ledger of {{ $store->name }}
                             </div>
                             @can('create', App\LedgerEntry::class)
+                            {{ $data->balance }}
+                            @if($data->balance >= $store->credit_limit)
                             <div class="ml-auto">
                                 <div class="text-center">
                                     <a href="" class="btn btn-outline-primary btn-sm card-shadow" data-toggle="modal" data-target="#modalDepositForm">Deposit Voucher</a>
                                 </div>
                             </div>
+                            @endif
                             @endcan
                             
                         </div>
                     </div>
                     <div class="card-body white card-shadow p-3">
-                        <table id="order-table" class="table custom-table table-hover white">
+                        <table id="transactions-table" class="table custom-table table-hover white">
                             <thead>
                                 <tr>
                                     <th>Date</th>
@@ -221,6 +227,9 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover();
@@ -248,6 +257,17 @@
             }
         })
         @endif
+        
+        $('#transactions-table').DataTable( {
+            order: [],
+            dom: 'Bfrtip',
+            buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            ]
+        } );
+        
     });
 </script>
 @endpush
