@@ -18,8 +18,19 @@
                     <form action="{{ route('product.deletemultiple') }}" method="POST">
                         @csrf
                         @method('delete')
-                        <input type="hidden" id="product_ids" name="product_ids">
-                        <button type="submit" id="bulk-delete-btn" class="btn btn-outline-danger btn-sm rounded-0 card-shadow ml-0" >Delete Selected</button>
+                        <input type="hidden" id="product_ids" name="product_ids" class="bulk_select">
+                        <button type="submit" id="bulk-delete-btn" class="btn btn-danger btn-sm rounded-0 card-shadow ml-0" >Delete Selected</button>
+                    </form>
+                    <form action="{{ route('product.featured.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" id="featured_product_ids" name="product_ids" class="bulk_select">
+                        <button type="submit" class="btn btn-success btn-sm rounded-0 card-shadow ml-0">Mark Featured</button>
+                    </form>
+                    <form action="{{ route('product.featured.destroy') }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <input type="hidden" name="product_ids" class="bulk_select">
+                        <button type="submit" class="btn btn-primary btn-sm rounded-0 card-shadow ml-0">Unmark Featured</button>
                     </form>
                 </div>
             </div>
@@ -66,6 +77,11 @@
                             @method('delete')
                             <button type="submit" class="del-product-btn del-btn" data-toggle="tooltip" title="Delete" data-placement="top"><i class="far fa-trash-alt"></i></button>
                         </form>
+
+                        @if($product->featured)
+                        <span class="text-warning"><i class="far fa-star"></i></span>
+                        @endif
+                        
                     </td>
                 </tr>
                 @endforeach
@@ -104,14 +120,16 @@
         
         $('.select-checkbox').change( function () {
             var arr = $('.select-checkbox:checked').map(function() { return this.value; }).get().join();
-            $('#product_ids').val(arr);
+            // $('#product_ids').val(arr);
+            // $('#featured_product_ids').val(arr);
+            $('.bulk_select').val(arr);
             if (arr.length  > 0) {
                 $('#bulk-delete-btn').removeAttr('disabled');
             } else {
                 $('#bulk-delete-btn').prop('disabled', true);
             }
         });
-
+        
         $('#select-all').change( function () {
             if($(this).prop('checked')) {
                 $('.select-checkbox').prop('checked', true).trigger('change');
@@ -119,7 +137,7 @@
                 $('.select-checkbox').prop('checked', false).trigger('change');
             }
         })
-
+        
         $('#bulk-delete-btn').click( function (e) {
             var ch = confirm ('Are you absolutely sure you want to delete all the selected items?');
             if(ch == true) {
