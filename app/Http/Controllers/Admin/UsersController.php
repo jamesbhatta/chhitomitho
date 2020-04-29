@@ -18,10 +18,17 @@ class UsersController extends Controller
     */
     public function index(Request $request)
     {
-        $role = $request->get('role');
-        $users = User::filterByRole($role)->latest()->paginate(config('constants.user.items_per_page', 15));
+        $searchTerm = $request->has('search_term') ? $request->search_term : null;
+        if ($searchTerm) {
+            $users = User::where('name', 'LIKE', "%{$searchTerm}%")
+                            ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                            ->orWhere('mobile', 'LIKE', "%{$searchTerm}%")->paginate(config('constants.user.items_per_page', 15));
+        } else {
+            $role = $request->get('role');
+            $users = User::filterByRole($role)->latest()->paginate(config('constants.user.items_per_page', 15));
+        }
         
-        return view('user.index', compact('users'));
+        return view('user.index', compact('users', 'searchTerm'));
     }
     
     /**

@@ -28,6 +28,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="ml-auto">
+                        <form action="{{ route('users.index') }}" method="GET">
+                            <div class="input-group mb-3">
+                                <input type="text" name="search_term" class="form-control rounded-0" value="{{ $searchTerm }}" placeholder="Search. . . " aria-label="Search. . ."
+                                aria-describedby="product-search-btn">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-md btn-primary rounded-0 m-0 px-3 py-2 z-depth-0 waves-effect" id="product-search-btn"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
