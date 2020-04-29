@@ -16,11 +16,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->latest()->paginate(config('constants.product.items_per_page'));
+        $searchTerm = $request->has('search_term') ? $request->search_term : null;
+        $products = Product::with('category');
+        if ($searchTerm) {
+            $products = $products->where('name', 'LIKE', "%{$searchTerm}%");
+        }
+        // $products = Product::with('category')->latest()->paginate(config('constants.product.items_per_page'));
 
-        return view('product.index', compact('products'));
+        $products = $products->latest()->paginate(config('constants.product.items_per_page'));
+
+        return view('product.index', compact('products', 'searchTerm'));
     }
 
     /**

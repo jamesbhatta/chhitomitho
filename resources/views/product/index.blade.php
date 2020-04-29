@@ -32,6 +32,17 @@
                         <input type="hidden" name="product_ids" class="bulk_select">
                         <button type="submit" class="btn btn-primary btn-sm rounded-0 card-shadow ml-0">Unmark Featured</button>
                     </form>
+                    <div class="ml-auto">
+                        <form action="{{ route('product.index') }}" method="GET">
+                            <div class="input-group mb-3">
+                                <input type="text" name="search_term" class="form-control rounded-0" value="{{ $searchTerm }}" placeholder="Search. . . " aria-label="Search. . ."
+                                aria-describedby="product-search-btn">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-md btn-primary rounded-0 m-0 px-3 py-2 z-depth-0 waves-effect" id="product-search-btn"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +88,7 @@
                             @method('delete')
                             <button type="submit" class="del-product-btn del-btn" data-toggle="tooltip" title="Delete" data-placement="top"><i class="far fa-trash-alt"></i></button>
                         </form>
-
+                        
                         @if($product->featured)
                         <span class="text-warning"><i class="far fa-star"></i></span>
                         @endif
