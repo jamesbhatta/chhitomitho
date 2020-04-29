@@ -28,6 +28,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($stores as $store)
+                                @if(count($store->transactions))
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $store->name }}</td>
@@ -59,6 +60,7 @@
                                         <a class="text-primary" href="{{ route('ledgers.show', $store->id) }}">View Transactions</a>
                                     </td>
                                 </tr>
+                                @endif
                                 @empty
                                 <tr>
                                     <td class="text-center font-italic" colspan="10">

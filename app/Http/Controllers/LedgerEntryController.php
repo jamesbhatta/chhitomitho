@@ -73,7 +73,7 @@ class LedgerEntryController extends Controller
         $entries = $store->transactions()->latest()->paginate(100);
 
         $data = LedgerEntry::whereStoreId($store->id)->select(\DB::raw('sum(credit) as earnings, sum(debit) as withdrawals'))->first();
-        $data['balance'] = LedgerEntry::whereStoreId($store->id)->select('balance')->latest()->first()->balance;
+        $data['balance'] = LedgerEntry::whereStoreId($store->id)->select('balance')->latest()->first()->balance ?? 0;
 
         return view('ledger.show', compact('entries', 'store', 'data'));
     }
