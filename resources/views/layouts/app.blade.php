@@ -63,7 +63,7 @@
 			/* color: #f1f1f1!important; */
 		}
 		.custom-navbar .dropdown-menu {
-			margin-top: 10px!important;
+			margin-top: 5px!important;
 			border-radius: 0;
 		}
 		.custom-navbar .dropdown-menu:before {
@@ -79,16 +79,6 @@
 		.custom-navbar .dropdown-menu a {
 			color: #535b61;
 			padding: .25rem 1.5rem;
-		}
-		
-		.custom-navbar .dropdown:hover>.dropdown-menu {
-			display: block;
-			top: 100%;
-		}
-		
-		.custom-navbar .dropdown>.dropdown-toggle:active {
-			/*Without this, clicking will make it sticky*/
-			pointer-events: none;
 		}
 		
 		[v-cloak] {
