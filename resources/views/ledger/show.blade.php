@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @push('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
 @endpush
 @section('content')
 <div id="ledger-page" class="p-3">
@@ -230,6 +230,7 @@
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover();
@@ -258,13 +259,33 @@
         })
         @endif
         
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '/' + mm + '/' + dd;
+        
+        var printTitle = '<span style="font-size: 20px; font-weight: 600;">Chhitomitho.com</span><small style="font-size: 12px; float:right;">Date: ' + today + '</small><p style="font-size: 14px;">Report of:  {{ $store->name }}</p>';
+        var exportTitle = '{{ $store->name }} ( ' + today + ' )';
         $('#transactions-table').DataTable( {
             order: [],
             dom: 'Bfrtip',
             buttons: [
-            'copyHtml5',
-            'excelHtml5',
+            {
+                extend: 'copy',
+                title: exportTitle,
+                messageTop: 'Chhitomitho.com'
+            },
+            {
+                extend: 'excel',
+                title: exportTitle,
+                messageTop: 'Chhitomitho.com'
+            },
             'csvHtml5',
+            {
+                extend: 'print',
+                title: printTitle
+            }
             ]
         } );
         
