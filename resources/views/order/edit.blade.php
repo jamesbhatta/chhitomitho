@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     @endif
-                    
+
                     @if(Auth::user()->hasRole('partner') && !is_null($order->order_notes))
                     <div class="card border my-3">
                         <div class="card-body">
@@ -280,7 +280,14 @@
                                 Status: <span class="text-capitalize">{{ $order->status }}</span>
                             </div>
                             
-                            @if($order->status == "processing" || $order->status == "confirmed")
+                            @if($order->status == "confirmed")
+
+                            @can('markProcessed', App\Order::class)
+                            <input type="hidden" name="processed" value="true" hidden>
+                            <button type="submit" class="btn btn-info btn-lg rounded-0 w-100 text-capitalize card-shadow">Mark Processing</button>
+                            @endcan
+
+                            @elseif($order->status == "processing")
                             
                             <input type="hidden" name="dispatched" value="true" hidden>
                             <button type="submit" class="btn btn-info btn-lg rounded-0 w-100 text-capitalize card-shadow">Mark Dispatched</button>

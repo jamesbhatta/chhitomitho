@@ -153,7 +153,11 @@ class OrderController extends Controller
     {
         DB::beginTransaction();
         try {
-            if ($request->has('dispatched')) {
+            if($request->has('processed')) {
+                $this->authorize('markProcessed', $order);
+                $order->fill(['status' => 'processing'])->save();
+                $response = "The order #$order->id has been marked as Processing.";
+            } elseif ($request->has('dispatched')) {
                 $this->authorize('markDispatched', $order);
                 $order->fill(['status' => 'shipped'])->save();
                 $response = "The order #$order->id has been marked as Dispatched.";
