@@ -113,7 +113,8 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'An unknown error occured. Please try again.');
         }
 
-        return redirect()->route('customer.orders')->with('success', 'Your order has been placed.');
+        // return redirect()->route('customer.orders')->with('success', 'Your order has been placed.');
+        return redirect()->route('customer.order_placed');
     }
 
     /**
@@ -215,5 +216,10 @@ class OrderController extends Controller
     {
         $orders = Order::with('orderProducts', 'store', 'courier')->latest()->mine()->paginate(config('constants.my_orders.items_per_page'));
         return view('orders', compact('orders'));
+    }
+
+    public function orderPlaced()
+    {
+        return view('order.placed');
     }
 }
