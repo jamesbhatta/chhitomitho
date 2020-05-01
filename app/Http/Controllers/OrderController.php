@@ -94,9 +94,17 @@ class OrderController extends Controller
 
             // Instead fire an Order Placed Event
             OrderPlacedJob::dispatch($order);
-            // $to = $order->billing_phone;
-            // $message = $this->createOrderReveivedSMS($order);
-            // SendSmsJob::dispatch($to, $message);
+
+            // Store user detals if not available
+            $user = Auth::user();
+            if (is_null($user->mobile)) {
+                $user->mobile = $request->billing_phone;
+            }
+            if (is_null($user->address)) {
+                $user->address = $request->billing_address;
+            }
+           $user->update();
+
             DB::commit();
             Cart::destroy();
         } catch (\Exception $e) {
