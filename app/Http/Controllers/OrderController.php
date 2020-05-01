@@ -168,6 +168,8 @@ class OrderController extends Controller
                     'courier_id'    => $request->courier_id,
                     'status'    => $request->status,
                     'order_notes' => $request->order_notes,
+                    'store_notes' => $request->store_notes,
+                    'courier_notes' => $request->courier_notes
                 ])->save();
                 $response = "The order #$order->id has been Updated.";
             }

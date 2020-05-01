@@ -87,109 +87,158 @@
                         </tfoot>
                     </table>
                     {{-- End of products list --}}
+                    
                     {{-- Order Notes --}}
-                    @if( Auth::user()->hasRoles(['admin', 'manager']) || !is_null($order->order_notes))
+                    @if( Auth::user()->hasRoles(['admin', 'manager']))
                     <div class="card border rounded-0">
                         <div class="card-header">
                             Order Notes
                         </div>
                         <div class="card-body">
-                            @if(Auth::user()->hasRoles(['admin', 'manager']))
-                            <textarea name="order_notes" id="" class="form-control" cols="30" rows="10">{{ $order->order_notes }}</textarea>
-                            @else
-                            <div class="card-text">
-                                {{ $order->order_notes }}
-                            </div>
-                            @endif
+                            <textarea name="order_notes" id="" class="form-control" cols="30" rows="5">{{ $order->order_notes }}</textarea>
+                        </div>
+                    </div>
+                    @endif
+                    
+                    @if(Auth::user()->hasRole('partner') && !is_null($order->order_notes))
+                    <div class="card border my-3">
+                        <div class="card-body">
+                            {{ $order->order_notes }}
                         </div>
                     </div>
                     @endif
                     {{-- End of Order Notes --}}
+                    
+                    {{-- Store Notes --}}
+                    @if( Auth::user()->hasRoles(['admin', 'manager']))
+                    <div class="card border rounded-0 my-3">
+                        <div class="card-header">
+                            Note to store
+                        </div>
+                        <div class="card-body">
+                            <textarea name="store_notes" id="" class="form-control" cols="30" rows="5">{{ $order->store_notes }}</textarea>
+                        </div>
+                    </div>
+                    @endif
+                    
+                    @if(Auth::user()->hasRole('partner') && !is_null($order->store_notes))
+                    <div class="card border my-3">
+                        <div class="card-body">
+                            {{ $order->store_notes }}
+                        </div>
+                    </div>
+                    @endif
+                    {{-- End of Store Notes --}}
+                    
+                    {{-- Courier Notes --}}
+                    @if( Auth::user()->hasRoles(['admin', 'manager']))
+                    <div class="card border rounded-0 my-3">
+                        <div class="card-header">
+                            Note to Courier
+                        </div>
+                        <div class="card-body">
+                            <textarea name="courier_notes" id="" class="form-control" cols="30" rows="5">{{ $order->courier_notes }}</textarea>
+                        </div>
+                    </div>
+                    @endif
+                    
+                    @if(Auth::user()->hasRole('courier') && !is_null($order->courier_notes))
+                    <div class="card border my-3">
+                        <div class="card-body">
+                            {{ $order->courier_notes }}
+                        </div>
+                    </div>
+                    @endif
+                    {{-- End of Corier Notes --}}
                 </div>
+                
                 @if(Auth::user()->hasRoles(['admin', 'manager']))
                 <div class="col-md-4">
-                    <div class="card border rounded-0 mb-3">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Status:</label>
-                                <select name="status" id="" class="form-control rounded-0">
-                                    @foreach(config('constants.STATUS') as $key => $value)
-                                    <option value="{{ $key }}" @if($key == $order->status) selected @endif</option>{{ $value }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @if(!Auth::user()->hasRole('partner'))
-                            <div class="form-group">
-                                <label>Fulfilled By:</label>
-                                <select name="store_id" id="" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
-                                    <option value="">Any</option>
-                                    @foreach($stores as $store)
-                                    <option value="{{ $store->id }}" @if($store->id == $order->store_id) selected @endif>{{ $store->name }}</option>
-                                    @endforeach
-                                </select>
-                                @if (!empty($order->preferred_store))
-                                <div class="form-text"><small>Preferred Store:</small> {{ $order->preferred_store }}</div>
-                                @endif
-                            </div>
-                            @endif
-                            <div class="form-group">
-                                <label>Delivered By:</label>
-                                <select name="courier_id" id="" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
-                                    <option value="">Select Courier</option>
-                                    @foreach($couriers as $courier)
-                                    <option value="{{ $courier->id }}" @if($courier->id == $order->courier_id) selected @endif>{{ $courier->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div>
-                                Next steps:
-                                @if($order->status == 'pending_payment')
-                                <ul>
-                                    <li>Await for Payment</li>
-                                </ul>
-                                @endif
-                                @if($order->status == 'pending')
-                                <ol>
-                                    @if($order->payment_option == 'cod')
-                                    <li>Call customer</li>
+                    <div style="position: sticky; top: 10px;">
+                        <div class="card border rounded-0 mb-3">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Status:</label>
+                                    <select name="status" id="" class="form-control rounded-0">
+                                        @foreach(config('constants.STATUS') as $key => $value)
+                                        <option value="{{ $key }}" @if($key == $order->status) selected @endif</option>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @if(!Auth::user()->hasRole('partner'))
+                                <div class="form-group">
+                                    <label>Fulfilled By:</label>
+                                    <select name="store_id" id="" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
+                                        <option value="">Any</option>
+                                        @foreach($stores as $store)
+                                        <option value="{{ $store->id }}" @if($store->id == $order->store_id) selected @endif>{{ $store->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if (!empty($order->preferred_store))
+                                    <div class="form-text"><small>Preferred Store:</small> {{ $order->preferred_store }}</div>
                                     @endif
-                                    <li>Select Store</li>
-                                    <li>Select Courier</li>
-                                    @if($order->payment_option == 'cod')
-                                    <li>Change status to Confirmed or Cancelled</li>
+                                </div>
+                                @endif
+                                <div class="form-group">
+                                    <label>Delivered By:</label>
+                                    <select name="courier_id" id="" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
+                                        <option value="">Select Courier</option>
+                                        @foreach($couriers as $courier)
+                                        <option value="{{ $courier->id }}" @if($courier->id == $order->courier_id) selected @endif>{{ $courier->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    Next steps:
+                                    @if($order->status == 'pending_payment')
+                                    <ul>
+                                        <li>Await for Payment</li>
+                                    </ul>
                                     @endif
-                                </ol>
-                                @endif
-                                @if($order->status == 'confirmed')
-                                <ul>
-                                    <li>Change status to Processing</li>
-                                </ul>
-                                @endif
-                                @if($order->status == 'processing')
-                                <ul>
-                                    <li>Change status to Shipped</li>
-                                </ul>
-                                @endif
-                                @if($order->status == 'shipped')
-                                <ul>
-                                    <li>Change status to Delivered</li>
-                                </ul>
-                                @endif
-                                @if($order->status == 'delivered')
-                                <span class="text-success">No more actions Reqired</span>
-                                @endif
-                                @if($order->status == 'cancelled')
-                                <span class="text-danger">This order has been cancelled</span>
-                                @endif
+                                    @if($order->status == 'pending')
+                                    <ol>
+                                        @if($order->payment_option == 'cod')
+                                        <li>Call customer</li>
+                                        @endif
+                                        <li>Select Store</li>
+                                        <li>Select Courier</li>
+                                        @if($order->payment_option == 'cod')
+                                        <li>Change status to Confirmed or Cancelled</li>
+                                        @endif
+                                    </ol>
+                                    @endif
+                                    @if($order->status == 'confirmed')
+                                    <ul>
+                                        <li>Change status to Processing</li>
+                                    </ul>
+                                    @endif
+                                    @if($order->status == 'processing')
+                                    <ul>
+                                        <li>Change status to Shipped</li>
+                                    </ul>
+                                    @endif
+                                    @if($order->status == 'shipped')
+                                    <ul>
+                                        <li>Change status to Delivered</li>
+                                    </ul>
+                                    @endif
+                                    @if($order->status == 'delivered')
+                                    <span class="text-success">No more actions Reqired</span>
+                                    @endif
+                                    @if($order->status == 'cancelled')
+                                    <span class="text-danger">This order has been cancelled</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card border rounded-0">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-0 w-100">Update</button>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="card border rounded-0">
-                        <div class="card-body">
-                            <button type="submit" class="btn btn-primary btn-lg rounded-0 w-100">Update</button>
-                        </div>
-                    </div>
+                    {{-- End of sticky div --}}
                 </div>
                 @else
                 <div class="col-md-4">
