@@ -40,6 +40,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
+                    @if($order->status != 'cancelled' && $order->status != 'delivered')
+                    <div>
+                        <x-status-tracker :status="$order->status"></x-status-tracker>
+                    </div>
+                    @endif
                     <table class="table table-borderless table-sm mdb-color-text">
                         <tbody>
                             @foreach ($order->orderProducts as $product)
