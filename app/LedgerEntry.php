@@ -69,7 +69,6 @@ class LedgerEntry extends Model
 
     public function getBalance()
     {
-        return 200;
-        $this->latest()->first()->balance() ?? 0;
+        return $this->latest()->first()->balance() ?? 0;
     }
 }
