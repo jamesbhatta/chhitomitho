@@ -77,7 +77,7 @@ Route::group(['prefix' => 'courier', 'middleware' => ['auth', 'courier']], funct
 
 // customers
 Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], function () {
-    Route::get('/my-profile', 'UserController@profile')->name('customer');
+    Route::get('/', 'FrontendController@index')->name('customer');
     Route::get('/profile', 'UserController@profile')->name('user.profile');
     Route::put('/profile/update/{user}', 'UserController@updateProfile')->name('user.profile.update');
     Route::put('/profile/password/{user}', 'UserController@changePassword')->name('user.password.update');
