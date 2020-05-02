@@ -106,7 +106,7 @@
                                         <form action="{{ route('orders.destroy', $order) }}" method="POST" class="form d-inline">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="del-user-btn del-btn" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button>
+                                            <button type="submit" class="del-order-btn del-btn" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -140,7 +140,13 @@
 @push('scripts')
 <script>
     $(function () {
-        // $('#order-table').DataTable();
+        $('.del-order-btn').click(function () {
+            var ch = confirm ('Are you absolutely sure you want to delete?');
+            if(ch == true) {
+                return true;
+            }
+            return false;
+        });
     });
 </script>
 @endpush
