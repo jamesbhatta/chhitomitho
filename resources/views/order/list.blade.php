@@ -42,7 +42,9 @@
                                 <tr>
                                     <th></th>
                                     <th>Name</th>
+                                    @if(!Auth::user()->hasRole('partner'))
                                     <th>Mode</th>
+                                    @endif
                                     <th>Date</th>
                                     @if(!Auth::user()->hasRole('partner'))
                                     <th>Store</th>
@@ -65,6 +67,7 @@
                                             <div>{{ $order->billing_address }}</div>
                                         </a>
                                     </td>
+                                    @if(!Auth::user()->hasRole('partner'))
                                     <td class="">
                                         <div class="text-uppercase">{{ $order->payment_option }}</div>
                                         @if($order->payment_option == "esewa")
@@ -73,6 +76,7 @@
                                         </div>
                                         @endif
                                     </td>
+                                    @endif
                                     <td>
                                         {{ \Carbon\Carbon::parse($order->created_at)->format('h:i A') }}<br>
                                         {{ \Carbon\Carbon::parse($order->created_at)->isoFormat('D MMM YYYY') }}
