@@ -290,7 +290,7 @@
                             @elseif($order->status == "processing")
                             
                             <input type="hidden" name="dispatched" value="true" hidden>
-                            <button type="submit" class="btn btn-info btn-lg rounded-0 w-100 text-capitalize card-shadow">Mark Dispatched</button>
+                            <button type="submit" class="btn btn-success btn-lg rounded-0 w-100 text-capitalize card-shadow">Dispatch</button>
                             
                             @elseif(Auth::user()->hasRole('courier') && $order->status == "shipped")
                             

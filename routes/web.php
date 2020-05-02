@@ -123,8 +123,9 @@ Route::group(['prefix' => 'ajax', 'middleware' => ['auth']], function() {
 
 Route::get('ajax/push-sales-products', 'AjaxController@pushSalesProducts')->name('ajax.push_sales_products');
 
-
-// temporary test routes
+/*
+* temporary test routes
+**/
 Route::get('cart/destroy', function(){
     Cart::destroy();
 });
