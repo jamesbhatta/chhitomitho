@@ -49,6 +49,12 @@
         </li>
         @endif
 
+        @if(Auth::user()->hasRole('courier'))
+        <li class="sidebar-list-item">
+            <a class="nav-link" href="{{ route('courier_ledgers.show', Auth::user()->id) }}"><i class="far fa-money-bill-alt text-default"></i>Ledger Book<span><i class="fas fa-angle-right"></i></span></a>
+        </li>
+        @endif
+
         @can('manage-categories')
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ route('category.index') }}"><i class="far fa-list-alt text-warning"></i>Categories<span><i class="fas fa-angle-right"></i></span></a>

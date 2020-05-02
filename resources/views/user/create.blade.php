@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="">Role</label>
-                                    <select name="role" id="" class="form-control">
+                                    <select name="role" id="userRole" class="form-control">
                                         @if(old('role'))
                                         <option value="{{ old('role') }}" selected>{{ ucfirst(old('role')) }}</option>
                                         @endif
@@ -73,6 +73,25 @@
                                         <option value="courier">Courier</option>
                                         <option value="customer">Customer</option>
                                     </select>
+                                </div>
+                                
+                                <div class="col-md-6 form-group courier-details" style="display: none;">
+                                    Receives a commission of 
+                                    <div class="input-group mb-3">
+                                        <input type="number" name="commission_percentage" class="form-control" value="{{ old('commission_percentage') }}" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group courier-details" style="display:none;">
+                                    Minimum withdraw amount is 
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">NRs.</span>
+                                        </div>
+                                        <input type="number" name="credit_limit" class="form-control" value="{{ old('credit_limit') }}" required>
+                                    </div>
                                 </div>
                                 
                                 <div class="col-md-6 form-group">
@@ -98,3 +117,18 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function () {
+        $('#userRole').on('change', function () {
+            console.log('role changed to: ' + $(this).val());
+            if($(this).val() == 'courier') {
+                $('.courier-details').show();
+            } else {
+                $('.courier-details').hide();
+            }
+        });
+    });
+</script>
+@endpush

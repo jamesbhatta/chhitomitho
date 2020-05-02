@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::put('product/{product}/update', 'ProductController@update')->name('product.update');
     Route::delete('product/{product}/destroy', 'ProductController@destroy')->name('product.destroy');
     Route::delete('product/deletemultiple', 'ProductController@deleteMultiple')->name('product.deletemultiple');
-
+    
     Route::post('products/featuted', 'FeaturedProductController@store')->name('product.featured.store');
     Route::delete('products/featuted', 'FeaturedProductController@destroy')->name('product.featured.destroy');
     
@@ -49,9 +49,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::put('sliders/{slider}', 'SliderController@update')->name('sliders.update');
     Route::delete('sliders/{slider}', 'SliderController@destroy')->name('sliders.destroy');
     Route::put('save-sliders-settings', 'SliderController@saveSettings')->name('sliders.settings.update');
-
+    
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs');
-
+    
 });
 
 // Manager
@@ -101,8 +101,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/store/{store}/ledgers', 'LedgerEntryController@store')->name('ledgers.store');
     Route::get('ajax/ledgers/stores', 'LedgerEntryController@storesList')->name('ajax.ledgers.stores_list');
 
+    Route::get('/courier-ledgers', 'CourierLedgerController@index')->name('courier_ledgers.index');
+    Route::get('/courier-ledgers/{courier}', 'CourierLedgerController@show')->name('courier_ledgers.show');
+    Route::post('/courier-ledgers/{courier}', 'CourierLedgerController@store')->name('courier_ledgers.store');
+    Route::get('ajax/courier-ledgers/couriers-list', 'CourierLedgerController@couriersList')->name('ajax.courier-ledgers.couriers_list');
+
+    
     // Payment Request
     Route::post('/store/{store}/payment', 'StorePaymentController@store')->name('store.payment.request');
+    Route::post('/courier/{courier}/payment', 'CourierPaymentController@store')->name('courier.payment.request');
+
 });
 
 // anyone
@@ -134,4 +142,27 @@ Route::group(['prefix' => 'test', 'middleware' => ['checkrole:admin,user']], fun
     Route::get('/role', function () {
         return "passed";
     });
+});
+
+Route::get('user-meta', function () {
+    $user = \Auth::user();
+    if (empty($user->meta)) {
+        $userMeta = new \App\UserMeta();
+        $userMeta->user_id = $user->id;
+    } else {
+        $userMeta = $user->meta;
+    }
+    $userMeta->commission_percentage = 10;
+    $userMeta->credit_limit = 5000;
+    $userMeta->save();
+    return $user->meta;
+});
+
+Route::get('courier-commission', function () {
+    $order = \App\Order::first();
+    $sellingPrice = $order->total_price;
+    $commissionAmount = $sellingPrice - (((100 - $order->courier->meta->commission_percentage) / 100) * $sellingPrice);
+    echo "selling price: $sellingPrice <br>";
+    echo "commission %: ".$order->courier->meta->commission_percentage ."<br>";
+    echo "commission: $commissionAmount <br>";
 });

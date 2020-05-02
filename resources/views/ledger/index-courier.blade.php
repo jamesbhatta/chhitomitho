@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex mb-4">
-                    <h5 class="align-self-center page-title">Ledger Book of Stores</h5>
+                    <h5 class="align-self-center page-title">Ledger Book of Couriers</h5>
                 </div>
                 @include('partials.alerts')
             </div>
@@ -31,26 +31,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($stores as $store)
-                                @if(count($store->transactions))
+                                @forelse ($couriers as $courier)
+                                @if(count($courier->transactions))
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $store->name }}</td>
+                                    <td>{{ $courier->name }}</td>
                                     <td>
-                                        @if(count($store->transactions))
-                                        <span class="@if($store->transactions->first()->balance >= $store->credit_limit) text-success  @else text-danger @endif)">
-                                            {{ $store->transactions->first()->balanceAmount }}
+                                        @if(count($courier->transactions))
+                                        <span class="@if($courier->transactions->first()->balance >= $courier->credit_limit) text-success  @else text-danger @endif)">
+                                            {{ $courier->transactions->first()->balanceAmount }}
                                         </span>
                                         @endif
                                     </td>
-                                    <td>NRs. {{ number_format($store->credit_limit) }}</td>
-                                    <td>{{ $store->commission_percentage }} %</td>
+                                    <td>{{ moneyFormat($courier->meta->credit_limit) }}</td>
+                                    <td>{{ $courier->meta->commission_percentage }} %</td>
                                     <td class="text-center">
-                                        @if( $store->hasRequestedPayment)
+                                        @if( $courier->meta->payment_requested_at)
                                         <span class="text-green" data-toggle="tooltip" title="Payment Requested" data-placement="left">
                                             <i class="fas fa-circle"></i>
                                         </span>
-                                        @elseif($store->transactions->first()->balance >= $store->credit_limit)
+                                        @elseif($courier->transactions->first()->balance >= $courier->meta->credit_limit)
                                         <span class="text-ink" data-toggle="tooltip" title="Credit Reached" data-placement="left">
                                             <i class="fas fa-circle"></i>
                                         </span>
@@ -59,10 +59,14 @@
                                             <i class="fas fa-circle"></i>
                                         </span>
                                         @endif
-                                        {{ moneyFormat($store->requested_amount) }}
+
+                                        @if($courier->meta->requested_amount)
+                                        {{ moneyFormat($courier->meta->requested_amount) }}
+                                        @endif
+
                                     </td>
                                     <td>
-                                        <a class="text-primary" href="{{ route('ledgers.show', $store->id) }}">View Transactions</a>
+                                        <a class="text-primary" href="{{ route('courier_ledgers.show', $courier->id) }}">View Transactions</a>
                                     </td>
                                 </tr>
                                 @endif
@@ -78,11 +82,11 @@
                     </div>
                     <div class="card-footer d-flex">
                         <div class="align-self-center text-dark">
-                            Showing {{ $stores->firstItem() }} to {{ $stores->lastItem() }} of {{ $stores->total() }} entries
+                            Showing {{ $couriers->firstItem() }} to {{ $couriers->lastItem() }} of {{ $couriers->total() }} entries
                         </div>
-                        @if($stores->hasPages())
+                        @if($couriers->hasPages())
                         <div class="align-self-center ml-auto">
-                            {{ $stores->links() }}
+                            {{ $couriers->links() }}
                         </div>
                         @endif
                     </div>

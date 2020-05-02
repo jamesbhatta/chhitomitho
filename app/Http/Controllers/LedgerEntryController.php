@@ -25,7 +25,9 @@ class LedgerEntryController extends Controller
             }])->first();
         });
 
-        return view('ledger.index', compact('stores'));
+        $type = 'store';
+
+        return view('ledger.index', compact('stores', 'type'));
     }
 
     /**

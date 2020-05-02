@@ -139,4 +139,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Order', 'courier_id');
     }
+
+    public function meta()
+    {
+        return $this->hasOne('App\UserMeta', 'user_id', 'id')->withDefault();
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany('App\CourierLedger', 'courier_id');
+    }
 }

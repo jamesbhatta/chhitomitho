@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CourierLedger;
 use App\Events\OrderStatusChangedEvent;
 use App\Http\Requests\OrderRequest;
 use App\Jobs\OrderPlacedJob;
@@ -183,6 +184,12 @@ class OrderController extends Controller
                 $sellingPrice = $order->total_price;
                 $amountAfterCommission = ((100 - $order->store->commission_percentage) / 100) * $sellingPrice;
                 LedgerEntry::credit($order->store_id, $amountAfterCommission, 'Order ' . $order->orderNumber, $sellingPrice);
+            }
+
+            if ($order->wasChanged('status') && $order->status == 'delivered') {
+                $sellingPrice = $order->total_price;
+                $commissionAmount = $sellingPrice - (((100 - $order->courier->meta->commission_percentage) / 100) * $sellingPrice);
+                CourierLedger::credit($order->courier_id, $commissionAmount, 'Order ' . $order->orderNumber, $sellingPrice);
             }
 
             DB::commit();

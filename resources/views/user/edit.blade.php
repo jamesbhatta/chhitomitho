@@ -83,6 +83,27 @@
                                     </select>
                                 </div>
                                 
+                                @if($user->hasRole('courier'))
+                                <div class="col-md-6 form-group">
+                                    Receives a commission of 
+                                    <div class="input-group mb-3">
+                                        <input type="number" name="commission_percentage" class="form-control" value="{{ old('commission_percentage', $user->meta->commission_percentage) }}" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    Minimum withdraw amount is 
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">NRs.</span>
+                                        </div>
+                                        <input type="number" name="credit_limit" class="form-control" value="{{ old('credit_limit', $user->meta->credit_limit) }}" required>
+                                    </div>
+                                </div>
+                                @endif
+                                
                                 <div class="col-md-6 form-group">
                                     <label for="">New Password</label>
                                     <input type="text" name="password" class="form-control rounded-0">

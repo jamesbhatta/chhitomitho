@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\CourierLedger;
 use App\LedgerEntry;
 use App\Order;
+use App\Policies\CourierLedgerPolicy;
 use App\Policies\LedgerPolicy;
 use App\Policies\OrderPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Order::class => OrderPolicy::class,
         LedgerEntry::class => LedgerPolicy::class,
+        CourierLedger::class => CourierLedgerPolicy::class,
     ];
 
     /**
