@@ -22,6 +22,13 @@
     <h2 class="h2-responsive text-muted mb-3">My Orders</h2>
     
     @include('partials.alerts')
+
+    <div class="mb-4">
+        <a class="text-primary" href="{{ route('customer.orders') }}?filter=unreceived">To Receive</a> | 
+        <a class="text-primary" href="{{ route('customer.orders') }}?filter=received">Received</a> | 
+        <a class="text-primary" href="{{ route('customer.orders') }}?filter=cancelled">Cancelled</a> | 
+        <a class="text-primary" href="{{ route('customer.orders') }}?filter=all">All</a>
+    </div>
     
     @forelse ($orders as $order)
     <div class="card card-shadow mb-5 rounded-0">
@@ -114,6 +121,10 @@
         </div>
     </div>
     @endif
+
+    <div class="text-center mb-3">
+        <a class="btn btn-success card-shadow" href="{{ url('/') }}">Continue Shopping</a>
+    </div>
     
 </div>
 @endsection

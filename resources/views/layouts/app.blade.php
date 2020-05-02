@@ -192,7 +192,7 @@
 									@can('access-backend')
 									<a class="dropdown-item" href="{{ route(Auth::user()->role) }}">{{ __('Dashboard') }}</a>
 									@endcan
-									<a class="dropdown-item" href="{{ route('customer.orders') }}">{{ __('My Orders') }}</a>
+									<a class="dropdown-item" href="{{ route('customer.orders') }}?filter=unreceived">{{ __('My Orders') }}</a>
 									<a class="dropdown-item" href="{{ route('user.profile') }}">{{ __('My Profile') }}</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
