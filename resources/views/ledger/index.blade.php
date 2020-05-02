@@ -55,6 +55,7 @@
                                             <i class="fas fa-circle"></i>
                                         </span>
                                         @endif
+                                        {{ moneyFormat($store->requested_amount) }}
                                     </td>
                                     <td>
                                         <a class="text-primary" href="{{ route('ledgers.show', $store->id) }}">View Transactions</a>

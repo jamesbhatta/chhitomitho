@@ -27,10 +27,7 @@
                     <div class="ml-auto align-self-center">
                         <div class="text-center">
                             @if( ! $store->hasRequestedPayment && $data->balance >= $store->credit_limit)
-                            <form action="{{ route('store.payment.request', $store) }}" method="POST" class="form form-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-success card-shadow text-capitalize"><i class="far fa-paper-plane mr-2"></i> Request Payment</button>
-                            </form>
+                            <button type="button" class="btn btn-success card-shadow text-capitalize" data-toggle="modal" data-target="#paymentRequestModal"><i class="far fa-paper-plane mr-2"></i> Request Payment</button>
                             @endif
                             @if($store->hasRequestedPayment)
                             <div class="text-success"><i class="fa fa-check mr-2"></i> Payment Requested</div>
@@ -38,6 +35,7 @@
                         </div>
                     </div>
                     @endcan
+                    
                     
                 </div>
                 @include('partials.alerts')
@@ -224,6 +222,35 @@
 </div>
 @endcan
 {{-- End of Deposit Form Modal --}}
+
+{{-- Payment Request Modal --}}
+<div class="modal fade" id="paymentRequestModal" tabindex="-1" role="dialog" aria-labelledby="paymentRequestModal"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Cast Withdrawal Request</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form action="{{ route('store.payment.request', $store) }}" method="POST" class="form">
+            @csrf
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="">Amount</label>
+                    <input type="number" name="requested_amount" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary card-shadow mr-auto" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success card-shadow text-capitalize"><i class="far fa-paper-plane mr-2"></i> Ok, Withdraw</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+{{-- End of Payment Request Modal --}}
 @endsection
 
 @push('scripts')

@@ -13,10 +13,11 @@ class StorePaymentController extends Controller
      * @param  mixed $store
      * @return void
      */
-    public function store(Store $store)
+    public function store(Request $request, Store $store)
     {
         if ($store->user_id == \Auth::user()->id) {
             $store->payment_requested_at = now();
+            $store->requested_amount = $request->requested_amount;
             $store->update();
             return redirect()->back()->with('success', 'Payment request has been sent');
         } else {

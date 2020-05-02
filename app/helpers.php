@@ -102,3 +102,10 @@ if (!function_exists('isPaymentComplete')) {
         return $order->payment_mode == 'esewa' && !isset($order->transaction_time);
     }
 }
+
+if (!function_exists('moneyFormat')) {
+    function moneyFormat($amount)
+    {
+        return 'NRs. ' . number_format($amount);
+    }
+}
