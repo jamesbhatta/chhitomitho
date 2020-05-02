@@ -102,12 +102,15 @@
                                     </td>
                                     <td class="text-right">Rs. {{ number_format($order->total_price) }}</td>
                                     <td>
-                                        <a href="{{ route('orders.edit', $order) }}" class="edit-link" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a> | 
+                                        <a href="{{ route('orders.edit', $order) }}" class="edit-link" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
+                                        @can('delete', App\Order::class)
+                                        | 
                                         <form action="{{ route('orders.destroy', $order) }}" method="POST" class="form d-inline">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="del-order-btn del-btn" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @empty

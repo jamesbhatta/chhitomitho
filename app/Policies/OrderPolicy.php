@@ -77,7 +77,7 @@ class OrderPolicy
      * @param  \App\Order  $order
      * @return mixed
      */
-    public function delete(User $user, Order $order)
+    public function delete(User $user)
     {
         return $user->role === 'manager';
     }
