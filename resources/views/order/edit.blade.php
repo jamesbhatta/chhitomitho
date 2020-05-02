@@ -8,9 +8,6 @@
             <div class="col-md-12">
                 <div class="d-flex mb-4">
                     <h5 class="align-self-center page-title">Edit Order {{ $order->orderNumber }}</h5>
-                    <div class="ml-auto">
-                        <a class="btn btn-outline-primary btn-sm z-depth-0" href="{{ route('product.create') }}">Add New</a>
-                    </div>
                 </div>
                 @include('partials.alerts')
             </div>

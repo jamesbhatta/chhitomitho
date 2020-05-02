@@ -7,9 +7,6 @@
             <div class="col-md-12">
                 <div class="d-flex mb-4">
                     <h5 class="align-self-center page-title">Manage Orders</h5>
-                    <div class="ml-auto">
-                        <a class="btn btn-outline-primary btn-sm z-depth-0" href="{{ route('product.create') }}">Add New</a>
-                    </div>
                 </div>
                 @include('partials.alerts')
             </div>
@@ -47,8 +44,12 @@
                                     <th>Name</th>
                                     <th>Mode</th>
                                     <th>Date</th>
+                                    @if(!Auth::user()->hasRole('partner'))
                                     <th>Store</th>
+                                    @endif
+                                    @if(!Auth::user()->hasRole('courier'))
                                     <th>Courier</th>
+                                    @endif
                                     <th>Status</th>
                                     <th class="text-right">Total</th>
                                     <th></th>
@@ -76,6 +77,7 @@
                                         {{ \Carbon\Carbon::parse($order->created_at)->format('h:i A') }}<br>
                                         {{ \Carbon\Carbon::parse($order->created_at)->isoFormat('D MMM YYYY') }}
                                     </td>
+                                    @if(!Auth::user()->hasRole('partner'))
                                     <td>
                                         @if($order->hasStore)
                                         {{ $order->store->name }}
@@ -84,6 +86,8 @@
                                         </div>
                                         @endif
                                     </td>
+                                    @endif
+                                    @if(!Auth::user()->hasRole('courier'))
                                     <td>
                                         @isset($order->courier)
                                         <a href="{{ route('users.edit', $order->courier) }}" data-toggle="tooltip" title="Courier Details" target="_blank">{{ $order->courier->name }}</a>
@@ -92,6 +96,7 @@
                                         </div>
                                         @endisset
                                     </td>
+                                    @endif
                                     <td class="text-capitalize">
                                         <div class="badge z-depth-0 p-2 {{ statusBadgeClass($order->status) }}">{{ $order->status }}</div>
                                     </td>
