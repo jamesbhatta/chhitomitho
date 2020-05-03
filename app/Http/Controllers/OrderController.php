@@ -219,6 +219,7 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Order has been deleted permanently');
     }
 
+    // moveed to CustomerOrderController
     public function myOrders()
     {
         $orders = Order::with('orderProducts', 'store', 'courier')->latest()->mine()->paginate(config('constants.my_orders.items_per_page'));

@@ -15,23 +15,59 @@
         margin: 20px auto;
         padding: 15px;
     }
+    #orderFilterNav {
+        border-bottom: 1.2px solid #e4ecf155;
+    }
+    #orderFilterNav li{
+        padding-bottom: 10px;
+    }
+    #orderFilterNav li.active{
+        border-bottom: 1.2px solid #b0ea39;
+    }
+    #orderFilterNav li.active a{
+        color: #9acd32;
+    }
+    #orderFilterNav a{
+        color: #0496ff;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-right: 1.2px solid #e4ecf155;
+    }
+    #orderFilterNav li:first-of-type a {
+        padding-left: 0;
+    }
+    #orderFilterNav li:last-of-type a {
+        border-right: 0;
+    }
 </style>
 @endpush
 @section('content')
 <div id="orders-page" class="container py-3">
-    <h2 class="h2-responsive text-muted mb-3">My Orders</h2>
+
+    <div class="card z-depth-0 rounded-0 mb-4">
+        <div class="card-body">
+            <h2 class="h2-responsive text-muted mb-3">My Orders</h2>
+            <ul id="orderFilterNav" class="nav">
+                <li class="nav-item {{ $filter == 'unreceived' ? 'active' : '' }}">
+                    <a href="{{ route('customer.orders') }}?filter=unreceived">To Receive</a>
+                </li>
+                <li class="nav-item {{ $filter == 'received' ? 'active' : '' }}">
+                    <a href="{{ route('customer.orders') }}?filter=received">Received</a>
+                </li>
+                <li class="nav-item {{ $filter == 'cancelled' ? 'active' : '' }}">
+                    <a href="{{ route('customer.orders') }}?filter=cancelled">Cancelled</a>
+                </li>
+                <li class="nav-item {{ $filter == 'all' ? 'active' : '' }}">
+                    <a href="{{ route('customer.orders') }}?filter=all">All</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     
     @include('partials.alerts')
 
-    <div class="mb-4">
-        <a class="text-primary" href="{{ route('customer.orders') }}?filter=unreceived">To Receive</a> | 
-        <a class="text-primary" href="{{ route('customer.orders') }}?filter=received">Received</a> | 
-        <a class="text-primary" href="{{ route('customer.orders') }}?filter=cancelled">Cancelled</a> | 
-        <a class="text-primary" href="{{ route('customer.orders') }}?filter=all">All</a>
-    </div>
-    
     @forelse ($orders as $order)
-    <div class="card card-shadow mb-5 rounded-0">
+    <div class="card z-depth-0 mb-5 rounded-0">
         <div class="card-header grey lighten-5 mdb-color-text">
             <div class="d-flex">
                 <div>
@@ -121,10 +157,12 @@
         </div>
     </div>
     @endif
-
+    
+    @if(count($orders))
     <div class="text-center mb-3">
         <a class="btn btn-success card-shadow" href="{{ url('/') }}">Continue Shopping</a>
     </div>
+    @endif
     
 </div>
 @endsection

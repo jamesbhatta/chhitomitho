@@ -30,6 +30,6 @@ class CustomerOrderController extends Controller
         }
 
         $orders = $orders->latest()->mine()->paginate(config('constants.my_orders.items_per_page'));
-        return view('orders', compact('orders'));
+        return view('orders', compact('orders', 'filter'));
     }
 }
