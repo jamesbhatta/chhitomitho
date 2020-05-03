@@ -92,15 +92,7 @@
                             Order Notes
                         </div>
                         <div class="card-body">
-                            <textarea name="order_notes" id="" class="form-control" cols="30" rows="5">{{ $order->order_notes }}</textarea>
-                        </div>
-                    </div>
-                    @endif
-
-                    @if(Auth::user()->hasRole('partner') && !is_null($order->order_notes))
-                    <div class="card border my-3">
-                        <div class="card-body">
-                            {{ $order->order_notes }}
+                            <textarea name="order_notes" class="form-control" cols="30" rows="5">{{ $order->order_notes }}</textarea>
                         </div>
                     </div>
                     @endif
@@ -109,11 +101,12 @@
                     {{-- Store Notes --}}
                     @if( Auth::user()->hasRoles(['admin', 'manager']))
                     <div class="card border rounded-0 my-3">
-                        <div class="card-header">
+                        <div class="card-header d-flex">
                             Note to store
+                            <a id="fillStoreNotesBtn" class="ml-auto mdb-color-text" href="#"><i class="far fa-copy"></i> Fill</a>
                         </div>
                         <div class="card-body">
-                            <textarea name="store_notes" id="" class="form-control" cols="30" rows="5">{{ $order->store_notes }}</textarea>
+                            <textarea name="store_notes" class="form-control" cols="30" rows="5">{{ $order->store_notes }}</textarea>
                         </div>
                     </div>
                     @endif
@@ -130,11 +123,12 @@
                     {{-- Courier Notes --}}
                     @if( Auth::user()->hasRoles(['admin', 'manager']))
                     <div class="card border rounded-0 my-3">
-                        <div class="card-header">
+                        <div class="card-header d-flex">
                             Note to Courier
+                            <a id="fillCourierNotesBtn" class="ml-auto mdb-color-text" href="#"><i class="far fa-copy"></i> Fill</a>
                         </div>
                         <div class="card-body">
-                            <textarea name="courier_notes" id="" class="form-control" cols="30" rows="5">{{ $order->courier_notes }}</textarea>
+                            <textarea name="courier_notes" class="form-control" cols="30" rows="5">{{ $order->courier_notes }}</textarea>
                         </div>
                     </div>
                     @endif
@@ -165,7 +159,7 @@
                                 @if(!Auth::user()->hasRole('partner'))
                                 <div class="form-group">
                                     <label>Fulfilled By:</label>
-                                    <select name="store_id" id="" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
+                                    <select name="store_id" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
                                         <option value="">Any</option>
                                         @foreach($stores as $store)
                                         <option value="{{ $store->id }}" @if($store->id == $order->store_id) selected @endif>{{ $store->name }}</option>
@@ -178,7 +172,7 @@
                                 @endif
                                 <div class="form-group">
                                     <label>Delivered By:</label>
-                                    <select name="courier_id" id="" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
+                                    <select name="courier_id" class="form-control rounded-0" @if($order->courier_id == Auth::user()->id) disabled @endif>
                                         <option value="">Select Courier</option>
                                         @foreach($couriers as $courier)
                                         <option value="{{ $courier->id }}" @if($courier->id == $order->courier_id) selected @endif>{{ $courier->name }}</option>
@@ -308,3 +302,21 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#fillCourierNotesBtn').click(function (e) {
+                e.preventDefault();
+                var orderNotes = $('textarea[name=order_notes]').val();
+                $('textarea[name=courier_notes]').val(orderNotes);
+            });
+
+            $('#fillStoreNotesBtn').click(function (e) {
+                e.preventDefault();
+                var orderNotes = $('textarea[name=order_notes]').val();
+                $('textarea[name=store_notes]').val(orderNotes);
+            });
+        });
+    </script>
+@endpush
