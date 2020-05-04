@@ -62,7 +62,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)->with(['prompt' => 'select_account'])->redirect();
     }
 
     /**
@@ -87,6 +87,7 @@ class LoginController extends Controller
                 'provider'      => $provider,
             ]);
             Auth::login($user, true);
+            return redirect()->intended(route('customer'));
         }
 
         $role = $user->role;
