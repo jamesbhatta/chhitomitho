@@ -236,7 +236,7 @@
 
 @section('content')
 {{-- Featured Products section --}}
-<div class="container-fluid" style="background-color: #e2eaef;">
+<div id="featuredProductSection" class="container-fluid" style="background-color: #e2eaef; display: none;">
     <div class="container py-4">
         <div class="row">
             <div class="col-md-12">
@@ -368,8 +368,9 @@
 
 <script>
     $(function () {
+        $('#featuredProductSection').show();
         $('#featuredProductSlider').slick({
-            dots: true,
+            dots: false,
             infinite: true,
             speed: 1500,
             slidesToShow: 4,
