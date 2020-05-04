@@ -311,15 +311,6 @@
 </div>
 {{-- End of Featured Products section --}}
 
-<div class="container my-4">
-    <div class="row">
-        <div class="col-md-12">
-            <x-home-page-slider />
-        </div>
-    </div>
-    
-</div>
-
 <style>
     #menuFilter .nav-item .nav-link {
         color: #7ac400;
@@ -363,6 +354,15 @@
         </div>
         @endforeach
       </div>
+</div>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-12">
+            <x-home-page-slider />
+        </div>
+    </div>
+    
 </div>
 
 
