@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRequest;
 use App\Store;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
 {
@@ -38,14 +40,15 @@ class StoreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $request->validate([
-            'name'  => 'required|string',
-            'user_id' => 'required|unique:stores,user_id|exists:users,id'
-        ]);
-        
-        $store = Store::create($request->all());
+        $store = new Store($request->except('logo'));
+
+        if ($request->hasFile('logo')) {
+            $logoPath = Storage::putFile(config('constants.store.image_dir'), $request->file('logo'));
+            $store->fill(['logo' => $logoPath]);
+        }
+        $store->save();
 
         return redirect()->back()->with('success', 'Store has been added to list');
     }
@@ -79,14 +82,19 @@ class StoreController extends Controller
      * @param  \App\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Store $store)
+    public function update(StoreRequest $request, Store $store)
     {
-        $request->validate([
-            'name'  => 'required|string',
-            'user_id' => 'required|unique:stores,user_id,' . $store->id  . '|exists:users,id',
-        ]);
+        // $request->validate([
+        //     'name'  => 'required|string',
+        //     'user_id' => 'required|unique:stores,user_id,' . $store->id  . '|exists:users,id',
+        //     ]);
 
-        $store->fill($request->all())->save();
+        if ($request->hasFile('logo')) {
+            Storage::delete($store->logo);
+            $logoPath = Storage::putFile(config('constants.store.image_dir'), $request->file('logo'));
+            $store->fill(['logo' => $logoPath]);
+        }
+        $store->fill($request->except('logo'))->save();
 
         return redirect()->back()->with('success', 'Store has been updated.');
     }

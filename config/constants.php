@@ -9,12 +9,15 @@ return [
     'product' => [
         'image_dir' => 'products',
         'items_per_page' => 15,
-        ''
+    ],
+
+    'store' => [
+        'image_dir' => 'stores',
+        'items_per_page' => 15,
     ],
     
     'order' => [
         'items_per_page' => 15,
-        ''
     ],
 
     'ROLES' => [

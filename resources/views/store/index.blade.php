@@ -20,7 +20,7 @@
                     <div class="p-3">
                         <h5>Add a new Store</h5>
                         <hr>
-                        <form action="{{ route('stores.store') }}" method="POST" class="form">
+                        <form action="{{ route('stores.store') }}" method="POST" enctype="multipart/form-data" class="form">
                             @csrf
                             <div class="form-group">
                                 <label for="">Name</label>
@@ -30,7 +30,7 @@
                                 <label>Owner</label>
                                 <select name="user_id" id="" class="form-control rounded-0">
                                     @foreach($partners as $partner)
-                                    <option value="{{ $partner->id }}">{{ $partner->name }} : {{ $partner->email }}</option>
+                                    <option value="{{ $partner->id }}" @if(old('user_id') == $partner->id) selected @endif>{{ $partner->name }} : {{ $partner->email }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -51,6 +51,18 @@
                                     </div>
                                     <input type="text" name="credit_limit" class="form-control rounded-0" value="{{ old('credit_limit') }}">
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Logo</label>
+                                <input type="file" name="logo">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Website URL</label>
+                                <input type="text" name="website_url" class="form-control" value="{{ old('website_url') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Additional Info</label>
+                                <textarea name="description" class="form-control" cols="30" rows="10">{{ old('description') }}</textarea>
                             </div>
                             <div class="form-group text-center">
                                 <button class="btn btn-primary rounded-0 card-shadow">Add New Store</button>
@@ -95,9 +107,10 @@
                             </tr>
                             <tr id="edit-{{ $loop->iteration }}" class="d-none">
                                 <td colspan="6">
-                                    <form action="{{ route('stores.update', $store) }}" method="POST" class="form">
+                                    <form action="{{ route('stores.update', $store) }}" method="POST" enctype="multipart/form-data" class="form">
                                         @csrf
                                         @method('PUT')
+                                        <input type="hidden" name="id" value="{{ $store->id }}" hidden>
                                         <h6 class="font-weight-bolder text- text-muted mb-3">Edit Store: {{ $store->name}}</h6>
                                         <div class="form-group form-row">
                                             <label class="col-sm-1"><i>Name</i></label>
@@ -117,11 +130,11 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group d-flex">
+                                        <div class="form-group form-row">
                                             <div class="col-md-2 align-self-center">
                                                 <label><i>Commission</i></label>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <div class="input-group input-group-sm">
                                                     <input type="text" name="commission_percentage" class="form-control form-control-sm rounded-0" value="{{ $store->commission_percentage }}">
                                                     <div class="input-group-append">
@@ -140,6 +153,21 @@
                                                     <input type="text" name="credit_limit" class="form-control form-control-sm rounded-0" value="{{ $store->credit_limit }}">
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="form-group form-row">
+                                            <div class="col-md-6">
+                                                <label><i>Logo</i></label>
+                                                <input type="file" name="logo" class="d-block">
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label><i>Website URL</i></label>
+                                                <input type="text" name="website_url" class="form-control form-control-sm rounded-0" value="{{ $store->website_url }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-row">
+                                                <label><i>Decription</i></label>
+                                                <textarea name="description" class="form-control" cols="30" rows="5">{{ $store->description }}</textarea>
+                                            
                                         </div>
                                         <div class="form-group form-row">
                                             <button type="button" data-id="{{ $loop->iteration }}" class="cancel-quick-edit-btn btn btn-outline-danger btn-sm z-depth-0 rounded-0">Cancel</button>

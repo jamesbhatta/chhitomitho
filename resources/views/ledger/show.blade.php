@@ -114,6 +114,27 @@
                 </div>
             </div>
             
+            @if($store->description)
+            <div class="col-md-12">
+                <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                    <div class="card card-shadow border my-3">
+                        <div class="card-header" role="tab" id="additionalInfoHeading">
+                            <a data-toggle="collapse" data-parent="#accordionEx" href="#additionalInfo" aria-expanded="false" aria-controls="additionalInfo">
+                                <h5 class="mb-0">
+                                   Additional Information <i class="fas fa-angle-down rotate-icon"></i>
+                                </h5>
+                            </a>
+                        </div>
+                        <div id="additionalInfo" class="collapse" role="tabpanel" aria-labelledby="additionalInfoHeading" data-parent="#accordionEx">
+                            <div class="card-body">
+                                <textarea class="form-control" rows="10">{{ $store->description }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            
             <div class="col-md-12">
                 <div class="card card-shadow">
                     <div class="card-header grey lighten-5">
@@ -122,7 +143,6 @@
                                 Showing ledger of {{ $store->name }}
                             </div>
                             @can('create', App\LedgerEntry::class)
-                            {{-- {{ $data->balance }} --}}
                             @if($data->balance >= $store->credit_limit)
                             <div class="ml-auto">
                                 <div class="text-center">
