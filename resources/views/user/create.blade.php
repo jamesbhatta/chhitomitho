@@ -78,7 +78,7 @@
                                 <div class="col-md-6 form-group courier-details" style="display: none;">
                                     Receives a commission of 
                                     <div class="input-group mb-3">
-                                        <input type="number" name="commission_percentage" class="form-control" value="{{ old('commission_percentage') }}" required>
+                                        <input type="number" name="commission_percentage" class="form-control" value="{{ old('commission_percentage') }}">
                                         <div class="input-group-append">
                                             <span class="input-group-text">%</span>
                                         </div>
@@ -90,7 +90,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">NRs.</span>
                                         </div>
-                                        <input type="number" name="credit_limit" class="form-control" value="{{ old('credit_limit') }}" required>
+                                        <input type="number" name="credit_limit" class="form-control" value="{{ old('credit_limit') }}">
                                     </div>
                                 </div>
                                 
