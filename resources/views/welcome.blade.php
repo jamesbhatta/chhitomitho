@@ -320,47 +320,51 @@
     
 </div>
 
-<div class="container my-4">
-    
-    <div class="row">
-        <div class="col-md-3">
-            {{-- Menu Card --}}
-            <div class="card menu-card card-shadow rounded-0 mx-auto">
-                <div class="title bg-theme-color bg-secondary-color"><i class="fa fa-utensils mr-2"></i>Delicious Menu</div>
-                <ul class="menu-list">
-                    @foreach($categories as $category)
-                    <li>
-                        <a href="#{{ $category->slug }}">{{ $category->name }}</a>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-            {{-- End of Menu Card --}}
-        </div>
-        <div class="col-md-9">
-            @foreach($categories as $category)
-            <div class="items-container">
-                <div id="{{ $category->slug }}" class="category-wrapper">
-                    @if ( count($category->products) )
-                    <div class="category-title mb-4">
-                        <h3 class="h3-responsive text-muted">{{ $category->name }}</h3>
-                    </div>
-                    @endif
-                    <div class="row">
-                        @foreach ($category->products as $product)
-                        <div class="col-md-4">
-                            <x-product-verticle :product="$product"></x-product-verticle>
-                        </div>
-                        @endforeach
-                    </div>
+<style>
+    #menuFilter .nav-item .nav-link {
+        color: #7ac400;
+        font-size: 14px;
+        text-transform: uppercase;
+        background: none;
+        border: 1px solid #7ac400;
+        padding: 6px 14px;
+        margin-top: 5px;
+        line-height: 18px;
+        border-radius: 20px;
+        margin-right: 15px;
+    }
+    #menuFilter .nav-item .nav-link.active,
+    #menuFilter .nav-item .nav-link:hover,
+    #menuFilter .nav-item .nav-link:focus {
+        color: #fff;
+        background: #7ac400;
+        box-shadow: none;
+    }
+</style>
+<div class="container">
+    <ul class="nav d-flex justify-content-center" id="menuFilter" role="tablist">
+        @foreach($categories as $category)
+        <li class="nav-item">
+          <a class="nav-link @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane"
+            aria-selected="true">{{ $category->name }}</a>
+        </li>
+        @endforeach
+      </ul>
+      <div class="tab-content pt-5" id="myTabContentEx">
+        @foreach($categories as $category)
+        <div class="tab-pane fade @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-pane" role="tabpanel" aria-labelledby="{{ $category->slug }}-tab">
+            <div class="row">
+                @foreach ($category->products as $product)
+                <div class="col-md-3">
+                    <x-product-verticle :product="$product"></x-product-verticle>
                 </div>
+                @endforeach
             </div>
-            @endforeach
-            
         </div>
-    </div>
+        @endforeach
+      </div>
 </div>
-@endsection
+
 
 @push('scripts')
 <script src="{{ asset('assets/js/shopping.js') }}"></script>
