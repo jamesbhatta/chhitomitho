@@ -102,6 +102,10 @@
                                         <input type="number" name="credit_limit" class="form-control" value="{{ old('credit_limit', $user->meta->credit_limit) }}" required>
                                     </div>
                                 </div>
+                                <div class="col-md-12 mb-2">
+                                    <label for="">Additional Information</label>
+                                    <textarea name="description" class="form-control" cols="30" rows="5">{{ old('description', $user->meta->description)}}</textarea>
+                                </div>
                                 @endif
                                 
                                 <div class="col-md-6 form-group">

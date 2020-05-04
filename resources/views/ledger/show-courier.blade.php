@@ -112,6 +112,27 @@
                     </div>
                 </div>
             </div>
+
+            @if($courier->meta->description)
+            <div class="col-md-12">
+                <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                    <div class="card card-shadow border my-3">
+                        <div class="card-header" role="tab" id="additionalInfoHeading">
+                            <a data-toggle="collapse" data-parent="#accordionEx" href="#additionalInfo" aria-expanded="false" aria-controls="additionalInfo">
+                                <h5 class="mb-0">
+                                   Additional Information <i class="fas fa-angle-down rotate-icon"></i>
+                                </h5>
+                            </a>
+                        </div>
+                        <div id="additionalInfo" class="collapse" role="tabpanel" aria-labelledby="additionalInfoHeading" data-parent="#accordionEx">
+                            <div class="card-body">
+                                <textarea class="form-control" rows="10">{{ $courier->meta->description }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
             
             <div class="col-md-12">
                 <div class="card card-shadow">

@@ -93,6 +93,10 @@
                                         <input type="number" name="credit_limit" class="form-control" value="{{ old('credit_limit') }}">
                                     </div>
                                 </div>
+                                <div class="col-md-12 courier-details mb-2" style="display: none;">
+                                    <label for="">Additional Information</label>
+                                    <textarea name="description" class="form-control" cols="30" rows="5"></textarea>
+                                </div>
                                 
                                 <div class="col-md-6 form-group">
                                     <label for="password">New Password</label>

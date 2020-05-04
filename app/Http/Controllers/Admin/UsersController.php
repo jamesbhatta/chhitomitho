@@ -68,6 +68,7 @@ class UsersController extends Controller
             }
             $userMeta->commission_percentage = $request->commission_percentage;
             $userMeta->credit_limit = $request->credit_limit;
+            $userMeta->description = $request->description;
             $userMeta->save();
         }
 
@@ -137,6 +138,7 @@ class UsersController extends Controller
             }
             $userMeta->commission_percentage = $request->commission_percentage;
             $userMeta->credit_limit = $request->credit_limit;
+            $userMeta->description = $request->description;
             $userMeta->save();
         }
 
