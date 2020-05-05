@@ -15,134 +15,18 @@
 	<link href="{{ asset('assets/mdb/css/mdb.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/mdb/css/style.css') }}" rel="stylesheet">
 	
-	@stack('styles')
-	<link href="https://fonts.googleapis.com/css?family=Lora&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 	
-	<style>
-		html {
-			scroll-behavior: smooth;
-		}
-		body {
-			box-sizing: border-box;
-			font-family: 'Lora', serif;
-			background-color: #f2f7fb;
-		}
-		*:focus {
-			outline: none;
-		}
-		.bg-theme-color {
-			/* background-color: #982121; */
-			background-color: #dd3e52;
-		}
-		.text-theme-color {
-			color: #982121;
-		}
-		.bg-secondary-color {
-			/* background-color: #28a745; */
-			background-color: #FC7A1E;
-		}
-		.text-secondary-color {
-			color: #28a745;
-		}
-		.card-shadow {
-			box-shadow: 0 0px 15px 2px rgba(143, 143, 143, 0.09);
-		}
-		.custom-navbar {
-			/* background-color: #982121!important; */
-			background-color: #dd3e52!important;
-			/* color: #f1f1f1!important; */
-			font-family: 'Sen', sans-serif;
-		}
-		.custom-navbar .navbar-brand {
-			/* color: #f1f1f1!important; */
-			font-family: 'Permanent Marker', cursive;
-		}
-		.custom-navbar .nav-item .nav-link {
-			/* color: #f1f1f1!important; */
-		}
-		.custom-navbar .dropdown-menu {
-			margin-top: 5px!important;
-			border-radius: 0;
-		}
-		.custom-navbar .dropdown-menu:before {
-			content: "";
-			border-bottom: 10px solid #fff;
-			border-right: 10px solid transparent;
-			border-left: 10px solid transparent;
-			position: absolute;
-			top: -10px;
-			right: 16px;
-			z-index: 10;
-		}
-		.custom-navbar .dropdown-menu a {
-			color: #535b61;
-			padding: .25rem 1.5rem;
-		}
-		
-		[v-cloak] {
-			display: none;
-		}
-		
-		.text-strike {
-			text-decoration: line-through;
-		}
-		
-		/*=================
-		** Floating Cart
-		**================*/
-		
-		#floating-cart {
-			position: fixed;
-			bottom: 20px;
-			right: 20px;
-			z-index: 100;
-			width: auto;
-			padding: 15px 20px;
-			background-color: #FC7A1E;
-			display: none;
-			font-family: 'Sen', sans-serif;
-		}
-		#floating-cart-wrapper .dropdown-menu {
-			border: 0.8px solid #FC7A1E;
-			font-family: 'Sen', sans-serif;
-		}
-		#floating-cart-wrapper .dropdown-menu:before {
-			content: "";
-			border-top: 10px solid #FC7A1E;
-			border-right: 10px solid transparent;
-			border-left: 10px solid transparent;
-			position: absolute;
-			bottom: -10px;
-			right: 16px;
-			z-index: 10;
-		}
-		#floating-cart svg{
-			font-size: 1.5rem;
-			fill: #fff;
-		}
-		#floating-cart .cart-quantity {
-			position: absolute;
-			top: -10px;
-			right: -15px;
-			background-color: #ff3547;
-			color: #fff; padding: 5px 8px;
-			min-height:15px;
-			min-width: 15px;
-			border-radius: 50%;
-			font-size: 0.6rem;
-		}
-		#floating-cart .cart-price {
-			margin-left: 20px;
-			color: #fff;
-			font-size: 0.8rem;
-		}
-	</style>
+	@stack('styles')
+	{{-- <link href="https://fonts.googleapis.com/css?family=Lora&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet"> --}}
+
+	<link href="https://fonts.googleapis.com/css?family=Lora|Permanent+Marker|Sen&display=swap" rel="stylesheet">
 	
 	{{--
-		Theme color Brown: #982121
-		Secondary Color: #ffb80e
+		Theme color Brown: #191717
+		Secondary Color: #FC7A1E
 		--}}
 	</head>
 	<body>
@@ -190,7 +74,9 @@
 								</a>
 								<div class="dropdown-menu dropdown-menu-right card-shadow" aria-labelledby="navbarDropdown">
 									@can('access-backend')
-									<a class="dropdown-item" href="{{ route(Auth::user()->role) }}">{{ __('Dashboard') }}</a>
+									<a class="dropdown-item" href="{{ route(Auth::user()->role) }}">
+										<i class="fas fa-chart-line"></i> {{ __('Dashboard') }}
+									</a>
 									@endcan
 									<a class="dropdown-item" href="{{ route('customer.orders') }}?filter=unreceived">
 										<i class="far fa-heart"></i> {{ __('My Orders') }}

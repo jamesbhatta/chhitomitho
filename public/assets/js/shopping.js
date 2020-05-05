@@ -41,7 +41,7 @@ $(document).ready(function () {
             App.loadCartSummary();
         });
         setTimeout(() => {
-            $(this).html('Add to Cart');
+            $(this).html('<i class="fas fa-shopping-basket mr-2"></i> Add to Cart');
         }, 1000);
         $(this).removeAttr('disabled');
     });

@@ -1,237 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
-<style>
-    .menu-card {
-        padding: 20px 0;
-        font-family: 'Sen', sans-serif;
-        max-width: 300px;
-        position: sticky;
-        top: 20px;
-    }
-    
-    .menu-card .title {
-        color: #fff;
-        margin: 0 -2px 10px -2px;
-        padding: 10px 15px;
-        text-align: center;
-        font-size: 18px;
-    }
-    
-    .menu-card .menu-list {
-        padding: 0;
-    }
-    
-    .menu-card .menu-list li {
-        list-style: none;
-        margin-left: 20px;
-        margin-right: 20px;
-        border-bottom: 1.1px solid #efefef;
-    }
-    
-    .menu-card .menu-list li:hover {
-        background-color: #fafafa;
-    }
-    
-    .menu-card .menu-list li a {
-        padding: 15px 10px;
-        color: inherit;
-        display: block;
-    }
-    
-    .category-title {
-        /* font-family: 'Permanent Marker', cursive; */
-        font-family: 'Sen', sans-serif;
-    }
-    
-    /* Chrome, Safari, Edge, Opera */
-    .counter-control::-webkit-outer-spin-button,
-    .counter-control::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
-    /* Firefox */
-    .counter-control[type=number] {
-        -moz-appearance: textfield;
-    }
-    
-</style>
-
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<style>
-    /* ************
-    *  SLICK DESIGN
-    * ************ */
-    /* Slick Prev Next Buttons */
-    .c-slick-prev,
-    .c-slick-next{
-        position: absolute;
-        top: 40%;
-        z-index: 100;
-        padding: 15px 12px;
-        background: #7ac400;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0.9;
-        cursor: pointer;
-    }
-    .c-slick-prev{
-        left: -15px;
-    }
-    .c-slick-next{
-        right: -15px;
-    }
-    .c-slick-prev:hover,
-    .c-slick-next:hover{
-        background: #fff;;
-        border: 1px solid #ff9800;
-        color: #ff9800;
-        opacity: 1;
-    }
-    
-    /* Dots */
-    .slick-dotted.slick-slider
-    {
-        margin-bottom: 30px;
-    }
-    
-    .slick-dots
-    {
-        position: absolute;
-        bottom: -40px;
-        display: block;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        text-align: center;
-    }
-    .slick-dots li
-    {
-        position: relative;
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin: 0 5px;
-        padding: 0;
-        cursor: pointer;
-    }
-    .slick-dots li button
-    {
-        font-size: 0;
-        line-height: 0;
-        display: block;
-        width: 20px;
-        height: 20px;
-        padding: 5px;
-        cursor: pointer;
-        color: transparent;
-        border: 0;
-        outline: none;
-        background: transparent;
-    }
-    .slick-dots li button:hover,
-    .slick-dots li button:focus
-    {
-        outline: none;
-    }
-    .slick-dots li button:hover:before,
-    .slick-dots li button:focus:before
-    {
-        opacity: 1;
-    }
-    .slick-dots li button:before
-    {
-        font-family: 'slick';
-        font-size: 26px;
-        line-height: 20px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 20px;
-        height: 20px;
-        content: '•';
-        text-align: center;
-        opacity: .25;
-        color: black;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    .slick-dots li.slick-active button:before
-    {
-        opacity: .75;
-        color: black;
-    }
-    
-    /* Hide Arrows when disabled */
-    .c-slick-prev.slick-disabled,
-    .c-slick-next.slick-disabled{
-        display: none!important;
-    }
-    
-    /* Product slider Styles */
-    #featuredProductSlider .product-wrapper {
-        font-family: 'Sen', sans-serif;
-        color: #747d89;
-    }
-    #featuredProductSlider img{
-        height: 150px;
-    }
-    #featuredProductSlider .product-wrapper .add-to-cart-btn {
-        color: #7ac400;
-        font-size: 14px;
-        text-transform: uppercase;
-        background: none;
-        border: 1px solid #7ac400;
-        padding: 6px 14px;
-        margin-top: 5px;
-        line-height: 18px;
-        border-radius: 20px;
-    }
-    
-    #featuredProductSlider .product-wrapper .add-to-cart-btn:hover,
-    #featuredProductSlider .product-wrapper .add-to-cart-btn:focus {
-        color: #fff;
-        background: #7ac400;
-        box-shadow: none;
-    }
-    #featuredProductSlider .product-wrapper .qty-minus-btn,
-    #featuredProductSlider .product-wrapper .qty-plus-btn {
-        padding: 5px;
-        color: #fff;
-        background-color: #ff9800;
-        border: 1px solid #ff9800;
-    }
-    #featuredProductSlider .product-wrapper .qty-minus-btn{
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-    }
-    #featuredProductSlider .product-wrapper .qty-plus-btn{
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-    }
-    #featuredProductSlider .product-wrapper .qty-minus-btn:hover,
-    #featuredProductSlider .product-wrapper .qty-plus-btn:hover {
-        color: #ff9800;
-        background-color: #fff;
-    }
-    
-    #featuredProductSlider .product-wrapper .counter-control {
-        padding: 0;
-        outline: none;
-        color: #747d89;
-    }
-
-    #featuredProductSlider .product-wrapper .counter-control-wrapper {
-        border-top: 1px solid #ff9800;
-        border-bottom: 1px solid #ff9800;
-    }
-    
-    
-</style>
 @endpush
 
 @section('content')
@@ -264,37 +34,21 @@
                                         <h4 class="h4-responsive d-inline">Rs. {{ number_format($product->sale_price) }}</h4>
                                         @endif
                                     </div>
-                                    {{-- <div class="d-flex justify-content-center my-3">
-                                        <div class="mx-2">
-                                            <button class="qty-minus-btn btn btn-sm rounded-0 px-3 z-depth-0 m-0">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <div class="mx-2 text-center">
-                                            <input type="number" class="quantity counter-control" value="{{ $product->min_quantity ?? 1 }}" min="{{ $product->min_quantity ?? 1 }}" max="99" style="width: 50px; text-align: center;">
-                                        </div>
-                                        <div class="mx-2">
-                                            <button class="qty-plus-btn btn btn-sm rounded-0 px-3 z-depth-0 m-0">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div> --}}
                                     <div class="d-flex justify-content-center my-3">
                                         <div class="">
-                                            <button class="qty-minus-btn btn btn-sm px-3 z-depth-0 m-0">
+                                            <button class="qty-minus-btn px-3 z-depth-0 m-0">
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <div class="counter-control-wrapper text-center">
-                                            <input type="number" class="quantity counter-control border-0" value="{{ $product->min_quantity ?? 1 }}" min="{{ $product->min_quantity ?? 1 }}" max="99" style="width: 50px; text-align: center;">
+                                        <div class="counter-control-wrapper text-center p-0">
+                                            <input type="number" class="quantity counter-control border-0" value="{{ $product->min_quantity ?? 1 }}" min="{{ $product->min_quantity ?? 1 }}" max="99">
                                         </div>
                                         <div class="">
-                                            <button class="qty-plus-btn btn btn-sm px-3 z-depth-0 m-0">
+                                            <button class="qty-plus-btn px-3 z-depth-0 m-0">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    
                                     @if($product->min_quantity)
                                     {{-- <p class="font-italic">Min. order : {{ $product->min_quantity }}</p> --}}
                                     @endif
@@ -311,37 +65,15 @@
 </div>
 {{-- End of Featured Products section --}}
 
-<style>
-    #menuFilter .nav-item .nav-link {
-        color: #7ac400;
-        font-size: 14px;
-        text-transform: uppercase;
-        background: none;
-        border: 1px solid #7ac400;
-        padding: 6px 14px;
-        margin-top: 5px;
-        line-height: 18px;
-        border-radius: 20px;
-        margin-right: 15px;
-    }
-    #menuFilter .nav-item .nav-link.active,
-    #menuFilter .nav-item .nav-link:hover,
-    #menuFilter .nav-item .nav-link:focus {
-        color: #fff;
-        background: #7ac400;
-        box-shadow: none;
-    }
-</style>
-<div class="container">
+<div class="container py-4">
     <ul class="nav d-flex justify-content-center" id="menuFilter" role="tablist">
         @foreach($categories as $category)
         <li class="nav-item">
-          <a class="nav-link @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane"
-            aria-selected="true">{{ $category->name }}</a>
+            <a class="nav-link @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane" aria-selected="true">{{ $category->name }}</a>
         </li>
         @endforeach
-      </ul>
-      <div class="tab-content pt-5" id="myTabContentEx">
+    </ul>
+    <div class="tab-content pt-5" id="myTabContentEx">
         @foreach($categories as $category)
         <div class="tab-pane fade @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-pane" role="tabpanel" aria-labelledby="{{ $category->slug }}-tab">
             <div class="row">
@@ -353,7 +85,7 @@
             </div>
         </div>
         @endforeach
-      </div>
+    </div>
 </div>
 
 <div class="container my-4">
@@ -362,9 +94,8 @@
             <x-home-page-slider />
         </div>
     </div>
-    
 </div>
-
+@endsection
 
 @push('scripts')
 <script src="{{ asset('assets/js/shopping.js') }}"></script>
@@ -403,54 +134,3 @@
     });
 </script>
 @endpush
-{{-- @push('scripts')
-<script>
-    $(document).ready(function () {
-        $('.qty-minus-btn').click(function () {
-            var quantity = $(this).parent().parent().find('.quantity');
-            var qty = parseInt(quantity.val());
-            var min = parseInt(quantity.attr('min'));
-            if(qty > 1 && qty > min){
-                quantity.val(qty-1);
-            }
-        });
-        
-        $('.qty-plus-btn').click(function () {
-            var quantity = $(this).parent().parent().find('.quantity');
-            var qty = parseInt(quantity.val());
-            if(qty < 99){
-                quantity.val(qty+1);
-            }
-        });
-        
-        $('.add-to-cart-btn').click(function () {
-            $(this).attr('disabled', 'true');
-            $(this).html('<i class="fas fa-circle-notch fa-spin"></i> Adding');
-            var id = $(this).data('product-id');
-            var quantity = parseInt($(this).parent().find('.quantity').val()) ;
-            var button = this;
-            $.ajax({
-                url: "{{ route('cart.add') }}",
-                type: 'POST',
-                data: {id: id, quantity: quantity},
-            })
-            .done(function(response) {
-                console.log(response);
-                if(response.status == 200) {
-                }
-            })
-            .fail(function(response) {
-                console.log("error");
-                console.log(response);
-            })
-            .always(function() {
-                App.loadCartSummary();
-            });
-            setTimeout(() => {
-                $(this).html('Add to Cart');
-            }, 1000);
-            $(this).removeAttr('disabled');
-        });
-    });
-</script>
-@endpush --}}
