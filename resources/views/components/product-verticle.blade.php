@@ -1,4 +1,4 @@
-<div class="product-wrapper">
+<div class="product-wrapper mb-3">
     <div class="card card-shadow rounded-0">
         <img class="card-img-top rounded-0" src="{{ asset('storage/' . $product->product_image) }}" alt="{{ $product->name }}">
         <div class="card-body text-center">

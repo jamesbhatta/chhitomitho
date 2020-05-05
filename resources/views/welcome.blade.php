@@ -68,9 +68,11 @@
 <div class="container py-4">
     <ul class="nav d-flex justify-content-center" id="menuFilter" role="tablist">
         @foreach($categories as $category)
+        @if(count($category->products))
         <li class="nav-item">
             <a class="nav-link @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane" aria-selected="true">{{ $category->name }}</a>
         </li>
+        @endif
         @endforeach
     </ul>
     <div class="tab-content pt-5" id="myTabContentEx">
