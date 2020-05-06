@@ -4,10 +4,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <style>
     #our-menu-section {
-        background:  url("{{ asset('assets/img/bg-3-min.jpg') }}") rgba(62, 58, 58, 0.12);
-        background-blend-mode: overlay;
+        /* background:  url("{{ asset('assets/img/bg-3-min.jpg') }}") rgba(62, 58, 58, 0.12); */
+        /* background-blend-mode: overlay; */
         width: 100%;
-        min-height: 100vh;
         background-position: center;
         background-attachment: fixed;
         background-size: cover;
@@ -20,7 +19,6 @@
         font-size: 36px;
         font-weight: 600;
         color: #555;
-        margin-bottom: 25px;
         z-index: 109;
     }
 </style>
@@ -35,7 +33,9 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-md-12">
-                <h3 id="section-title">Quick Order</h3>
+                <div class="pl-4">
+                    <h3 id="section-title">Quick Order</h3>
+                </div>
             </div>
             <div class="col-md-12">
                 <div id="featuredProductSlider" class="px-3">
@@ -94,36 +94,41 @@
 {{-- End of Featured Products section --}}
 
 <div id="our-menu-section">
-    <div class="rgba-black-light">
-        <div class="container py-5">
-            <div id="menu-head-section">
-                <h3 id="section-title" class="text-center">Our Menu</h3>
-                <ul class="nav d-flex justify-content-center" id="menuFilter" role="tablist">
-                    @foreach($categories as $category)
-                    @if(count($category->products))
-                    <li class="nav-item">
-                        <a class="nav-link @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane" aria-selected="true">{{ $category->name }}</a>
-                    </li>
-                    @endif
-                    @endforeach
-                </ul>
-            </div>
-            <div class="tab-content pt-5" id="myTabContentEx">
-                @foreach($categories as $category)
-                <div class="tab-pane fade @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-pane" role="tabpanel" aria-labelledby="{{ $category->slug }}-tab">
-                    <div class="row">
-                        @foreach ($category->products as $product)
-                        <div class="col-md-3 d-flex align-items-stretch">
-                            <x-product-verticle :product="$product"></x-product-verticle>
-                        </div>
+    <div class="container-fluid py-5">
+        <div class="row">
+            <div class="col-lg-2 col-md-3">
+                <div id="menu-head-section" class="p-3">
+                    <h3 id="section-title" class="text-center">Our Menu</h3>
+                    <ul class="nav menu-list" role="tablist">
+                        @foreach($categories as $category)
+                        {{-- @if(count($category->products)) --}}
+                        <li class="menu-list-item flex-fill">
+                            <a class="menu-item @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane" aria-selected="true">{{ $category->name }}</a>
+                        </li>
+                        {{-- @endif --}}
                         @endforeach
-                    </div>
+                    </ul>
                 </div>
-                @endforeach
+            </div>
+            <div class="col-lg-10 col-md-9">
+                <div class="tab-content" id="myTabContentEx">
+                    @foreach($categories as $category)
+                    <div class="tab-pane fade @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-pane" role="tabpanel" aria-labelledby="{{ $category->slug }}-tab">
+                        <div class="row">
+                            @foreach ($category->products as $product)
+                            <div class="col-lg-3 col-md-4 d-flex align-items-stretch">
+                                <x-product-verticle :product="$product"></x-product-verticle>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="container py-5">
     <div class="row">
