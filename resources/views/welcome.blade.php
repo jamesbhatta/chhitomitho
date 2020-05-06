@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <style>
     #our-menu-section {
-        background:  url("{{ asset('assets/img/bg-3.jpg') }}") rgba(62, 58, 58, 0.12);
+        background:  url("{{ asset('assets/img/bg-3-min.jpg') }}") rgba(62, 58, 58, 0.12);
         background-blend-mode: overlay;
         width: 100%;
         min-height: 100vh;
@@ -28,7 +28,7 @@
 
 @section('content')
 <div class="">
-    <img class="img-fluid w-100" src="{{ asset('assets/img/banner-4.jpg') }}">
+    <img class="img-fluid w-100" src="{{ asset('assets/img/banner-4-min.jpg') }}">
 </div>
 {{-- Featured Products section --}}
 <div id="featuredProductSection" class="container-fluid" style="display: none;">
