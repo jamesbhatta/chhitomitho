@@ -1,6 +1,6 @@
 <div class="product-wrapper mb-4">
-    <div class="card h-100 z-depth-0" style="border-radius: 6px;">
-        <img class="card-img-top" src="{{ asset('storage/' . $product->product_image) }}" alt="{{ $product->name }}" style="border-radius: 6px;">
+    <div class="card h-100 z-depth-0">
+        <img class="card-img-top" src="{{ asset('storage/' . $product->product_image) }}" alt="{{ $product->name }}">
         <div class="card-body text-center pb-1">
             <div class="card-title">
                 <h4 class="h4-responsive text-capitalize">

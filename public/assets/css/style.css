@@ -241,9 +241,14 @@ body {
     font-family: 'Sen', sans-serif;
     color: #747d89;
 }
+.product-wrapper .card {
+    border-radius: 6px;
+}
 
 .product-wrapper img {
     height: 180px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 .product-wrapper .add-to-cart-btn {
