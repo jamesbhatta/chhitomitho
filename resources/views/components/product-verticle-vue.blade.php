@@ -3,13 +3,13 @@
         <img class="card-img-top rounded-0 border-bottom" v-bind:src="product.product_image_url" v-bind:alt="product.name">
         <div class="card-body text-center">
             <div class="card-title">
-                <h4 class="h4-responsive font-weight-bolder text-theme-color text-capitalize">
+                <h4 class="h4-responsive text-capitalize">
                     @{{ product.name }}
                 </h4>
             </div>
             <div>
-                <h3 v-if="product.sale_price" class="h3-responsive text-secondary-color">Rs. @{{ formatMoney(product.sale_price) }}</h3>
-                <h3 v-bind:class="{ 'text-strike' : product.sale_price }" class="h3-responsive text-secondary-color">Rs. @{{ formatMoney(product.regular_price) }}</h3>
+                <span v-bind:class="{ 'text-strike' : product.sale_price }" class="h4-responsive">Rs. @{{ formatMoney(product.regular_price) }}</span>
+                <span v-if="product.sale_price" class="h5-responsive d-inline text-secondary-color">Rs. @{{ formatMoney(product.sale_price) }}</span>
             </div>
             {{-- <div class="d-flex justify-content-center my-3">
                 <div class="mx-2">
@@ -27,7 +27,7 @@
                 </div>
             </div> --}}
             <p v-if="product.min_quantity" class="font-italic">Min. order : @{{product.min_quantity }}</p>
-            <button v-bind:ref="'product'+product.id" v-on:click="addToCart(product.id, product.min_quantity || 1, $event)" class="add-to-cart-btn btn bg-secondary-color text-white rounded-0 text-capitalize z-depth-0 mt-4 w-100" v-bind:data-product-id="product.id">Add to Cart</button>
+            <button v-bind:ref="'product'+product.id" v-on:click="addToCart(product.id, product.min_quantity || 1, $event)" class="add-to-cart-btn z-depth-0 mt-4 w-100" v-bind:data-product-id="product.id">Add to Cart</button>
             {{-- <button v-bind:ref="'product'+product.id" class="add-to-cart-btn btn bg-secondary-color text-white rounded-0 text-capitalize z-depth-0 mt-4 w-100" v-bind:data-product-id="product.id">Add to Cart</button> --}}
         </div>
     </div>

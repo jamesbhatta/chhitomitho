@@ -1,7 +1,7 @@
 <div class="product-wrapper mb-4">
     <div class="card h-100 z-depth-0">
         <img class="card-img-top" src="{{ asset('storage/' . $product->product_image) }}" alt="{{ $product->name }}">
-        <div class="card-body text-center pb-1">
+        <div class="card-body text-center h-100">
             <div class="card-title">
                 <h4 class="h4-responsive text-capitalize">
                     {{ $product->name }}
@@ -31,8 +31,6 @@
             @if($product->min_quantity)
             <p class="font-italic small">Min. order : {{ $product->min_quantity }}</p>
             @endif
-        </div>
-        <div class="d-flex justify-content-center pb-4">
             <button class="add-to-cart-btn z-depth-0" data-product-id="{{ $product->id }}"><i class="fas fa-shopping-basket mr-2"></i> Add to Cart</button>
         </div>
     </div>
