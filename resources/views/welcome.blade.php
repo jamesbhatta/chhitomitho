@@ -2,13 +2,41 @@
 
 @push('styles')
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<style>
+    #our-menu-section {
+        background:  url("{{ asset('assets/img/bg-3.jpg') }}") rgba(62, 58, 58, 0.12);
+        background-blend-mode: overlay;
+        width: 100%;
+        min-height: 100vh;
+        background-position: center;
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: 'Sen', sans-serif;
+        position: relative;
+    }
+    #section-title {
+        font-family: 'Sen', sans-serif;
+        font-size: 36px;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 25px;
+        z-index: 109;
+    }
+</style>
 @endpush
 
 @section('content')
+<div class="">
+    <img class="img-fluid w-100" src="{{ asset('assets/img/banner-4.jpg') }}">
+</div>
 {{-- Featured Products section --}}
-<div id="featuredProductSection" class="container-fluid" style="background-color: #e2eaef; display: none;">
-    <div class="container py-4">
+<div id="featuredProductSection" class="container-fluid" style="display: none;">
+    <div class="container py-5">
         <div class="row">
+            <div class="col-md-12">
+                <h3 id="section-title">Quick Order</h3>
+            </div>
             <div class="col-md-12">
                 <div id="featuredProductSlider" class="px-3">
                     @foreach ($featuredProducts as $product)
@@ -65,32 +93,39 @@
 </div>
 {{-- End of Featured Products section --}}
 
-<div class="container py-4">
-    <ul class="nav d-flex justify-content-center" id="menuFilter" role="tablist">
-        @foreach($categories as $category)
-        @if(count($category->products))
-        <li class="nav-item">
-            <a class="nav-link @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane" aria-selected="true">{{ $category->name }}</a>
-        </li>
-        @endif
-        @endforeach
-    </ul>
-    <div class="tab-content pt-5" id="myTabContentEx">
-        @foreach($categories as $category)
-        <div class="tab-pane fade @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-pane" role="tabpanel" aria-labelledby="{{ $category->slug }}-tab">
-            <div class="row">
-                @foreach ($category->products as $product)
-                <div class="col-md-3">
-                    <x-product-verticle :product="$product"></x-product-verticle>
+<div id="our-menu-section">
+    <div class="rgba-black-light">
+        <div class="container py-5">
+            <div id="menu-head-section">
+                <h3 id="section-title" class="text-center">Our Menu</h3>
+                <ul class="nav d-flex justify-content-center" id="menuFilter" role="tablist">
+                    @foreach($categories as $category)
+                    @if(count($category->products))
+                    <li class="nav-item">
+                        <a class="nav-link @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane" aria-selected="true">{{ $category->name }}</a>
+                    </li>
+                    @endif
+                    @endforeach
+                </ul>
+            </div>
+            <div class="tab-content pt-5" id="myTabContentEx">
+                @foreach($categories as $category)
+                <div class="tab-pane fade @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-pane" role="tabpanel" aria-labelledby="{{ $category->slug }}-tab">
+                    <div class="row">
+                        @foreach ($category->products as $product)
+                        <div class="col-md-3 d-flex align-items-stretch">
+                            <x-product-verticle :product="$product"></x-product-verticle>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
                 @endforeach
             </div>
         </div>
-        @endforeach
     </div>
 </div>
 
-<div class="container my-4">
+<div class="container py-5">
     <div class="row">
         <div class="col-md-12">
             <x-home-page-slider />
@@ -132,6 +167,15 @@
                     slidesToScroll: 1
                 }
             }]
+        });
+        
+        $(window).scroll(function(){
+            var distance = $('#menu-head-section').offset().top - $(window).scrollTop()
+            if (distance == 0) {
+                $('#menu-head-section').css('padding', '10px');
+            } else {
+                $('#menu-head-section').css('padding', '25px 10px');
+            }
         });
     });
 </script>
