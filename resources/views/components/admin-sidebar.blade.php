@@ -119,7 +119,12 @@
             },
             methods: {
                 getNewOrders: function(){
+                    // quick fix
+                    @if(Auth::user()->hasRoles(['partner','courier']))
+                    axios.get('{{ route('ajax.order.new.count-confirmed') }}')
+                    @else
                     axios.get('{{ route('ajax.order.new.count') }}')
+                    @endif
                     .then(response => {
                         this.newOrders = response.data.count;
                     })

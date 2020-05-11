@@ -14,6 +14,12 @@ class AjaxController extends Controller
         return response()->json(['count' => $count]);
     }
 
+    public function newOrderConfirmedCount()
+    {
+        $count = DB::table('notifications')->where('type', 'App\Notifications\OrderConfirmed')->where('notifiable_id', Auth::user()->id)->count();
+        return response()->json(['count' => $count]);
+    }
+
     public function pushSalesProducts()
     {
         // \DB::enableQueryLog();

@@ -120,6 +120,7 @@ Route::get('/privacy-policy', 'PageController@privacyPolicy')->name('page.privac
 // all registered users
 Route::group(['prefix' => 'ajax', 'middleware' => ['auth']], function() {
     Route::get('order/new/count', 'AjaxController@newOrdersCount')->name('ajax.order.new.count');
+    Route::get('order/new/count/confirmed', 'AjaxController@newOrderConfirmedCount')->name('ajax.order.new.count-confirmed');
 });
 
 Route::get('ajax/push-sales-products', 'AjaxController@pushSalesProducts')->name('ajax.push_sales_products');
