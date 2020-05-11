@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Socialite;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
@@ -53,6 +54,8 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         $role = $user->role;
+
+        if (Gate::allows('access-dashboard')) return redirect()->intended(route('dashboard'));
         return redirect()->intended(route($role));
     }
     /**
@@ -92,6 +95,7 @@ class LoginController extends Controller
 
         $role = $user->role;
 
+        if (Gate::allows('access-dashboard')) return redirect()->intended(route('dashboard'));
         return redirect()->intended(route($role));
     }
 }

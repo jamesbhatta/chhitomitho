@@ -19,14 +19,12 @@
     </div>
     <div class="text-muted text-uppercase small font-weight-bolder ml-2">Navigation</div>
     <ul class="list-unstyled sidebar-list">
+        @can('access-dashboard')
         <li class="sidebar-list-item">
-            <a class="nav-link" href=""><i class="fas fa-desktop text-ink"></i>Dashboard <span><i class="fas fa-angle-right"></i></span></a>
+            <a class="nav-link" href="{{ route('dashboard') }}"><i class="fas fa-desktop text-ink"></i>Dashboard <span><i class="fas fa-angle-right"></i></span></a>
         </li>
-        {{-- @can('viewAny', App\Order::class)
-        <li class="sidebar-list-item">
-            <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-cart-arrow-down text-secondary"></i>Orders</a>
-        </li>
-        @endcan --}}
+        @endcan
+        
         <li class="sidebar-list-item">
             <a class="nav-link" href="{{ url('/') }}" target="_blank"><i class="fas fa-globe text-warning"></i> Site <span><i class="fas fa-angle-right"></i></span></a>
         </li>

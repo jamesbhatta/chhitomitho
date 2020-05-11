@@ -12,10 +12,6 @@ Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCall
 
 // Admin
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard');
-    })->name('admin');
-    
     Route::get('category', 'CategoryController@index')->name('category.index');
     Route::post('category/store', 'CategoryController@store')->name('category.store');
     Route::put('category/{category}/update', 'CategoryController@update')->name('category.update');
@@ -56,23 +52,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
 // Manager
 Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'manager']], function () {
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard');
-    })->name('manager');
+    
 });
 
 //partner
 Route::group(['prefix' => 'partner', 'middleware' => ['auth', 'partner']], function () {
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard');
-    })->name('partner');
 });
 
 // courier
 Route::group(['prefix' => 'courier', 'middleware' => ['auth', 'courier']], function () {
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard');
-    })->name('courier');
 });
 
 // customers
@@ -90,6 +78,10 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'customer']], fun
 });
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('can:access-dashboard');
+    Route::get('/api/dashboard/item-counts', 'DashboardController@counts')->name('api.dashboard.item-counts')->middleware('can:access-dashboard');
+
     // registered users with policy
     Route::get('/orders', 'OrderController@index')->name('orders.index');
     Route::get('/orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
@@ -167,3 +159,4 @@ Route::get('courier-commission', function () {
     echo "commission %: ".$order->courier->meta->commission_percentage ."<br>";
     echo "commission: $commissionAmount <br>";
 });
+

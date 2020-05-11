@@ -5,103 +5,120 @@
     <div>
         <h5 class="page-title">Dashboard</h5>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card card-shadow mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <div class="mb-3">Customers</div>
-                                    <div>
-                                        <h4><strong>36,254</strong></h4>
-                                    </div>
-                                </div>
-                                <div class="grey lighten-4 rounded p-2">
-                                    <span class="text-ink"><i class="fas fa-user-friends fa-lg"></i></span>
-                                </div>
+    <div class="row" v-cloak>
+        {{-- customers count --}}
+        <div class="col-md-3">
+            <div class="card card-shadow mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="mb-3">Customers</div>
+                            <div>
+                                <h4><strong>@{{ itemCounts.customerCount }}</strong></h4>
                             </div>
-                            <div class="small py-3">
-                                <span class="text-green font-weight-bold"><i class="fas fa-arrow-up"></i> 5.56 %</span>
-                                Since last month
-                            </div>
+                        </div>
+                        <div class="grey lighten-4 rounded p-2">
+                            <span class="text-ink"><i class="fas fa-user-friends fa-lg"></i></span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-shadow mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <div class="mb-3">Orders</div>
-                                    <div>
-                                        <h4><strong>5,432</strong></h4>
-                                    </div>
-                                </div>
-                                <div class="grey lighten-4 rounded p-2">
-                                    <span class="text-ink"><i class="fas fa-luggage-cart fa-lg"></i></span>
-                                </div>
-                            </div>
-                            <div class="small py-3">
-                                <span class="text-red font-weight-bold"><i class="fas fa-arrow-down"></i> 1.04 %</span>
-                                Since last month
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-shadow mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <div class="mb-3">Revenue</div>
-                                    <div>
-                                        <h4><strong>$ 6,254</strong></h4>
-                                    </div>
-                                </div>
-                                <div class="grey lighten-4 rounded p-2">
-                                    <span class="text-ink"><i class="fas fa-dollar-sign fa-lg"></i></span>
-                                </div>
-                            </div>
-                            <div class="small py-3">
-                                <span class="text-red font-weight-bold"><i class="fas fa-arrow-up"></i> 7 %</span>
-                                Since last month
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-shadow mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <div class="mb-3">Growth</div>
-                                    <div>
-                                        <h4><strong>+ 30.56 %</strong></h4>
-                                    </div>
-                                </div>
-                                <div class="grey lighten-4 rounded p-2">
-                                    <span class="text-ink"><i class="fas fa-chart-line fa-lg"></i></span>
-                                </div>
-                            </div>
-                            <div class="small py-3">
-                                <span class="text-green font-weight-bold"><i class="fas fa-arrow-up"></i> 4.86 %</span>
-                                Since last month
-                            </div>
-                        </div>
+                    <div class="small py-3">
+                        <span class="text-green font-weight-bold"><i class="fas fa-arrow-up"></i> 5.56 %</span>
+                        Since last month
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card card-shadow">
-                <div class="p-2">
-                    <canvas id="bubbleChart" class=""></canvas>
+        {{-- Products Count --}}
+        <div class="col-md-3">
+            <div class="card card-shadow mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="mb-3">Products</div>
+                            <div>
+                                <h4><strong>@{{ itemCounts.productCount }}</strong></h4>
+                            </div>
+                        </div>
+                        <div class="grey lighten-4 rounded p-2">
+                            <span class="text-ink"><i class="fas fa-cubes fa-lg"></i></span>
+                        </div>
+                    </div>
+                    <div class="small py-3">
+                        <span class="text-green font-weight-bold"><i class="fas fa-arrow-up"></i> 5.56 %</span>
+                        Since last month
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Stores Count --}}
+        <div class="col-md-3">
+            <div class="card card-shadow mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="mb-3">Stores</div>
+                            <div>
+                                <h4><strong>@{{ itemCounts.storeCount }}</strong></h4>
+                            </div>
+                        </div>
+                        <div class="grey lighten-4 rounded p-2">
+                            <span class="text-ink"><i class="fas fa-store fa-lg"></i></span>
+                        </div>
+                    </div>
+                    <div class="small py-3">
+                        <span class="text-red font-weight-bold"><i class="fas fa-arrow-down"></i> 1.04 %</span>
+                        Since last month
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Couriers Count --}}
+        <div class="col-md-3">
+            <div class="card card-shadow mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="mb-3">Delivery Boy</div>
+                            <div>
+                                <h4><strong>@{{ itemCounts.courierCount }}</strong></h4>
+                            </div>
+                        </div>
+                        <div class="grey lighten-4 rounded p-2">
+                            <span class="text-ink"><i class="fas fa-people-carry fa-lg"></i></span>
+                        </div>
+                    </div>
+                    <div class="small py-3">
+                        <span class="text-red font-weight-bold"><i class="fas fa-arrow-up"></i> 7 %</span>
+                        Since last month
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Categories Count --}}
+        <div class="col-md-3">
+            <div class="card card-shadow mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="mb-3">Product Categories</div>
+                            <div>
+                                <h4><strong>@{{ itemCounts.categoryCount }}</strong></h4>
+                            </div>
+                        </div>
+                        <div class="grey lighten-4 rounded p-2">
+                            <span class="text-ink"><i class="far fa-list-alt fa-lg"></i></span>
+                        </div>
+                    </div>
+                    <div class="small py-3">
+                        <span class="text-green font-weight-bold"><i class="fas fa-arrow-up"></i> 4.86 %</span>
+                        Since last month
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    
     <div class="row">
         <div class="col-md-8">
             <div class="card card-shadow">
@@ -157,40 +174,22 @@
 
 @push('scripts')
 <script>
-    var ctxBc = document.getElementById('bubbleChart').getContext('2d');
-    var bubbleChart = new Chart(ctxBc, {
-        type: 'bubble',
+    
+    var dashboard = new Vue({
+        el: '#dashboard',
         data: {
-            datasets: [{
-                label: 'Green',
-                data: [{
-                    x: 3,
-                    y: 7,
-                    r: 10
-                }],
-                backgroundColor: "#24e873",
-                hoverBackgroundColor: "#ff6384"
-            }, {
-                label: 'Red',
-                data: [{
-                    x: 4,
-                    y: 7,
-                    r: 15
-                }],
-                backgroundColor: "#fc5d51",
-                hoverBackgroundColor: "#44e4ee"
-            }, {
-                label: 'Ink',
-                data: [{
-                    x: 5,
-                    y: 7,
-                    r: 10
-                }],
-                backgroundColor: "#667bf1",
-                hoverBackgroundColor: "#62088A"
-            }]
+            itemCounts: {}
         },
-    })
+        mounted: function() {
+            this.fetchItemCounts();
+        },
+        methods: {
+            fetchItemCounts: function () {
+                axios.get("{{ route('api.dashboard.item-counts') }}").then(response => this.itemCounts = response.data);
+            }
+        }
+    });
+    
     
     // Line Chart
     var ctxL = document.getElementById("lineChart").getContext('2d');

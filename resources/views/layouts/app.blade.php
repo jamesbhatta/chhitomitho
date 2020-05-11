@@ -74,7 +74,7 @@
 								</a>
 								<div class="dropdown-menu dropdown-menu-right card-shadow" aria-labelledby="navbarDropdown">
 									@can('access-backend')
-									<a class="dropdown-item" href="{{ route(Auth::user()->role) }}">
+									<a class="dropdown-item" href="{{ route('dashboard') }}">
 										<i class="fas fa-chart-line"></i> {{ __('Dashboard') }}
 									</a>
 									@endcan
