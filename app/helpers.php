@@ -109,3 +109,16 @@ if (!function_exists('moneyFormat')) {
         return 'NRs. ' . number_format($amount);
     }
 }
+
+
+if (! function_exists('setActive')) {
+	/**
+	 * Check if the route is active or not
+	 *
+	 * @param  string  $key
+	 * @return string
+	 */
+	function setActive($path, $active = 'active') {
+		return Request::routeIs($path) ? $active : '';
+	}
+}

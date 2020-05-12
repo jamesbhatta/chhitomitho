@@ -116,7 +116,7 @@
                     <div class="tab-pane fade @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-pane" role="tabpanel" aria-labelledby="{{ $category->slug }}-tab">
                         <div class="row">
                             @foreach ($category->products as $product)
-                            <div class="col-lg-3 col-md-4 d-flex align-items-stretch">
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch px-1 px-sm-2 px-md-4">
                                 <x-product-verticle :product="$product"></x-product-verticle>
                             </div>
                             @endforeach
@@ -153,7 +153,7 @@
             slidesToShow: 4,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 1500,
+            autoplaySpeed: 2000,
             arrows: true,
             prevArrow: '<div class="c-slick-prev"><span class="fa fa-chevron-left"></span></div>',
             nextArrow: '<div class="c-slick-next"><span class="fa fa-chevron-right"></span></div>',

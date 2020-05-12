@@ -151,6 +151,14 @@ body {
     font-size: 0.8rem;
 }
 
+/* small devices */
+
+@media (max-width: 600px) {
+    #floating-cart-wrapper {
+        display: none;
+    }
+}
+
 /* ------------
 *  Quantity btns in card
 *-------------- */
@@ -307,6 +315,39 @@ body {
 .product-wrapper .counter-control-wrapper {
     border-top: 1px solid #ff9800;
     border-bottom: 1px solid #ff9800;
+}
+
+/* Small devices */
+
+@media (max-width: 600px) {
+    .product-wrapper {
+        font-size: 16px!important;
+        color: #555;
+    }
+    .product-wrapper .card-title {
+        font-size: 16px!important;
+    }
+    .out-menu-section .product-wrapper .card-title {
+        text-align: left;
+    }
+    .product-wrapper .h4-responsive, .product-wrapper .h5-responsive {
+        font-size: 16px!important;
+    }
+    .product-wrapper .price {
+        text-align: left;
+        font-size: 16px!important;
+        color: #ff9800;
+    }
+    .product-wrapper .old-price {
+        color: #a8a3a3;
+    }
+    .product-wrapper img {
+        height: auto;
+    }
+    .product-wrapper .add-to-cart-btn {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
 }
 
 /* -----------------

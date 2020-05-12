@@ -7,7 +7,7 @@
                     @{{ product.name }}
                 </h4>
             </div>
-            <div>
+            <div class="price">
                 <span v-bind:class="{ 'text-strike' : product.sale_price }" class="h4-responsive">Rs. @{{ formatMoney(product.regular_price) }}</span>
                 <span v-if="product.sale_price" class="h5-responsive d-inline text-secondary-color">Rs. @{{ formatMoney(product.sale_price) }}</span>
             </div>

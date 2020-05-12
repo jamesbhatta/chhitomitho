@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'FrontendController@index');
+Route::get('/', 'FrontendController@index')->name('home');
 
 Auth::routes();
 

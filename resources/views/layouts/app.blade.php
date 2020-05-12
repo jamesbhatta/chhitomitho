@@ -12,11 +12,15 @@
 	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 	{{-- <link href="{{ asset('assets/mdb/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link href="{{ asset('assets/mdb/css/mdb.min.css') }}" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+	{{-- <link href="{{ asset('assets/mdb/css/mdb.min.css') }}" rel="stylesheet"> --}}
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css" rel="stylesheet">
+
 	{{-- <link href="{{ asset('assets/mdb/css/style.css') }}" rel="stylesheet"> --}}
 	
 	<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
+	<link href="{{ asset('assets/fontello/css/fontello.css') }}" rel="stylesheet">
 	
 	@stack('styles')
 	{{-- <link href="https://fonts.googleapis.com/css?family=Lora&display=swap" rel="stylesheet">
@@ -34,13 +38,14 @@
 		<div id="app">
 			<nav class="navbar navbar-expand-md navbar-dark custom-navbar shadow-sm">
 				<div class="container">
-					<a class="navbar-brand" href="{{ url('/') }}">
-						<img class="img-fluid" src="{{ asset('assets/img/logo-white.png') }}" alt="" style="height: 40px; width: 40px;">
-						{{ config('app.name', 'Laravel') }}
-					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
 						<span class="navbar-toggler-icon"></span>
 					</button>
+
+					<a class="navbar-brand mr-auto" href="{{ url('/') }}">
+						<img class="img-fluid" src="{{ asset('assets/img/logo-white.png') }}" alt="" style="height: 40px; width: 40px;">
+						{{ config('app.name', 'Laravel') }}
+					</a>
 					
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<!-- Left Side Of Navbar -->
@@ -50,7 +55,7 @@
 						
 						<!-- Right Side Of Navbar -->
 						<ul class="navbar-nav ml-auto">
-							<li class="nav-item">
+							<li class="nav-item d-none">
 								<a class="nav-link" href="{{ route('cart') }}">
 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: #f1f1f1;" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
 									<span id="cart-total-quantity" class="badge badge-pill badge-info card-shadow mr-1"></span>
@@ -135,18 +140,22 @@
 					</div>
 				</div>
 			</div>
+
+			<x-bottom-menu></x-bottom-menu>
 			
 			
 		</div>
 		
 		{{-- Scripts --}}
-		<script type="text/javascript" src="{{ asset('assets/mdb/js/jquery.min.js') }}"></script>
+		{{-- <script type="text/javascript" src="{{ asset('assets/mdb/js/jquery.min.js') }}"></script> --}}
 		{{-- <script type="text/javascript" src="{{ asset('assets/mdb/js/popper.min.js') }}"></script> --}}
 		{{-- <script type="text/javascript" src="{{ asset('assets/mdb/js/bootstrap.min.js') }}"></script> --}}
-		{{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="{{ asset('assets/mdb/js/mdb.min.js') }}"></script>
+		{{-- <script type="text/javascript" src="{{ asset('assets/mdb/js/mdb.min.js') }}"></script> --}}
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
+
 		{{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -175,7 +184,8 @@
 								$('#cart-total-price').html('Rs. ' + totalPrice);
 								
 								$('#floating-cart').show();
-								$('#floating-cart .cart-quantity').html(totalQty);
+								// $('#floating-cart .cart-quantity').html(totalQty);
+								$('.cart-quantity').html(totalQty);
 								$('#floating-cart .cart-price').html('Rs. ' + totalPrice);
 							},
 							error: function (data) {

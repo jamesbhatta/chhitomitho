@@ -1,4 +1,4 @@
-<div class="product-wrapper mb-5">
+<div class="product-wrapper mb-2 mb-sm-3 mb-md-5 w-100">
     <div class="card h-100 z-depth-0">
         <img class="card-img-top" src="{{ asset('storage/' . $product->product_image) }}" alt="{{ $product->name }}">
         <div class="card-body text-center h-100">
@@ -7,8 +7,8 @@
                     {{ $product->name }}
                 </h4>
             </div>
-            <div>
-                <span class="h5-responsive d-inline  @if($product->sale_price) text-strike @endif">Rs. {{ number_format($product->regular_price) }}</span>
+            <div class="price">
+                <span class="h5-responsive d-inline  @if($product->sale_price) text-strike old-price @endif">Rs. {{ number_format($product->regular_price) }}</span>
                 @if($product->sale_price)
                 <span class="h4-responsive d-inline">Rs. {{ number_format($product->sale_price) }}</span>
                 @endif
