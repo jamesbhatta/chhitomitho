@@ -52,6 +52,8 @@
 						{{ config('app.name', 'Laravel') }}
 					</a>
 					
+					<button class="navbar-toggler" onClick="window.location.reload();"><i class="fas fa-redo"></i></button>
+					
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<!-- Left Side Of Navbar -->
 						<ul class="navbar-nav mr-auto">
@@ -111,7 +113,7 @@
 				</div>
 			</nav>
 			<x-mobile-sidebar-modal></x-mobile-sidebar-modal>
-
+			
 			
 			<main>
 				@yield('content')
