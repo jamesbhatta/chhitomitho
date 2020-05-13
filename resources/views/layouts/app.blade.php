@@ -15,11 +15,11 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 	{{-- <link href="{{ asset('assets/mdb/css/mdb.min.css') }}" rel="stylesheet"> --}}
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css" rel="stylesheet">
-
+	
 	{{-- <link href="{{ asset('assets/mdb/css/style.css') }}" rel="stylesheet"> --}}
 	
 	<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-
+	
 	<link href="{{ asset('assets/fontello/css/fontello.css') }}" rel="stylesheet">
 	
 	@stack('styles')
@@ -38,10 +38,15 @@
 		<div id="app">
 			<nav class="navbar navbar-expand-md navbar-dark custom-navbar shadow-sm">
 				<div class="container">
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+					<button class="navbar-toggler d-none d-md-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
+					
+					<button class="navbar-toggler d-inline-block d-md-none" type="button" data-toggle="modal" data-target="#mobileSidebarModal">
+						<i class="fas fa-bars"></i>
+					</button>
+					
+					
 					<a class="navbar-brand mr-auto" href="{{ url('/') }}">
 						<img class="img-fluid" src="{{ asset('assets/img/logo-white.png') }}" alt="" style="height: 40px; width: 40px;">
 						{{ config('app.name', 'Laravel') }}
@@ -105,6 +110,8 @@
 					</div>
 				</div>
 			</nav>
+			<x-mobile-sidebar-modal></x-mobile-sidebar-modal>
+
 			
 			<main>
 				@yield('content')
@@ -140,7 +147,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<x-bottom-menu></x-bottom-menu>
 			
 			
@@ -155,7 +162,7 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
-
+		
 		{{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

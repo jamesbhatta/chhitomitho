@@ -70,7 +70,7 @@
                         <input type="radio" id="radio-esewa" name="payment_option" value="esewa" hidden>
                         <div class="row">
                             <div class="col-md-6">
-                                <div id="cod" class="card payment-option-card border border-info">
+                                <div id="cod" class="card payment-option-card border border-info mb-2">
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="align-self-center pr-3">
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div id="esewa" class="card payment-option-card border border-info">
+                                <div id="esewa" class="card payment-option-card border border-info mb-2">
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="align-self-center pr-3">
@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 
-                <div class="card border border rounded-0 mt-4">
+                <div class="card border border rounded-0 mt-4 mb-4">
                     <div class="card-body grey lighten-4 text-theme-color py-2 px-4">
                         <h5>Order Notes (optional)</h5>
                     </div>

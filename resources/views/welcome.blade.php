@@ -94,18 +94,18 @@
 {{-- End of Featured Products section --}}
 
 <div id="our-menu-section">
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-3 py-md-5">
         <div class="row">
             <div class="col-lg-2 col-md-3">
                 <div id="menu-head-section" class="p-3">
                     <h3 id="section-title" class="text-center">Our Menu</h3>
                     <ul class="nav menu-list" role="tablist">
                         @foreach($categories as $category)
-                        {{-- @if(count($category->products)) --}}
+                        @if(count($category->products))
                         <li class="menu-list-item flex-fill">
                             <a class="menu-item @if($loop->iteration == 1) active show @endif" id="{{ $category->slug }}-tab" data-toggle="tab" href="#{{ $category->slug }}-pane" role="tab" aria-controls="{{ $category->slug }}-pane" aria-selected="true">{{ $category->name }}</a>
                         </li>
-                        {{-- @endif --}}
+                        @endif
                         @endforeach
                     </ul>
                 </div>
@@ -130,7 +130,7 @@
 </div>
 
 
-<div class="container py-5">
+<div class="container py-3 py-md-5">
     <div class="row">
         <div class="col-md-12">
             <x-home-page-slider />

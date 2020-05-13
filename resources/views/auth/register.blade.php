@@ -1,6 +1,10 @@
 @extends('layouts.app')
+
 @push('styles')
 <style>
+     #bottomMenu {
+        display: none!important;
+    }
     #auth-register {
         background: url("{{ asset('assets/img/bg.webp') }}");
         width: 100%;

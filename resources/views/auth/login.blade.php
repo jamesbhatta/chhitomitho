@@ -2,6 +2,9 @@
 
 @push('styles')
 <style>
+    #bottomMenu {
+        display: none!important;
+    }
     #login-page {
         background: url("{{ asset('assets/img/bg.webp') }}");
         width: 100%;

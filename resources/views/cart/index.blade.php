@@ -142,24 +142,26 @@
         </div>
         <div class="col-md-8">
             <div id="cart-table-wrapper">
-                <table class="table cart-table white border">
+                <table class="table cart-table table-responsive-sm white border">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th>Total</th>
+                            <th class="d-none d-md-table-cell">Total</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach(Cart::content() as $item) :?>
                         <tr>
-                            <td class="d-flex name-col">
-                                @if ($item->options->has('product_image'))
-                                <img class="img-fluid" src="{{ asset('storage/' . $item->options->product_image) }}" alt="" style="min-width: 50px; height:50px;">
-                                @endif
-                                <div class="ml-3 text-success">{{ $item->name }}</div>
+                            <td>
+                                <div class="d-flex name-col">
+                                    @if ($item->options->has('product_image'))
+                                    <img class="img-fluid" src="{{ asset('storage/' . $item->options->product_image) }}" alt="" style="min-width: 50px; height:50px;">
+                                    @endif
+                                    <div class="ml-3 text-success">{{ $item->name }}</div>
+                                </div>
                             </td>
                             <td>
                                 Rs. {{ number_format($item->price) }}
@@ -176,7 +178,7 @@
                                 </div>
                                 @endif
                             </td>
-                            <td>Rs. {{ number_format($item->total) }}</td>
+                            <td class="d-none d-md-table-cell">Rs. {{ number_format($item->total) }}</td>
                             <td>
                                 <button type="button" class="remove-item-btn bg-transparent border-0 text-danger" data-row-id="{{ $item->rowId }}">
                                     <i class="far fa-times-circle"></i>

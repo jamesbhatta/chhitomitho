@@ -8,12 +8,19 @@ body {
     background-color: #f2f7fb;
 }
 
+@media (max-width: 600px) {
+    body {
+        font-size: 12px;
+    }
+}
+
 *:focus {
     outline: none;
 }
 
 .bg-theme-color {
     background-color: #191717;
+    background-color: #982121;
 }
 
 .text-theme-color {
@@ -84,6 +91,22 @@ body {
 
 .custom-navbar .dropdown-menu .dropdown-item:active i {
     color: #fff;
+}
+
+
+/* small devices (custom navbar) */
+
+@media (max-width: 600px) {
+    .custom-navbar {
+        background-color: #dd3e52!important;
+        font-size: .9em;
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        padding: 0;
+    }
 }
 
 [v-cloak] {
