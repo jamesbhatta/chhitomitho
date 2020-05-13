@@ -9,10 +9,10 @@
         background: url("{{ asset('assets/img/bg.webp') }}");
         width: 100%;
         min-height: 100vh;
-        display: flex;
+        /* display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        align-items: center;
+        align-items: center; */
         padding: 15px;
         background-position: center;
         background-size: cover;
@@ -23,6 +23,7 @@
         font-family: 'Sen', sans-serif;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16),0 1px 6px 0 rgba(0,0,0,0.12) !important;
         background-color: #fff;
+        border-radius: 0.25rem;
     }
     .login-form .head {
         padding: 15px 10px;
@@ -35,7 +36,7 @@
         text-align: center;
     }
     .login-form .social-login{
-        padding: 25px 15px;
+        padding: 10px 15px;
     }
     .login-form .social-login .social-login-btn {
         display: block;
@@ -107,9 +108,9 @@
 
 @section('content')
 <div id="login-page">
-    <div class="container">
+    {{-- <div class="container"> --}}
         <div class="row justify-content-center">
-            <div class="col-md-6 mb-5 p-4">
+            <div class="col-md-6">
                 <div class="login-form">
                     <div class="head">
                         <div class="form-title">{{ __('Login') }}</div>
@@ -179,6 +180,6 @@
             </div>
             
         </div>
-    </div>
+    {{-- </div> --}}
 </div>
 @endsection
