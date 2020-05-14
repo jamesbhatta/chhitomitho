@@ -67,6 +67,18 @@ class User extends Authenticatable
         return "http://www.gravatar.com/avatar/$hash?s=260&d=mp";
     }
 
+        
+    /**
+     * Checks if user is verified or not
+     *
+     * @return void
+     */
+    public function isVerified()
+    {
+        return $this->email_verified_at;
+    }
+
+
     /**
      * Return the role of current user
      */
