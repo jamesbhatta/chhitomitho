@@ -400,10 +400,10 @@ body {
     display: block;
     color: #7ac400;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
     background: none;
-    border: 1.5px solid #7ac400;
+    border: 1px solid #7ac400;
     padding: 10px 15px;
     line-height: 18px;
     border-radius: 20px;
