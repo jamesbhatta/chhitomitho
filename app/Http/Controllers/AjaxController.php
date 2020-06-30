@@ -23,7 +23,7 @@ class AjaxController extends Controller
     public function pushSalesProducts()
     {
         // \DB::enableQueryLog();
-        $products = \App\Product::inRandomOrder()->limit(4)->get();
+        $products = \App\Product::visible()->inRandomOrder()->limit(4)->get();
         // dd(\DB::getQueryLog());
         $products->map(function($product) {
             return $product['product_image_url'] = asset('/storage/' . $product->product_image);

@@ -15,22 +15,38 @@
             </div>
             <div class="col-md-12 mb-4">
                 <div class="d-flex">
+                    {{-- Delete Selected Button --}}
                     <form action="{{ route('product.deletemultiple') }}" method="POST">
                         @csrf
                         @method('delete')
                         <input type="hidden" id="product_ids" name="product_ids" class="bulk_select">
                         <button type="submit" id="bulk-delete-btn" class="btn btn-danger btn-sm rounded-0 card-shadow ml-0" >Delete Selected</button>
                     </form>
+                    {{-- Mark Featured Button --}}
                     <form action="{{ route('product.featured.store') }}" method="POST">
                         @csrf
                         <input type="hidden" id="featured_product_ids" name="product_ids" class="bulk_select">
                         <button type="submit" class="btn btn-success btn-sm rounded-0 card-shadow ml-0">Mark Featured</button>
                     </form>
+                    {{-- Unmark featured Button --}}
                     <form action="{{ route('product.featured.destroy') }}" method="POST">
                         @csrf
                         @method('delete')
                         <input type="hidden" name="product_ids" class="bulk_select">
                         <button type="submit" class="btn btn-primary btn-sm rounded-0 card-shadow ml-0">Unmark Featured</button>
+                    </form>
+                    {{-- Hide Selected Btn --}}
+                    <form action="{{ route('product.hidden.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" id="hidden_product_ids" name="product_ids" class="bulk_select">
+                        <button type="submit" class="btn btn-danger btn-sm rounded-0 card-shadow ml-0">Hide Marked</button>
+                    </form>
+                    {{-- Unhide Selected Btn --}}
+                    <form action="{{ route('product.hidden.destroy') }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <input type="hidden" name="product_ids" class="bulk_select">
+                        <button type="submit" class="btn btn-success btn-sm rounded-0 card-shadow ml-0">Unide Marked</button>
                     </form>
                     <div class="ml-auto">
                         <form action="{{ route('product.index') }}" method="GET">
@@ -90,7 +106,11 @@
                         </form>
                         
                         @if($product->featured)
-                        <span class="text-warning"><i class="far fa-star"></i></span>
+                        <span class="text-warning mx-1"><i class="far fa-star"></i></span>
+                        @endif
+
+                        @if($product->hidden)
+                        <span class="text-info mx-1"><i class="far fa-eye-slash"></i></span>
                         @endif
                         
                     </td>

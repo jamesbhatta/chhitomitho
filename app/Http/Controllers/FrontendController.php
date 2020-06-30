@@ -6,7 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
-{    
+{
     /**
      * Shows the application homepage
      *
@@ -14,8 +14,10 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        $categories = Category::active()->where('slug', '!=', 'uncategorized')->with('products')->orderByFeatured()->ordered()->get();
-        $featuredProducts = \App\Product::whereFeatured(true)->get();
+        $categories = Category::active()->where('slug', '!=', 'uncategorized')->with(['products' => function ($query) {
+            $query->visible();
+        }])->orderByFeatured()->ordered()->get();
+        $featuredProducts = \App\Product::whereFeatured(true)->visible()->get();
         return view('welcome', compact('categories', 'featuredProducts'));
     }
 }

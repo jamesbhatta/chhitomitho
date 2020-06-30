@@ -12,4 +12,14 @@ class Product extends Model
     {
         return $this->belongsTo('App\Category');
     }
+
+    public function scopeHidden($query)
+    {
+        return $query->where('hidden', true);
+    }
+
+    public function scopeVisible($query)
+    {
+        return $query->where('hidden', false);
+    }
 }

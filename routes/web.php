@@ -27,6 +27,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     
     Route::post('products/featuted', 'FeaturedProductController@store')->name('product.featured.store');
     Route::delete('products/featuted', 'FeaturedProductController@destroy')->name('product.featured.destroy');
+
+    Route::post('products/hidden', 'HiddenProductController@store')->name('product.hidden.store');
+    Route::delete('products/hidden', 'HiddenProductController@destroy')->name('product.hidden.destroy');
     
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::get('users/create', 'UsersController@create')->name('users.create');
