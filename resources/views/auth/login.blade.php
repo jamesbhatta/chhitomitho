@@ -24,6 +24,9 @@
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16),0 1px 6px 0 rgba(0,0,0,0.12) !important;
         background-color: #fff;
         border-radius: 0.25rem;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .login-form .head {
         padding: 15px 10px;
